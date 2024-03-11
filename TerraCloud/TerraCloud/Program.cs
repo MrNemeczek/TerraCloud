@@ -1,5 +1,5 @@
 using TerraCloud.Client.Pages;
-using TerraCloud.Components;
+using TerraCloud.Server.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
