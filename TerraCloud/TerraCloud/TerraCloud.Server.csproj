@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <ProjectReference Include="..\..\TerraCloud.Application\TerraCloud.Application.csproj" />
+	  <ProjectReference Include="..\..\TerraCloud.Infrastructure\TerraCloud.Infrastructure.csproj" />
+	  <ProjectReference Include="..\..\TerraCloud.Persistence\TerraCloud.Persistence.csproj" />
     <ProjectReference Include="..\TerraCloud.Client\TerraCloud.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.2" />
   </ItemGroup>
