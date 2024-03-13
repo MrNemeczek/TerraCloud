@@ -1,18 +1,22 @@
 using Microsoft.EntityFrameworkCore;
 using Radzen;
+
 using TerraCloud.Client.Pages;
 using TerraCloud.Persistence.Contexts;
 using TerraCloud.Server.Components;
+using TerraCloud.Application;
+using TerraCloud.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+IConfiguration config = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
-IConfiguration config = builder.Configuration;
-
 builder.Services.AddDbContext<TerraCloudContext>(options => options.UseNpgsql(config.GetConnectionString("AzureDatabase")));
+
+builder.Services.AddApplication();
 
 var app = builder.Build();
 

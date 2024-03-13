@@ -17,11 +17,13 @@ namespace TerraCloud.Persistence.Configurations.User
 
             builder.Property(x => x.Name);
 
-            builder.Property(x => x.LastName);
+            builder.Property(x => x.Lastname);
 
             builder.Property(x => x.Login);
 
             builder.Property(x => x.Password);
+
+            builder.Property(x => x.Salt);
 
             builder.Property(x => x.Email);
         }
