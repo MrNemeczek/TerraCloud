@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-using TerraCloud.Application.DTO.Auth;
+using TerraCloud.Application.DTO.Auth.Request;
 using TerraCloud.Application.Interfaces.Application.Auth;
 
 namespace TerraCloud.Server.Controllers
@@ -15,7 +14,7 @@ namespace TerraCloud.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginDto login)
+        public async Task<IActionResult> Login([FromBody] LoginDtoRequest login)
         {
             bool result = await _loginService.Login(login);
             if (result)

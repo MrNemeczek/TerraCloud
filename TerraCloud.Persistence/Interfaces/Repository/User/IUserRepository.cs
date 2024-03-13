@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TerraCloud.Domain.Models.User;
 
-namespace TerraCloud.Application.Interfaces.Repository.User
+namespace TerraCloud.Persistence.Interfaces.Repository.User
 {
     public interface IUserRepository
     {

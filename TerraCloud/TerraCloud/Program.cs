@@ -6,6 +6,7 @@ using TerraCloud.Persistence.Contexts;
 using TerraCloud.Server.Components;
 using TerraCloud.Application;
 using TerraCloud.Infrastructure;
+using TerraCloud.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 IConfiguration config = builder.Configuration;
@@ -17,6 +18,8 @@ builder.Services.AddRazorComponents()
 builder.Services.AddDbContext<TerraCloudContext>(options => options.UseNpgsql(config.GetConnectionString("AzureDatabase")));
 
 builder.Services.AddApplication();
+builder.Services.AddPersistance();
+builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 

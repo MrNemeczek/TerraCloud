@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using TerraCloud.Application.Interfaces.Infrastructure.Auth;
+using TerraCloud.Infrastructure.Interfaces.Auth;
 
 namespace TerraCloud.Infrastructure.Auth
 {

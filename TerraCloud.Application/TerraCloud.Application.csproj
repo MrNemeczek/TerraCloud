@@ -13,6 +13,7 @@
     <ItemGroup>
 	    <ProjectReference Include="..\TerraCloud.Domain\TerraCloud.Domain.csproj" />
 	    <ProjectReference Include="..\TerraCloud.Infrastructure\TerraCloud.Infrastructure.csproj" />
+	    <ProjectReference Include="..\TerraCloud.Persistence\TerraCloud.Persistence.csproj" />
     </ItemGroup>
 
 </Project>

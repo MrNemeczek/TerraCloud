@@ -4,10 +4,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-
-using TerraCloud.Application.DTO.Auth;
+using TerraCloud.Application.DTO.Auth.Request;
 using TerraCloud.Application.Interfaces.Application.Auth;
-using TerraCloud.Application.Interfaces.Repository.User;
+using TerraCloud.Persistence.Interfaces.Repository.User;
 using TerraCloud.Domain.Models.User;
 using TerraCloud.Infrastructure.Interfaces.Auth;
 
@@ -23,7 +22,7 @@ namespace TerraCloud.Infrastructure.Auth
             _passwordOperations = passwordOperations;
         }
 
-        public async Task<bool> Login(LoginDto login)
+        public async Task<bool> Login(LoginDtoRequest login)
         {
             User user = await _userRepository.GetUserByLogin(login.Login);
 
