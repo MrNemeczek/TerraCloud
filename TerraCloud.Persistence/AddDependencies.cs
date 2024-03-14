@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TerraCloud.Persistence.Interfaces.Repository.Database;
 using TerraCloud.Persistence.Interfaces.Repository.User;
-using TerraCloud.Persistence.Repositories;
+using TerraCloud.Persistence.Repositories.Database;
+using TerraCloud.Persistence.Repositories.User;
 
 namespace TerraCloud.Persistence
 {
@@ -15,6 +17,9 @@ namespace TerraCloud.Persistence
         {
             //User
             services.AddScoped<IUserRepository, UserRepository>();
+
+            //Database
+            services.AddScoped<IDatabaseRepository, DatabaseRepository>();
         }
     }
 }

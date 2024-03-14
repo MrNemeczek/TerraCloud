@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TerraCloud.Application.DTO.Auth.Request;
 using TerraCloud.Domain.Models.User;
 using TerraCloud.Infrastructure.Auth;
 
@@ -14,6 +15,7 @@ namespace TerraCloud.Application
         public AutoMapperProfile()
         {
             CreateMap<User, JwtUser>();
+            CreateMap<RegisterRequest, User>();
         }
     }
 }

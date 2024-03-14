@@ -10,5 +10,6 @@ namespace TerraCloud.Persistence.Interfaces.Repository.User
     public interface IUserRepository
     {
         Task<Domain.Models.User.User> GetUserByLogin(string login);
+        Task AddUser(Domain.Models.User.User user);
     }
 }

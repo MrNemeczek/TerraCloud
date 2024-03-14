@@ -3,7 +3,7 @@ using TerraCloud.Domain.Models.User;
 using TerraCloud.Persistence.Contexts;
 using TerraCloud.Persistence.Interfaces.Repository.User;
 
-namespace TerraCloud.Persistence.Repositories
+namespace TerraCloud.Persistence.Repositories.User
 {
     public class UserRepository : IUserRepository
     {
@@ -13,9 +13,14 @@ namespace TerraCloud.Persistence.Repositories
             _context = context;
         }
 
-        public async Task<User> GetUserByLogin(string login)
+        public async Task AddUser(Domain.Models.User.User user)
         {
-            User user = await _context.Users.FirstOrDefaultAsync(u => u.Login == login);
+            await _context.Users.AddAsync(user);
+        }
+
+        public async Task<Domain.Models.User.User> GetUserByLogin(string login)
+        {
+            Domain.Models.User.User user = await _context.Users.FirstOrDefaultAsync(u => u.Login == login);
 
             return user;
         }

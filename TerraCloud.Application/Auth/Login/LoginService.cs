@@ -28,7 +28,7 @@ namespace TerraCloud.Infrastructure.Auth
             _jwtService = jwtService;
         }
 
-        public async Task<string> Login(LoginDtoRequest login)
+        public async Task<string> Login(LoginRequest login)
         {
             User user = await _userRepository.GetUserByLogin(login.Login);
             if (user == null)
