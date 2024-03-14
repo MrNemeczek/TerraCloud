@@ -21,6 +21,6 @@ namespace TerraCloud.Persistence.Contexts
             modelBuilder.ApplyConfiguration(new UserConfiguration());
         }
 
-        public virtual DbSet<Domain.Models.User.User> Users { get; set; }
+        public virtual DbSet<Domain.Models.User.User> User { get; set; }
     }
 }

@@ -1,10 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Radzen;
 
-using TerraCloud.Client.Pages;
 using TerraCloud.Persistence.Contexts;
 using TerraCloud.Server.Components;
-using TerraCloud.Application;
 using TerraCloud.Infrastructure;
 using TerraCloud.Persistence;
 
@@ -17,6 +14,12 @@ builder.Services.AddRazorComponents()
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<TerraCloudContext>(options => options.UseNpgsql(config.GetConnectionString("AzureDatabase")));
+
+builder.Services.AddScoped(sp =>
+    new HttpClient
+    {
+        BaseAddress = new Uri(builder.Configuration["AppConfigurations:ApiUrl"] ?? "https://localhost:7291/api")
+    });
 
 builder.Services.AddApplication();
 builder.Services.AddPersistance();
@@ -55,5 +58,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MapControllers();
 
 app.Run();

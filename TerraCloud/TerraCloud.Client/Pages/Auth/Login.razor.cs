@@ -1,17 +1,32 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Radzen;
+using System.Net.Http.Json;
+using TerraCloud.Application.DTO.Auth.Request;
 
 namespace TerraCloud.Client.Pages.Auth
 {
     public class LoginBase : ComponentBase
     {
-        protected string userName = "admin";
-        protected string password = "admin";
+        protected string defaultUsername = "string";
+        protected string defaultPassword = "string";
         protected bool rememberMe = true;
 
-        protected bool OnLogin(LoginArgs args, string name)
+        [Inject]
+        protected HttpClient _http {  get; set; }
+
+        protected async Task<bool> OnLogin(LoginArgs args, string name)
         {
             Console.WriteLine($"{name} -> Username: {args.Username}, password: {args.Password}, remember me: {args.RememberMe}");
+
+            var loginRequest = new LoginRequest
+            {
+                Login = args.Username,
+                Password = args.Password
+            };
+
+            var test = await _http.PostAsJsonAsync<LoginRequest>("api/Auth/login", loginRequest);
+
+            Console.WriteLine(await test.Content.ReadAsStringAsync());
 
             return true;
         }

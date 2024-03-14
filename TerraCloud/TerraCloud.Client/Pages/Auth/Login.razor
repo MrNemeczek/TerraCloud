@@ -13,8 +13,8 @@
             <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H2" Class="rz-mb-6">
                 Login
             </RadzenText>
-            <RadzenTemplateForm Data=@("LoginWithDefaultValues") Action="http://www.google.com">
-                <RadzenLogin AllowRegister="true" AllowResetPassword="true" Username=@userName Password=@password
+            <RadzenTemplateForm Data=@("LoginWithDefaultValues")>
+                <RadzenLogin AllowRegister="true" AllowResetPassword="true" Username=@defaultUsername Password=@defaultPassword
                              AllowRememberMe="true" RememberMe="@rememberMe"
                              Login=@(args => OnLogin(args, "Login with default values"))
                              ResetPassword=@(args => OnResetPassword(args, "Login with default values"))
