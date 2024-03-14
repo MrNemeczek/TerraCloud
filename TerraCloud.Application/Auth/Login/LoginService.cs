@@ -5,10 +5,11 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using TerraCloud.Application.DTO.Auth.Request;
-using TerraCloud.Application.Interfaces.Application.Auth;
+using TerraCloud.Application.Interfaces.Auth;
 using TerraCloud.Persistence.Interfaces.Repository.User;
 using TerraCloud.Domain.Models.User;
 using TerraCloud.Infrastructure.Interfaces.Auth;
+using AutoMapper;
 
 namespace TerraCloud.Infrastructure.Auth
 {
@@ -16,22 +17,35 @@ namespace TerraCloud.Infrastructure.Auth
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordOperations _passwordOperations;
-        public LoginService(IUserRepository userRepository, IPasswordOperations passwordOperations)
+        private readonly IMapper _mapper;
+        private readonly IJwtService _jwtService;
+
+        public LoginService(IUserRepository userRepository, IPasswordOperations passwordOperations, IMapper mapper, IJwtService jwtService)
         {
             _userRepository = userRepository;
             _passwordOperations = passwordOperations;
+            _mapper = mapper;
+            _jwtService = jwtService;
         }
 
-        public async Task<bool> Login(LoginDtoRequest login)
+        public async Task<string> Login(LoginDtoRequest login)
         {
             User user = await _userRepository.GetUserByLogin(login.Login);
-
             if (user == null)
             {
-                return false;
+                return String.Empty;
             }
 
-            return _passwordOperations.VerifyPassword(login.Password, user.Password, Convert.FromHexString(user.Salt)) ? true : false;
+            bool result = _passwordOperations.VerifyPassword(login.Password, user.Password, Convert.FromHexString(user.Salt));
+            if (result)
+            {
+                var jwtUser = _mapper.Map<JwtUser>(user);
+
+                string jwtToken = _jwtService.GenerateJWT(jwtUser);
+
+                return jwtToken;
+            }
+            return String.Empty;            
         }
     }
 }

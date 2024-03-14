@@ -15,6 +15,7 @@ namespace TerraCloud.Infrastructure
         {
             //User
             services.AddScoped<IPasswordOperations, PasswordOperations>();
+            services.AddScoped<IJwtService, JwtService>();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TerraCloud.Application.Interfaces.Application.Auth
+namespace TerraCloud.Application.Interfaces.Auth
 {
     internal interface IRegistryService
     {
