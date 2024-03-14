@@ -7,6 +7,8 @@ using TerraCloud.Infrastructure.Auth;
 
 namespace TerraCloud.Server.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class AuthController : Controller
     {
         private readonly ILoginService _loginService;    
@@ -19,7 +21,7 @@ namespace TerraCloud.Server.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
             string jwtToken = await _loginService.Login(loginRequest);
@@ -31,7 +33,7 @@ namespace TerraCloud.Server.Controllers
             return Ok(new { token = jwtToken });
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest registerRequest)
         {
             await _registryService.Registry(registerRequest);
