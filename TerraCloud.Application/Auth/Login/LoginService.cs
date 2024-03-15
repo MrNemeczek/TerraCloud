@@ -10,6 +10,7 @@ using TerraCloud.Persistence.Interfaces.Repository.User;
 using TerraCloud.Domain.Models.User;
 using TerraCloud.Infrastructure.Interfaces.Auth;
 using AutoMapper;
+using TerraCloud.Application.DTO.Auth.Response;
 
 namespace TerraCloud.Infrastructure.Auth
 {
@@ -28,12 +29,12 @@ namespace TerraCloud.Infrastructure.Auth
             _jwtService = jwtService;
         }
 
-        public async Task<string> Login(LoginRequest login)
+        public async Task<LoginResponse> Login(LoginRequest login)
         {
             User user = await _userRepository.GetUserByLogin(login.Login);
             if (user == null)
             {
-                return String.Empty;
+                return null;
             }
 
             bool result = _passwordOperations.VerifyPassword(login.Password, user.Password, Convert.FromHexString(user.Salt));
@@ -43,9 +44,9 @@ namespace TerraCloud.Infrastructure.Auth
 
                 string jwtToken = _jwtService.GenerateJWT(jwtUser);
 
-                return jwtToken;
+                return new LoginResponse() { Token = jwtToken };
             }
-            return String.Empty;            
+            return null;            
         }
     }
 }

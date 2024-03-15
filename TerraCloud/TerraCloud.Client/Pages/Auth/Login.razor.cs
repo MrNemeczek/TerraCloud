@@ -2,6 +2,8 @@
 using Radzen;
 using System.Net.Http.Json;
 using TerraCloud.Application.DTO.Auth.Request;
+using TerraCloud.Application.DTO.Auth.Response;
+using TerraCloud.Client.Common;
 
 namespace TerraCloud.Client.Pages.Auth
 {
@@ -12,7 +14,9 @@ namespace TerraCloud.Client.Pages.Auth
         protected bool rememberMe = true;
 
         [Inject]
-        protected HttpClient _http {  get; set; }
+        protected HttpClient _http { get; set; } = default!;
+        [Inject]
+        private ApiRequest _apiRequest { get; set; } = default!;
 
         protected async Task<bool> OnLogin(LoginArgs args, string name)
         {
@@ -24,9 +28,11 @@ namespace TerraCloud.Client.Pages.Auth
                 Password = args.Password
             };
 
-            var test = await _http.PostAsJsonAsync<LoginRequest>("api/Auth/login", loginRequest);
+            //var test = await _http.PostAsJsonAsync<LoginRequest>("api/Auth/login", loginRequest);
 
-            Console.WriteLine(await test.Content.ReadAsStringAsync());
+            //Console.WriteLine(await test.Content.ReadAsStringAsync());
+            var loginResponse = await _apiRequest.PostAsync<LoginResponse, LoginRequest>("api/Auth/login", loginRequest);
+            Console.WriteLine(loginResponse.Token);
 
             return true;
         }

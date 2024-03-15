@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TerraCloud.Application.DTO.Auth.Request;
+using TerraCloud.Application.DTO.Auth.Response;
 using TerraCloud.Application.Interfaces.Auth;
 using TerraCloud.Infrastructure.Auth;
 
@@ -24,13 +25,13 @@ namespace TerraCloud.Server.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            string jwtToken = await _loginService.Login(loginRequest);
-            if (jwtToken.IsNullOrEmpty())
+            LoginResponse loginResponse = await _loginService.Login(loginRequest);
+            if (loginResponse is null)
             {
                 return Unauthorized();
             }
 
-            return Ok(new { token = jwtToken });
+            return Ok(loginResponse);
         }
 
         [HttpPost("register")]

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TerraCloud.Application.DTO.Auth.Request;
+using TerraCloud.Application.DTO.Auth.Response;
 
 namespace TerraCloud.Application.Interfaces.Auth
 {
@@ -14,6 +15,6 @@ namespace TerraCloud.Application.Interfaces.Auth
         /// </summary>
         /// <param name="login"></param>
         /// <returns>JWT Token</returns>
-        Task<string> Login(LoginRequest login);
+        Task<LoginResponse> Login(LoginRequest login);
     }
 }

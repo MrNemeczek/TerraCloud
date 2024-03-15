@@ -4,6 +4,7 @@ using TerraCloud.Persistence.Contexts;
 using TerraCloud.Server.Components;
 using TerraCloud.Infrastructure;
 using TerraCloud.Persistence;
+using TerraCloud.Client.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 IConfiguration config = builder.Configuration;
@@ -29,6 +30,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<ApiRequest>();
 
 var app = builder.Build();
 
