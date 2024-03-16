@@ -22,7 +22,7 @@ namespace TerraCloud.Server.Controllers
 
         }
 
-        [HttpPost("login")]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
             LoginResponse loginResponse = await _loginService.Login(loginRequest);
@@ -34,7 +34,7 @@ namespace TerraCloud.Server.Controllers
             return Ok(loginResponse);
         }
 
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest registerRequest)
         {
             await _registryService.Registry(registerRequest);

@@ -39,6 +39,25 @@ namespace TerraCloud.Client.Common
                 throw;
             }
         }
+        public async Task<bool> OnlyPostAsync<TBody>(string endpoint, TBody body)
+        {
+            try
+            {
+                string requestBody = JsonSerializer.Serialize(body);
+                var httpContent = new StringContent(requestBody, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _http.PostAsync(endpoint, httpContent);
+                response.EnsureSuccessStatusCode();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await Console.Out.WriteLineAsync(ex.ToString());
+
+                throw;
+            }
+        }
         public async Task<TResult> GetAsync<TResult>()
         {
             throw new NotImplementedException();

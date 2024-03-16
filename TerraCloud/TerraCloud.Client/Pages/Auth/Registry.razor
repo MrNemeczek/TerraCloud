@@ -1,4 +1,5 @@
-﻿@inherits RegistryBase
+﻿@using TerraCloud.Application.DTO.Auth.Request
+@inherits RegistryBase
 
 <RadzenRow Gap="0" Class="rz-my-12 rz-mx-auto rz-border-radius-6 rz-shadow-10" Style="width: 100%; max-width: 800px; overflow: hidden;">
     <RadzenColumn Size="12" SizeMD="6">
@@ -13,22 +14,21 @@
             <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H2" Class="rz-mb-6">
                 Registry
             </RadzenText>
-            <RadzenTemplateForm Data=@("LoginWithDefaultValues")>
+            <RadzenTemplateForm Data="@registerRequest" Submit="@((RegisterRequest args) => OnRegister(args))">
                 <RadzenText>Username</RadzenText>
-                <RadzenTextBox Style="width: 100%;"/>
+                <RadzenTextBox @bind-Value=@registerRequest.Login Style="width: 100%;" />
 
                 <RadzenText>Password</RadzenText>
-                <RadzenPassword @bind-Value=@password aria-label="enter password" Style="width: 100%;" />
+                <RadzenPassword @bind-Value=@registerRequest.Password Style="width: 100%;" />
 
                 <RadzenText>Name</RadzenText>
-                <RadzenTextBox Style="width: 100%;" />
+                <RadzenTextBox @bind-Value=@registerRequest.Name Style="width: 100%;" />
 
                 <RadzenText>Lastname</RadzenText>
-                <RadzenTextBox Style="width: 100%;" />
+                <RadzenTextBox @bind-Value=@registerRequest.Lastname Style="width: 100%;" />
 
                 <RadzenText>Email</RadzenText>
-                <RadzenTextBox style="display: block" Name="Email" @bind-Value=@email class="w-100" />
-
+                <RadzenTextBox style="display: block" Name="Email" @bind-Value=@registerRequest.Email class="w-100" />
                 <RadzenRequiredValidator Component="Email" Text="Email is required" Popup=@popup Style="position: absolute" />
                 <RadzenEmailValidator Component="Email" Text="Provide a valid email address" Popup=@popup Style="position: absolute" />
 

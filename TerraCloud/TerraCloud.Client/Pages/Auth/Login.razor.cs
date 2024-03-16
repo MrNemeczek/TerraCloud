@@ -11,27 +11,21 @@ namespace TerraCloud.Client.Pages.Auth
     {
         protected string defaultUsername = "string";
         protected string defaultPassword = "string";
+
         protected bool rememberMe = true;
 
-        [Inject]
-        protected HttpClient _http { get; set; } = default!;
         [Inject]
         private ApiRequest _apiRequest { get; set; } = default!;
 
         protected async Task<bool> OnLogin(LoginArgs args, string name)
         {
-            Console.WriteLine($"{name} -> Username: {args.Username}, password: {args.Password}, remember me: {args.RememberMe}");
-
             var loginRequest = new LoginRequest
             {
                 Login = args.Username,
                 Password = args.Password
             };
 
-            //var test = await _http.PostAsJsonAsync<LoginRequest>("api/Auth/login", loginRequest);
-
-            //Console.WriteLine(await test.Content.ReadAsStringAsync());
-            var loginResponse = await _apiRequest.PostAsync<LoginResponse, LoginRequest>("api/Auth/login", loginRequest);
+            var loginResponse = await _apiRequest.PostAsync<LoginResponse, LoginRequest>("api/Auth/Login", loginRequest);
             Console.WriteLine(loginResponse.Token);
 
             return true;
