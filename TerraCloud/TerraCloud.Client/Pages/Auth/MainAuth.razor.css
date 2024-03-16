@@ -1,0 +1,11 @@
+﻿.page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #38474e;
+    height: 100vh;
+}
+
+body {
+    background-color: #45565e;
+}

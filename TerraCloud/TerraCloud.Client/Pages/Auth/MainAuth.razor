@@ -3,15 +3,16 @@
 @inject IJSRuntime jsRuntime
 
 @inherits MainAuthBase
+<div class="page">
+    <RadzenTabs Change=@OnChange TabPosition="@TabPosition.Top" RenderMode="TabRenderMode.Client">
+        <Tabs>
+            <RadzenTabsItem Text="Login">
+                <Login />
+            </RadzenTabsItem>
 
-<RadzenTabs Change=@OnChange TabPosition="@TabPosition.Top" RenderMode="TabRenderMode.Client">
-    <Tabs>
-        <RadzenTabsItem Text="Login">
-            <Login />
-        </RadzenTabsItem>
-
-        <RadzenTabsItem Text="Registry">
-            <Registry />
-        </RadzenTabsItem>
-    </Tabs>
-</RadzenTabs>
+            <RadzenTabsItem Text="Registry">
+                <Registry />
+            </RadzenTabsItem>
+        </Tabs>
+    </RadzenTabs>
+</div>
