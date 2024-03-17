@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace TerraCloud.Client.Common
 {
-    public class ApiRequest
+    public class ApiRequest : IApiRequest
     {
         private readonly JsonSerializerOptions _options;
         private readonly HttpClient _http;

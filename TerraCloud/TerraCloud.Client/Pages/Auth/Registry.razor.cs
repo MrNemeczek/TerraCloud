@@ -11,7 +11,7 @@ namespace TerraCloud.Client.Pages.Auth
         protected bool popup;
 
         [Inject]
-        private ApiRequest _apiRequest { get; set; } = default!;
+        private IApiRequest _apiRequest { get; set; } = default!;
 
         protected async Task OnRegister(RegisterRequest request)
         {

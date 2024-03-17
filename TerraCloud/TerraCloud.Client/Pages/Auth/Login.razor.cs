@@ -15,7 +15,7 @@ namespace TerraCloud.Client.Pages.Auth
         protected bool rememberMe = true;
 
         [Inject]
-        private ApiRequest _apiRequest { get; set; } = default!;
+        private IApiRequest _apiRequest { get; set; } = default!;
 
         protected async Task<bool> OnLogin(LoginArgs args, string name)
         {
