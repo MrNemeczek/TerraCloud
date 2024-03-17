@@ -7,7 +7,15 @@
 
     <main>
         <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+            <RadzenProfileMenu>
+                <Template>
+                    <RadzenGravatar Email="user@example.com">
+                    </RadzenGravatar>
+                </Template>
+                <ChildContent>
+                    <RadzenProfileMenuItem Text="Settings" Path="settings" Icon="build"></RadzenProfileMenuItem>
+                </ChildContent>
+            </RadzenProfileMenu>
         </div>
 
         <article class="content px-4">
