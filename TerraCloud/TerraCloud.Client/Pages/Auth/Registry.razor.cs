@@ -15,7 +15,7 @@ namespace TerraCloud.Client.Pages.Auth
 
         protected async Task OnRegister(RegisterRequest request)
         {
-            var result = await _apiRequest.OnlyPostAsync<RegisterRequest>("api/Auth/Register", request);
+            var result = await _apiRequest.OnlyPostAsync("Auth/Register", request);
             if (!result)
             {
                 // TODO: obsluga niepowodzenia

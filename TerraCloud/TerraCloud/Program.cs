@@ -20,7 +20,7 @@ builder.Services.AddDbContext<TerraCloudContext>(options => options.UseNpgsql(co
 builder.Services.AddScoped(sp =>
     new HttpClient
     {
-        BaseAddress = new Uri(builder.Configuration["AppConfigurations:ApiUrl"] ?? "https://localhost:7291/api")
+        BaseAddress = new Uri(builder.Configuration["AppConfigurations:ApiUrl"] ?? "https://localhost:7291/api/")
     });
 
 builder.Services.AddApplication();

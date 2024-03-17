@@ -25,7 +25,7 @@ namespace TerraCloud.Client.Pages.Auth
                 Password = args.Password
             };
 
-            var loginResponse = await _apiRequest.PostAsync<LoginResponse, LoginRequest>("api/Auth/Login", loginRequest);
+            var loginResponse = await _apiRequest.PostAsync<LoginResponse, LoginRequest>("Auth/Login", loginRequest);
             Console.WriteLine(loginResponse.Token);
 
             return true;
