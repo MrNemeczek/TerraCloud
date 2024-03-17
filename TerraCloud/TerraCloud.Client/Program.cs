@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Radzen;
 using TerraCloud.Client;
 using TerraCloud.Client.Common;
 
@@ -11,5 +12,8 @@ builder.Services.AddScoped(sp =>
     });
 
 builder.Services.AddClient();
+
+builder.Services.AddRadzenComponents();
+builder.Services.AddScoped<NotificationService>();
 
 await builder.Build().RunAsync();

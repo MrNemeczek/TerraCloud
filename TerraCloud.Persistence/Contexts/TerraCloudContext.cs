@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using TerraCloud.Domain.Models.User;
 using TerraCloud.Persistence.Configurations.User;
 
 namespace TerraCloud.Persistence.Contexts

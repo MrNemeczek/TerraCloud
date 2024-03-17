@@ -18,6 +18,13 @@ namespace TerraCloud.Persistence.Repositories.User
             await _context.User.AddAsync(user);
         }
 
+        public async Task<Domain.Models.User.User> GetUserByEmailOrLogin(string email, string login)
+        {
+            Domain.Models.User.User user = await _context.User.FirstOrDefaultAsync(u => u.Email == email || u.Login == login);
+
+            return user;
+        }
+
         public async Task<Domain.Models.User.User> GetUserByLogin(string login)
         {
             Domain.Models.User.User user = await _context.User.FirstOrDefaultAsync(u => u.Login == login);

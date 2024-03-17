@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TerraCloud.Persistence.Configurations.User
 {
@@ -15,17 +10,27 @@ namespace TerraCloud.Persistence.Configurations.User
         {
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Name);
+            builder.Property(x => x.Name)
+                .HasComment("Imię");
 
-            builder.Property(x => x.Lastname);
+            builder.Property(x => x.Lastname)
+                .HasComment("Nazwisko");
 
-            builder.Property(x => x.Login);
+            builder.HasIndex(x => x.Login)
+                .IsUnique(true);
+            builder.Property(x => x.Login)
+                .HasComment("Login");
 
-            builder.Property(x => x.Password);
+            builder.Property(x => x.Password)
+                .HasComment("Hasło");
 
-            builder.Property(x => x.Salt);
+            builder.Property(x => x.Salt)
+                .HasComment("Sól do szyfrowania hasła");
 
-            builder.Property(x => x.Email);
+            builder.HasIndex(x => x.Email)
+                .IsUnique(true);
+            builder.Property(x => x.Email)
+                .HasComment("Email");
         }
     }
 }

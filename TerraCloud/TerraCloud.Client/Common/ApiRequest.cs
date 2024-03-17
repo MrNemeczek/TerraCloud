@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Text.Json;
+using TerraCloud.Application.DTO.Error;
 
 namespace TerraCloud.Client.Common
 {
@@ -39,7 +40,7 @@ namespace TerraCloud.Client.Common
                 throw;
             }
         }
-        public async Task<bool> OnlyPostAsync<TBody>(string endpoint, TBody body)
+        public async Task<ErrorResponse?> OnlyPostAsync<TBody>(string endpoint, TBody body)
         {
             try
             {
@@ -47,9 +48,15 @@ namespace TerraCloud.Client.Common
                 var httpContent = new StringContent(requestBody, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await _http.PostAsync(endpoint, httpContent);
-                response.EnsureSuccessStatusCode();
+                if (!response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    var errorResponse = JsonSerializer.Deserialize<ErrorResponse>(responseBody, _options);
 
-                return true;
+                    return errorResponse;
+                }
+
+                return null;
             }
             catch (Exception ex)
             {

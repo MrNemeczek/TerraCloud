@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TerraCloud.Application.DTO.Auth.Request;
+using TerraCloud.Application.Exceptions.Auth;
 using TerraCloud.Application.Interfaces.Auth;
 using TerraCloud.Domain.Models.User;
 using TerraCloud.Infrastructure.Interfaces.Auth;
@@ -30,6 +31,8 @@ namespace TerraCloud.Infrastructure.Auth.Registry
 
         public async Task Registry(RegisterRequest registerRequest)
         {
+            await CheckConflictExists(registerRequest.Login, registerRequest.Email);
+
             registerRequest.Password = _passwordOperations.GenerateHash(registerRequest.Password, out byte[] salt);
 
             var user = _mapper.Map<User>(registerRequest);
@@ -37,6 +40,22 @@ namespace TerraCloud.Infrastructure.Auth.Registry
 
             await _userRepository.AddUser(user);
             await _databaseRepository.SaveChangesAsync();
+        }
+
+        private async Task<bool> CheckConflictExists(string login, string email)
+        {
+            User user = await _userRepository.GetUserByEmailOrLogin(email, login);
+
+            if (user?.Email == email)
+            {
+                throw new EmailExistsException(email);
+            }
+            if(user?.Login == login)
+            {
+                throw new LoginExistsException(login);
+            }
+
+            return false;
         }
     }
 }

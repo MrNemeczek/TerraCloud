@@ -1,4 +1,6 @@
-﻿namespace TerraCloud.Client.Common
+﻿using TerraCloud.Application.DTO.Error;
+
+namespace TerraCloud.Client.Common
 {
     public interface IApiRequest
     {
@@ -18,7 +20,7 @@
         /// <param name="endpoint"></param>
         /// <param name="body"></param>
         /// <returns></returns>
-        Task<bool> OnlyPostAsync<TBody>(string endpoint, TBody body);
+        Task<ErrorResponse?> OnlyPostAsync<TBody>(string endpoint, TBody body);
         /// <summary>
         /// 
         /// </summary>

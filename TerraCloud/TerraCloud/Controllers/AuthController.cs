@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TerraCloud.Application.DTO.Auth.Request;
 using TerraCloud.Application.DTO.Auth.Response;
+using TerraCloud.Application.DTO.Error;
+using TerraCloud.Application.Exceptions.Auth;
 using TerraCloud.Application.Interfaces.Auth;
 using TerraCloud.Infrastructure.Auth;
 
@@ -37,7 +39,33 @@ namespace TerraCloud.Server.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest registerRequest)
         {
-            await _registryService.Registry(registerRequest);
+            // TODO: przenieść try...catch to tak jak bylo na szkoleniu
+            try
+            {
+                await _registryService.Registry(registerRequest);
+            }
+            catch (LoginExistsException ex)
+            {
+                await Console.Out.WriteLineAsync(ex.ToString());
+
+                var errorResponse = new ErrorResponse() 
+                {
+                    Describe = "Login exists!",
+                    ErrorCode = ErrorCode.LoginExists
+                };
+                return Conflict(errorResponse);
+            }
+            catch(EmailExistsException ex)
+            {
+                await Console.Out.WriteLineAsync(ex.ToString());
+
+                var errorResponse = new ErrorResponse()
+                {
+                    Describe = "Email exists!",
+                    ErrorCode = ErrorCode.EmailExists
+                };
+                return Conflict(errorResponse);
+            }
 
             return Ok();
         }

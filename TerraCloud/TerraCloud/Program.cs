@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using Radzen;
 
 using TerraCloud.Persistence.Contexts;
 using TerraCloud.Server.Components;
 using TerraCloud.Infrastructure;
 using TerraCloud.Persistence;
-using TerraCloud.Client.Common;
 using TerraCloud.Client;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,12 +28,13 @@ builder.Services.AddPersistance();
 builder.Services.AddInfrastructure();
 builder.Services.AddClient();
 
+builder.Services.AddRadzenComponents();
+builder.Services.AddScoped<NotificationService>();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-//builder.Services.AddScoped<ApiRequest>();
 
 var app = builder.Build();
 
