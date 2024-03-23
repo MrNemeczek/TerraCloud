@@ -1,18 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Radzen;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 using TerraCloud.Persistence.Contexts;
 using TerraCloud.Server.Components;
 using TerraCloud.Infrastructure;
 using TerraCloud.Persistence;
 using TerraCloud.Client;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using TerraCloud.Client.Pages.Auth;
-using TerraCloud.Server.Components.Pages;
-using Microsoft.AspNetCore.Components.Authorization;
-//using TerraCloud.Server.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 IConfiguration config = builder.Configuration;
@@ -34,6 +30,7 @@ builder.Services.AddScoped(sp =>
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
+    // TODO: wziac z jwtservice
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
@@ -46,8 +43,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
-//builder.Services.AddApiAuthorization();
-builder.Services.AddScoped<AuthenticationStateProvider, PersistentAuthenticationStateProvider>();
+//Auth
+//builder.Services.AddScoped<AuthenticationStateProvider, PersistentAuthenticationStateProvider>();
 
 builder.Services.AddApplication();
 builder.Services.AddPersistance();
@@ -84,10 +81,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
-//app.MapRazorComponents<App>()
-//    .AddInteractiveWebAssemblyRenderMode()
-//    .AddAdditionalAssemblies(typeof(TerraCloud.Client._Imports).Assembly);
-
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
@@ -100,7 +93,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Czy musi byc?
 app.UseAuthentication();
 app.UseAuthorization();
 

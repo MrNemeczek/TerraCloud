@@ -41,5 +41,19 @@ namespace TerraCloud.Infrastructure.Auth
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        public TokenValidationParameters GetValidationParameters()
+        {
+            return new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = _configuration["Jwt:Issuer"],
+                ValidAudience = _configuration["Jwt:Issuer"], // TODO: zmienic na Audience
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]))
+            };
+        }
     }
 }

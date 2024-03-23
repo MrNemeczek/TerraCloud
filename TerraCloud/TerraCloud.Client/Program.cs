@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Radzen;
 using TerraCloud.Client;
 using TerraCloud.Client.Common;
+using TerraCloud.Infrastructure;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -16,10 +17,9 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddCascadingAuthenticationState();
 
 builder.Services.AddClient();
+builder.Services.AddInfrastructure();
 
 builder.Services.AddRadzenComponents();
 builder.Services.AddScoped<NotificationService>();
-//builder.Services.AddSingleton<AuthenticationStateProvider, PersistentAuthenticationStateProvider>();
-builder.Services.AddScoped<AuthenticationStateProvider, PersistentAuthenticationStateProvider>();
 
 await builder.Build().RunAsync();
