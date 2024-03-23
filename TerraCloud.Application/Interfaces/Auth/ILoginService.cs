@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TerraCloud.Application.DTO.Auth.Request;
-using TerraCloud.Application.DTO.Auth.Response;
+using TerraCloud.Application.DTOs.Auth.Request;
+using TerraCloud.Application.DTOs.Auth.Response;
 
 namespace TerraCloud.Application.Interfaces.Auth
 {

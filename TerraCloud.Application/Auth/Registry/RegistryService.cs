@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TerraCloud.Application.DTO.Auth.Request;
+using TerraCloud.Application.DTOs.Auth.Request;
 using TerraCloud.Application.Exceptions.Auth;
 using TerraCloud.Application.Interfaces.Auth;
 using TerraCloud.Domain.Models.User;

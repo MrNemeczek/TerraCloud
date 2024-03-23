@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using System.Text.Json;
-using TerraCloud.Application.DTO.Error;
+using TerraCloud.Application.DTOs.Error;
 
 namespace TerraCloud.Client.Common
 {

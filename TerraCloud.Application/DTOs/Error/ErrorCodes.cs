@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TerraCloud.Application.DTO.Error
+namespace TerraCloud.Application.DTOs.Error
 {
     public enum ErrorCode
     {

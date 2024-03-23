@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Radzen;
-using System.Net.Http.Json;
-using TerraCloud.Application.DTO.Auth.Request;
-using TerraCloud.Application.DTO.Auth.Response;
+using System.Linq.Dynamic.Core.Tokenizer;
+using TerraCloud.Application.DTOs.Auth.Request;
+using TerraCloud.Application.DTOs.Auth.Response;
 using TerraCloud.Client.Common;
 
 namespace TerraCloud.Client.Pages.Auth
@@ -16,6 +17,10 @@ namespace TerraCloud.Client.Pages.Auth
 
         [Inject]
         private IApiRequest _apiRequest { get; set; } = default!;
+        [Inject]
+        private AuthenticationStateProvider AuthStateProvider { get; set; } = default!;
+        [Inject]
+        private NavigationManager NavManager { get; set; } = default!;
 
         protected async Task<bool> OnLogin(LoginArgs args, string name)
         {
@@ -27,6 +32,10 @@ namespace TerraCloud.Client.Pages.Auth
 
             var loginResponse = await _apiRequest.PostAsync<LoginResponse, LoginRequest>("Auth/Login", loginRequest);
             Console.WriteLine(loginResponse.Token);
+
+            var customAuthStateProvider = (PersistentAuthenticationStateProvider)AuthStateProvider;
+            await customAuthStateProvider.UpdateAuthenticationState(loginResponse.Token);
+            NavManager.NavigateTo("/");
 
             return true;
         }

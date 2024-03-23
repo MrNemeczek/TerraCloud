@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Radzen;
 
-using TerraCloud.Application.DTO.Auth.Request;
+using TerraCloud.Application.DTOs.Auth.Request;
 using TerraCloud.Client.Common;
 
 namespace TerraCloud.Client.Pages.Auth

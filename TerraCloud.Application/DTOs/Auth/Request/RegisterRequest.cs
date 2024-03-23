@@ -1,4 +1,4 @@
-﻿namespace TerraCloud.Application.DTO.Auth.Request
+﻿namespace TerraCloud.Application.DTOs.Auth.Request
 {
     public class RegisterRequest
     {

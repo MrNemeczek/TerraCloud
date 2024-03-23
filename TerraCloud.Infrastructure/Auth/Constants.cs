@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TerraCloud.Application.DTO.Auth.Response
+namespace TerraCloud.Infrastructure.Auth
 {
-    public class LoginResponse
+    public static class Constants
     {
-        public string Token { get; set; }
+        public static string JWTTOKEN { get; set; } = "";
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace TerraCloud.Application.DTO.Error
+﻿namespace TerraCloud.Application.DTOs.Error
 {
     public class ErrorResponse
     {

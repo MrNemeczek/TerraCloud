@@ -4,13 +4,13 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using TerraCloud.Application.DTO.Auth.Request;
+using TerraCloud.Application.DTOs.Auth.Request;
 using TerraCloud.Application.Interfaces.Auth;
 using TerraCloud.Persistence.Interfaces.Repository.User;
 using TerraCloud.Domain.Models.User;
 using TerraCloud.Infrastructure.Interfaces.Auth;
 using AutoMapper;
-using TerraCloud.Application.DTO.Auth.Response;
+using TerraCloud.Application.DTOs.Auth.Response;
 
 namespace TerraCloud.Infrastructure.Auth
 {

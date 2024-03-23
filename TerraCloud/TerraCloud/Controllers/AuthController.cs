@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using TerraCloud.Application.DTO.Auth.Request;
-using TerraCloud.Application.DTO.Auth.Response;
-using TerraCloud.Application.DTO.Error;
+using TerraCloud.Application.DTOs.Auth.Request;
+using TerraCloud.Application.DTOs.Auth.Response;
+using TerraCloud.Application.DTOs.Error;
 using TerraCloud.Application.Exceptions.Auth;
 using TerraCloud.Application.Interfaces.Auth;
 using TerraCloud.Infrastructure.Auth;
@@ -21,7 +21,6 @@ namespace TerraCloud.Server.Controllers
         {
             _loginService = loginService;
             _registryService = registryService;
-
         }
 
         [HttpPost("Login")]
@@ -33,6 +32,7 @@ namespace TerraCloud.Server.Controllers
                 return Unauthorized();
             }
 
+            //return RedirectToAction("Index", "Home");
             return Ok(loginResponse);
         }
 
