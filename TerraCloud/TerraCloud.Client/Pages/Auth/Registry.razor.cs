@@ -19,6 +19,13 @@ namespace TerraCloud.Client.Pages.Auth
 
         protected async Task OnRegister(RegisterRequest request)
         {
+            if (!request.Password.Equals(request.ConfirmPassword))
+            {
+                _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = "Password and Confirm Password are not the same", Duration = 5000 });
+                
+                return;
+            }
+
             var result = await _apiRequest.OnlyPostAsync("Auth/Register", request);
             if (result is not null)
             {
