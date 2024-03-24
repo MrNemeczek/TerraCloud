@@ -17,27 +17,27 @@
                 Registry
             </RadzenText>
             <RadzenTemplateForm Data="@registerRequest" Submit="@((RegisterRequest args) => OnRegister(args))">
-                <RadzenText>Username</RadzenText>
-                <RadzenTextBox @bind-Value=@registerRequest.Login Style="width: 100%;" />
+                <RadzenText class="rz-mb-3">Username</RadzenText>
+                <RadzenTextBox @bind-Value=@registerRequest.Login class="w-100 rz-mb-3" />
 
-                <RadzenText>Password</RadzenText>
-                <RadzenPassword @bind-Value=@registerRequest.Password Style="width: 100%;" />
+                <RadzenText class="rz-mb-3">Password</RadzenText>
+                <RadzenPassword @bind-Value=@registerRequest.Password class="w-100 rz-mb-3" />
 
-                <RadzenText>Confirm Password</RadzenText>
-                <RadzenPassword @bind-Value=@registerRequest.ConfirmPassword Style="width: 100%;" />
+                <RadzenText class="rz-mb-3">Confirm Password</RadzenText>
+                <RadzenPassword @bind-Value=@registerRequest.ConfirmPassword class="w-100 rz-mb-3" />
 
-                <RadzenText>Name</RadzenText>
-                <RadzenTextBox @bind-Value=@registerRequest.Name Style="width: 100%;" />
+                <RadzenText class="rz-mb-3">Name</RadzenText>
+                <RadzenTextBox @bind-Value=@registerRequest.Name class="w-100 rz-mb-3" />
 
-                <RadzenText>Lastname</RadzenText>
-                <RadzenTextBox @bind-Value=@registerRequest.Lastname Style="width: 100%;" />
+                <RadzenText class="rz-mb-3">Lastname</RadzenText>
+                <RadzenTextBox @bind-Value=@registerRequest.Lastname class="w-100 rz-mb-3" />
 
-                <RadzenText>Email</RadzenText>
-                <RadzenTextBox style="display: block" Name="Email" @bind-Value=@registerRequest.Email class="w-100" />
+                <RadzenText class="rz-mb-3">Email</RadzenText>
+                <RadzenTextBox style="display: block" Name="Email" @bind-Value=@registerRequest.Email class="w-100 rz-mb-3" />
                 <RadzenRequiredValidator Component="Email" Text="Email is required" Popup=@popup Style="position: absolute" />
                 <RadzenEmailValidator Component="Email" Text="Provide a valid email address" Popup=@popup Style="position: absolute" />
 
-                <RadzenButton ButtonType="ButtonType.Submit" Size="ButtonSize.Large" Icon="save" Text="Registry" />
+                <RadzenButton ButtonType="ButtonType.Submit" Size="ButtonSize.Large" Icon="save" Text="Registry" class="rz-mt-5"/>
             </RadzenTemplateForm>
         </RadzenCard>
     </RadzenColumn>
