@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TerraCloud.Domain.Models.Device;
 
 namespace TerraCloud.Domain.Models.User
 {
@@ -15,5 +11,7 @@ namespace TerraCloud.Domain.Models.User
         public string Password { get; set; }
         public string Salt { get; set; }
         public string Email { get; set; }
+
+        public virtual ICollection<UserDevice>? UserDevices { get; }
     }
 }

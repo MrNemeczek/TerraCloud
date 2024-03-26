@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TerraCloud.Persistence.Configurations.User
 {
-    // TODO: zlikwidowac ten namespace (za pomoca using?)
     public class UserConfiguration : IEntityTypeConfiguration<Domain.Models.User.User>
     {
         public void Configure(EntityTypeBuilder<Domain.Models.User.User> builder)
         {
+            builder.ToTable("User");
+
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Name)
