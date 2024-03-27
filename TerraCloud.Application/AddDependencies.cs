@@ -1,15 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
+using TerraCloud.Application.Device.Queries;
 using TerraCloud.Application.Interfaces.Auth;
+using TerraCloud.Application.Interfaces.Device;
 using TerraCloud.Infrastructure.Auth;
 using TerraCloud.Infrastructure.Auth.Registry;
-using TerraCloud.Persistence;
 
 namespace TerraCloud.Infrastructure
 {
@@ -20,6 +15,10 @@ namespace TerraCloud.Infrastructure
             //Auth
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRegistryService, RegistryService>();
+
+            //Device
+            services.AddScoped<IGetDevice, GetDevice>();
+            services.AddScoped<IGetDevices, GetDevices>();
         }
     }
 }

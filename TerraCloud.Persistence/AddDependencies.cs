@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using TerraCloud.Persistence.Interfaces.Repository.Database;
+using TerraCloud.Persistence.Interfaces.Repository.Device;
 using TerraCloud.Persistence.Interfaces.Repository.User;
 using TerraCloud.Persistence.Repositories.Database;
+using TerraCloud.Persistence.Repositories.Device;
 using TerraCloud.Persistence.Repositories.User;
 
 namespace TerraCloud.Persistence
@@ -20,6 +18,9 @@ namespace TerraCloud.Persistence
 
             //Database
             services.AddScoped<IDatabaseRepository, DatabaseRepository>();
+
+            //Device
+            services.AddScoped<IDeviceRepository, DeviceRepository>();
         }
     }
 }
