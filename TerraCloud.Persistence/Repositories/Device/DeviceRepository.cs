@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TerraCloud.Domain.Models.Device;
+
 using TerraCloud.Persistence.Contexts;
 using TerraCloud.Persistence.Interfaces.Repository.Device;
 
@@ -21,14 +16,12 @@ namespace TerraCloud.Persistence.Repositories.Device
 
         public async Task<Domain.Models.Device.Device> GetDevice(Guid deviceId)
         {
-            Domain.Models.Device.Device device = await _context.Devices.FirstOrDefaultAsync(d => d.Id == deviceId);
-
-            return device;
+            return await _context.Devices.SingleOrDefaultAsync(d => d.Id == deviceId);
         }
 
-        public Task<IEnumerable<Domain.Models.Device.Device>> GetDevices()
+        public async Task<IEnumerable<Domain.Models.Device.Device>> GetDevices()
         {
-            throw new NotImplementedException();
+            return await _context.Devices.ToListAsync();
         }
     }
 }

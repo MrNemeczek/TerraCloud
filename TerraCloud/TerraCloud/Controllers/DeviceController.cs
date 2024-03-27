@@ -21,8 +21,9 @@ namespace TerraCloud.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetDevices()
         {
+            var response = await _getDevices.Execute();
 
-            return Ok();
+            return Ok(response);
         }
 
         [HttpGet("{id}")]
