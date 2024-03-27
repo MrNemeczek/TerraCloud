@@ -1,7 +1,15 @@
 ﻿@page "/device"
 
-<h3>Index</h3>
+@using TerraCloud.Application.DTOs.Device.Responses;
 
-@code {
+@inherits IndexBase
 
-}
+<RadzenButton Text="Add Device" class="rz-mb-3" />
+
+<RadzenDataGrid AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" Data="@devices" TItem="DeviceResponse" 
+                ColumnWidth="300px">
+    <Columns>
+        <RadzenDataGridColumn TItem="DeviceResponse" Property="Id" Title="ID"/>
+        <RadzenDataGridColumn TItem="DeviceResponse" Property="Name" Title="Name" />
+    </Columns>
+</RadzenDataGrid>

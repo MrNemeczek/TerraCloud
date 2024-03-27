@@ -26,12 +26,12 @@ namespace TerraCloud.Client.Common
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <returns></returns>
-        Task<TResult> GetAsync<TResult>();
+        Task<TResult> GetAsync<TResult>(string endpoint);
         /// <summary>
         /// 
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <returns></returns>
-        Task<TResult> PutAsync<TResult>();
+        Task<TResult> PutAsync<TResult>(string endpoint);
     }
 }

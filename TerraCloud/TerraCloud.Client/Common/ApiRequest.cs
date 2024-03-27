@@ -28,8 +28,7 @@ namespace TerraCloud.Client.Common
                 HttpResponseMessage response = await _http.PostAsync(endpoint, httpContent);
                 response.EnsureSuccessStatusCode();
 
-                string responseBody = await response.Content.ReadAsStringAsync();
-                TResult result = JsonSerializer.Deserialize<TResult>(responseBody, _options);
+                var result = await DeserializeResponse<TResult>(response);
 
                 return result;
             }
@@ -50,8 +49,7 @@ namespace TerraCloud.Client.Common
                 HttpResponseMessage response = await _http.PostAsync(endpoint, httpContent);
                 if (!response.IsSuccessStatusCode)
                 {
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    var errorResponse = JsonSerializer.Deserialize<ErrorResponse>(responseBody, _options);
+                    var errorResponse = await DeserializeResponse<ErrorResponse>(response);
 
                     return errorResponse;
                 }
@@ -65,13 +63,26 @@ namespace TerraCloud.Client.Common
                 throw;
             }
         }
-        public async Task<TResult> GetAsync<TResult>()
+        public async Task<TResult> GetAsync<TResult>(string endpoint)
+        {
+            HttpResponseMessage response = await _http.GetAsync(endpoint);
+            response.EnsureSuccessStatusCode();
+
+            var result = await DeserializeResponse<TResult>(response);
+
+            return result;
+        }
+        public async Task<TResult> PutAsync<TResult>(string endpoint)
         {
             throw new NotImplementedException();
         }
-        public async Task<TResult> PutAsync<TResult>()
+
+        private async Task<TResult> DeserializeResponse<TResult>(HttpResponseMessage response)
         {
-            throw new NotImplementedException();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            var result = JsonSerializer.Deserialize<TResult>(responseBody, _options);
+
+            return result;
         }
     }
 }
