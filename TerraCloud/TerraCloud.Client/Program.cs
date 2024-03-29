@@ -21,5 +21,6 @@ builder.Services.AddInfrastructure();
 
 builder.Services.AddRadzenComponents();
 builder.Services.AddScoped<NotificationService>();
+builder.Services.AddScoped<DialogService>();// Czy potrzebne?
 
 await builder.Build().RunAsync();

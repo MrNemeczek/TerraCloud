@@ -4,7 +4,7 @@
 
 @inherits IndexBase
 
-<RadzenButton Text="Add Device" class="rz-mb-3" />
+<RadzenButton Text="Add Device" class="rz-mb-3" Click=@AddDevice />
 
 <RadzenDataGrid AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" Data="@devices" TItem="DeviceResponse" 
                 ColumnWidth="300px">

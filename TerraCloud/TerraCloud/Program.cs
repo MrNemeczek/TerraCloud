@@ -54,6 +54,7 @@ builder.Services.AddClient();
 // Radzen
 builder.Services.AddRadzenComponents();
 builder.Services.AddScoped<NotificationService>();
+builder.Services.AddScoped<DialogService>();// Czy potrzebne?
 
 // Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
