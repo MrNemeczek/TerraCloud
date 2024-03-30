@@ -4,5 +4,6 @@
     {
         Task<Domain.Models.Device.Device> GetDevice(Guid deviceId);
         Task<IEnumerable<Domain.Models.Device.Device>> GetDevices();
+        Task AddDevice(Domain.Models.Device.Device device);
     }
 }

@@ -1,11 +1,16 @@
-﻿@using TerraCloud.Application.DTOs.Device.Requests;
+﻿@page "/dialog"
+
+@using TerraCloud.Application.DTOs.Device.Requests;
 
 @inherits DialogCreateBase
 
+@inject Radzen.DialogService dialogService
+
+<div class="close-button-div">
+    <RadzenButton Text="X" Click="() => dialogService.Close(false)" class="close-button" ButtonStyle="ButtonStyle.Danger"/>
+</div>
+
 <RadzenCard>
-    <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H2" Class="rz-mb-6">
-        Add Device
-    </RadzenText>
     <RadzenTemplateForm Data="@deviceRequest" Submit="@((AddDeviceRequest args) => OnDeviceAdd(args))">
         <RadzenText class="rz-mb-3">Device name</RadzenText>
         <RadzenTextBox @bind-Value=@deviceRequest.Name class="w-100 rz-mb-3" />

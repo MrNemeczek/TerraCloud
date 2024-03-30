@@ -44,6 +44,12 @@ namespace TerraCloud.Infrastructure.Auth
 
         public TokenValidationParameters GetValidationParameters()
         {
+            string key = _configuration.GetRequiredSection("Jwt:Key").Value;
+            //if (String.IsNullOrEmpty(key))
+            //{
+            //    throw new ArgumentNullException(nameof(key));
+            //}
+
             return new TokenValidationParameters
             {
                 ValidateIssuer = true,
@@ -52,7 +58,7 @@ namespace TerraCloud.Infrastructure.Auth
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = _configuration["Jwt:Issuer"],
                 ValidAudience = _configuration["Jwt:Issuer"], // TODO: zmienic na Audience
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]))
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
             };
         }
     }

@@ -24,10 +24,8 @@ namespace TerraCloud.Client.Pages.Device
 
         public async Task AddDevice()
         {
-            await Console.Out.WriteLineAsync("dupa");
-
             await _dialogService.OpenAsync<DialogCreate>(
-                title: "Test",
+                title: "Add Device",
                 options: new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
         }
     }

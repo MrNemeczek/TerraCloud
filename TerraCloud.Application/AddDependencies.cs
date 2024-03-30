@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-
+using TerraCloud.Application.Device.Commands;
 using TerraCloud.Application.Device.Queries;
 using TerraCloud.Application.Interfaces.Auth;
 using TerraCloud.Application.Interfaces.Device;
@@ -19,6 +19,7 @@ namespace TerraCloud.Infrastructure
             //Device
             services.AddScoped<IGetDevice, GetDevice>();
             services.AddScoped<IGetDevices, GetDevices>();
+            services.AddScoped<IAddDevice, AddDevice>();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace TerraCloud.Application.Device.Queries
         public async Task<DeviceResponse> Execute(Guid deviceId)
         {
             Domain.Models.Device.Device device = await _deviceRepository.GetDevice(deviceId);
-            DeviceResponse response = _mapper.Map<DeviceResponse>(device);
+            var response = _mapper.Map<DeviceResponse>(device);
 
             return response;
         }

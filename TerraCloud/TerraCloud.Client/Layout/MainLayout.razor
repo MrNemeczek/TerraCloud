@@ -10,6 +10,8 @@
 
             <main>
                 <div class="top-row px-4">
+                    <RadzenNotification />
+                    <RadzenDialog />
                     <RadzenProfileMenu>
                         <Template>
                             <RadzenGravatar Email="user@example.com">
@@ -28,6 +30,7 @@
         </div>
     </Authorized>
     <NotAuthorized>
+        <RadzenNotification />
         <MainAuth/>
     </NotAuthorized>
 </AuthorizeView>
