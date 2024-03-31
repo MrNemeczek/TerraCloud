@@ -1,5 +1,8 @@
-﻿using System.Text;
+﻿using Blazored.LocalStorage;
+using System.Text;
 using System.Text.Json;
+using System.Net.Http.Headers;
+
 using TerraCloud.Application.DTOs.Error;
 
 namespace TerraCloud.Client.Common
@@ -8,14 +11,17 @@ namespace TerraCloud.Client.Common
     {
         private readonly JsonSerializerOptions _options;
         private readonly HttpClient _http;
+        private readonly ILocalStorageService _localStorageService;
 
-        public ApiRequest(HttpClient http)
+        public ApiRequest(HttpClient http, ILocalStorageService localStorageService)
         {
             _options = new JsonSerializerOptions()
             {
                 PropertyNameCaseInsensitive = true
             };
+
             _http = http;
+            _localStorageService = localStorageService;            
         }
 
         public async Task<TResult> PostAsync<TResult, TBody>(string endpoint, TBody body)
@@ -24,7 +30,7 @@ namespace TerraCloud.Client.Common
             {
                 string requestBody = JsonSerializer.Serialize(body);
                 var httpContent = new StringContent(requestBody, Encoding.UTF8, "application/json");
-
+                
                 HttpResponseMessage response = await _http.PostAsync(endpoint, httpContent);
                 response.EnsureSuccessStatusCode();
 
@@ -65,6 +71,10 @@ namespace TerraCloud.Client.Common
         }
         public async Task<TResult> GetAsync<TResult>(string endpoint)
         {
+            // TODO: syf straszny sprobowac zrobic to jakims trikiem
+            string tokenJWT = await _localStorageService.GetItemAsStringAsync("jwt");
+            tokenJWT = tokenJWT.Trim('\"');
+            _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
             HttpResponseMessage response = await _http.GetAsync(endpoint);
             response.EnsureSuccessStatusCode();
 

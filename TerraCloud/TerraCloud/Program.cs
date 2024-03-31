@@ -9,6 +9,7 @@ using TerraCloud.Server.Components;
 using TerraCloud.Infrastructure;
 using TerraCloud.Persistence;
 using TerraCloud.Client;
+using Blazored.LocalStorage;
 
 var builder = WebApplication.CreateBuilder(args);
 IConfiguration config = builder.Configuration;
@@ -55,6 +56,9 @@ builder.Services.AddClient();
 builder.Services.AddRadzenComponents();
 builder.Services.AddScoped<NotificationService>();
 builder.Services.AddScoped<DialogService>();// Czy potrzebne?
+
+// Local Storage
+builder.Services.AddBlazoredLocalStorage();
 
 // Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

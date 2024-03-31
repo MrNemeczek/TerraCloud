@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Radzen;
 
@@ -19,9 +20,11 @@ namespace TerraCloud.Client.Pages.Auth
         [Inject]
         private IApiRequest _apiRequest { get; set; } = default!;
         [Inject]
-        private AuthenticationStateProvider AuthStateProvider { get; set; } = default!;
+        private AuthenticationStateProvider _authStateProvider { get; set; } = default!;
         [Inject]
-        private NavigationManager NavManager { get; set; } = default!;
+        private NavigationManager _navManager { get; set; } = default!;
+        [Inject]
+        private ILocalStorageService _localStorageService { get; set; } = default!;
 
         protected async Task<bool> OnLogin(LoginArgs args, string name)
         {
@@ -33,10 +36,12 @@ namespace TerraCloud.Client.Pages.Auth
 
             var loginResponse = await _apiRequest.PostAsync<LoginResponse, LoginRequest>("Auth/Login", loginRequest);
             Console.WriteLine(loginResponse.Token);
+            await _localStorageService.SetItemAsync("jwt", loginResponse.Token);
 
-            var customAuthStateProvider = (PersistentAuthenticationStateProvider)AuthStateProvider;
+            var customAuthStateProvider = (PersistentAuthenticationStateProvider)_authStateProvider;
             await customAuthStateProvider.UpdateAuthenticationState(loginResponse.Token);
-            NavManager.NavigateTo("/");
+
+            _navManager.NavigateTo("/");
 
             return true;
         }
