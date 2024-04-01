@@ -28,6 +28,8 @@ namespace TerraCloud.Client.Common
         {
             try
             {
+                await SetAuthorization();
+
                 string requestBody = JsonSerializer.Serialize(body);
                 var httpContent = new StringContent(requestBody, Encoding.UTF8, "application/json");
                 
@@ -49,6 +51,8 @@ namespace TerraCloud.Client.Common
         {
             try
             {
+                await SetAuthorization();
+
                 string requestBody = JsonSerializer.Serialize(body);
                 var httpContent = new StringContent(requestBody, Encoding.UTF8, "application/json");
 
@@ -71,10 +75,8 @@ namespace TerraCloud.Client.Common
         }
         public async Task<TResult> GetAsync<TResult>(string endpoint)
         {
-            // TODO: syf straszny sprobowac zrobic to jakims trikiem
-            string tokenJWT = await _localStorageService.GetItemAsStringAsync("jwt");
-            tokenJWT = tokenJWT.Trim('\"');
-            _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
+            await SetAuthorization();
+
             HttpResponseMessage response = await _http.GetAsync(endpoint);
             response.EnsureSuccessStatusCode();
 
@@ -84,6 +86,8 @@ namespace TerraCloud.Client.Common
         }
         public async Task<TResult> PutAsync<TResult>(string endpoint)
         {
+            await SetAuthorization();
+
             throw new NotImplementedException();
         }
 
@@ -93,6 +97,13 @@ namespace TerraCloud.Client.Common
             var result = JsonSerializer.Deserialize<TResult>(responseBody, _options);
 
             return result;
+        }
+
+        private async Task SetAuthorization()
+        {
+            string tokenJWT = await _localStorageService.GetItemAsStringAsync("jwt");
+            tokenJWT = tokenJWT.Trim('\"');
+            _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
         }
     }
 }
