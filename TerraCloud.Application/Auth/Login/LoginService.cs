@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using TerraCloud.Application.DTOs.Auth.Request;
+﻿using AutoMapper;
+
+using TerraCloud.Application.DTOs.Auth.Requests;
 using TerraCloud.Application.Interfaces.Auth;
 using TerraCloud.Persistence.Interfaces.Repository.User;
 using TerraCloud.Domain.Models.User;
 using TerraCloud.Infrastructure.Interfaces.Auth;
-using AutoMapper;
-using TerraCloud.Application.DTOs.Auth.Response;
+using TerraCloud.Application.DTOs.Auth.Responses;
 
 namespace TerraCloud.Infrastructure.Auth
 {

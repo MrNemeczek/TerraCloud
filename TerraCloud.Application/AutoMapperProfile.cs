@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-using TerraCloud.Application.DTOs.Auth.Request;
+using TerraCloud.Application.DTOs.Auth.Requests;
 using TerraCloud.Application.DTOs.Device.Requests;
 using TerraCloud.Application.DTOs.Device.Responses;
 using TerraCloud.Domain.Models.User;

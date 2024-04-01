@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Radzen;
 
-using TerraCloud.Application.DTOs.Auth.Request;
-using TerraCloud.Application.DTOs.Auth.Response;
+using TerraCloud.Application.DTOs.Auth.Requests;
+using TerraCloud.Application.DTOs.Auth.Responses;
 using TerraCloud.Client.Common;
 using TerraCloud.Infrastructure.Auth;
 

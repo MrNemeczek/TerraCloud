@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TerraCloud.Application.DTOs.Auth.Request;
-using TerraCloud.Application.DTOs.Auth.Response;
+﻿using TerraCloud.Application.DTOs.Auth.Requests;
+using TerraCloud.Application.DTOs.Auth.Responses;
 
 namespace TerraCloud.Application.Interfaces.Auth
 {
