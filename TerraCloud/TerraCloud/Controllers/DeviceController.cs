@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using TerraCloud.Application.DTOs.Device.Requests;
 using TerraCloud.Application.DTOs.Device.Responses;
+using TerraCloud.Application.DTOs.Error;
 using TerraCloud.Application.Interfaces.Device;
 
 namespace TerraCloud.Server.Controllers
@@ -15,6 +16,7 @@ namespace TerraCloud.Server.Controllers
         private readonly IGetDevice _getDevice;
         private readonly IGetDevices _getDevices;
         private readonly IAddDevice _addDevice;
+        private readonly IDeleteDevice _deleteDevice;
 
         public DeviceController(IGetDevice getDevice, IGetDevices getDevices, IAddDevice addDevice)
         {
@@ -46,6 +48,27 @@ namespace TerraCloud.Server.Controllers
             await _addDevice.Execute(request);
 
             return Created();
+        }
+        #endregion
+        #region DELETE
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteDevice([FromRoute] string Id)
+        {
+            try
+            {
+                await _deleteDevice.Execute(Id);
+            }
+            catch (ApplicationException)
+            {
+                var errorResponse = new ErrorResponse()
+                {
+                    Describe = "Aplication error",
+                    ErrorCode = ErrorCode.ApplicationError
+                };
+                return BadRequest(errorResponse);
+            }
+
+            return NoContent();
         }
         #endregion
     }

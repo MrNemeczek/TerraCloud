@@ -44,11 +44,11 @@ namespace TerraCloud.Infrastructure.Auth
 
         public TokenValidationParameters GetValidationParameters()
         {
-            string key = _configuration.GetRequiredSection("Jwt:Key").Value;
-            //if (String.IsNullOrEmpty(key))
-            //{
-            //    throw new ArgumentNullException(nameof(key));
-            //}
+            string key = _configuration["Jwt:Key"];
+            if (String.IsNullOrEmpty(key))
+            {
+                Console.WriteLine("jest null nie wiem czemu");
+            }
 
             return new TokenValidationParameters
             {

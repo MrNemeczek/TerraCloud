@@ -20,6 +20,7 @@ namespace TerraCloud.Infrastructure
             services.AddScoped<IGetDevice, GetDevice>();
             services.AddScoped<IGetDevices, GetDevices>();
             services.AddScoped<IAddDevice, AddDevice>();
+            services.AddScoped<IDeleteDevice, DeleteDevice>();
         }
     }
 }

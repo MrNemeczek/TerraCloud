@@ -33,5 +33,12 @@ namespace TerraCloud.Client.Common
         /// <typeparam name="TResult"></typeparam>
         /// <returns></returns>
         Task<TResult> PutAsync<TResult>(string endpoint);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="endpoint"></param>
+        /// <returns></returns>
+        Task<ErrorResponse?> DeleteAsync(string endpoint);
     }
 }

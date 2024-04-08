@@ -90,6 +90,20 @@ namespace TerraCloud.Client.Common
 
             throw new NotImplementedException();
         }
+        public async Task<ErrorResponse?> DeleteAsync(string endpoint)
+        {
+            await SetAuthorization();
+
+            HttpResponseMessage response = await _http.DeleteAsync(endpoint);
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorResponse = await DeserializeResponse<ErrorResponse>(response);
+
+                return errorResponse;
+            }
+
+            return null;
+        }
 
         private async Task<TResult> DeserializeResponse<TResult>(HttpResponseMessage response)
         {
@@ -102,8 +116,11 @@ namespace TerraCloud.Client.Common
         private async Task SetAuthorization()
         {
             string tokenJWT = await _localStorageService.GetItemAsStringAsync("jwt");
+            if (string.IsNullOrEmpty(tokenJWT)) return;
+
             tokenJWT = tokenJWT.Trim('\"');
             _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
         }
+
     }
 }

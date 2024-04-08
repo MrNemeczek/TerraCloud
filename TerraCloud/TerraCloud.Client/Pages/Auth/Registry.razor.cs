@@ -2,6 +2,7 @@
 using Radzen;
 
 using TerraCloud.Application.DTOs.Auth.Requests;
+using TerraCloud.Application.DTOs.Error;
 using TerraCloud.Client.Common;
 
 namespace TerraCloud.Client.Pages.Auth
@@ -26,7 +27,7 @@ namespace TerraCloud.Client.Pages.Auth
                 return;
             }
 
-            var result = await _apiRequest.OnlyPostAsync("Auth/Register", request);
+            ErrorResponse? result = await _apiRequest.OnlyPostAsync("Auth/Register", request);
             if (result is not null)
             {
                 _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = result.Describe, Duration = 5000});
