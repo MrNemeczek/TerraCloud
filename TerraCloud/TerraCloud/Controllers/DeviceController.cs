@@ -18,11 +18,12 @@ namespace TerraCloud.Server.Controllers
         private readonly IAddDevice _addDevice;
         private readonly IDeleteDevice _deleteDevice;
 
-        public DeviceController(IGetDevice getDevice, IGetDevices getDevices, IAddDevice addDevice)
+        public DeviceController(IGetDevice getDevice, IGetDevices getDevices, IAddDevice addDevice, IDeleteDevice deleteDevice)
         {
             _getDevice = getDevice;
             _getDevices = getDevices;
             _addDevice = addDevice;
+            _deleteDevice = deleteDevice;
         }
         #region GET
         [HttpGet]
@@ -51,12 +52,12 @@ namespace TerraCloud.Server.Controllers
         }
         #endregion
         #region DELETE
-        [HttpDelete("{Id}")]
-        public async Task<IActionResult> DeleteDevice([FromRoute] string Id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteDevice([FromRoute] string id)
         {
             try
             {
-                await _deleteDevice.Execute(Id);
+                await _deleteDevice.Execute(id);
             }
             catch (ApplicationException)
             {

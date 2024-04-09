@@ -19,6 +19,7 @@ namespace TerraCloud.Infrastructure.Auth
 
         public async override Task<AuthenticationState> GetAuthenticationStateAsync()
         {
+            // TODO: dodac sprawdzanie z local storage
             return await Task.FromResult(new AuthenticationState(anonymous));
         }
 
@@ -27,8 +28,7 @@ namespace TerraCloud.Infrastructure.Auth
             var identity = new ClaimsIdentity(new[]
             {
                 new Claim("name", "name"),
-                new Claim("lastname", "lastname"),
-                // Dodaj inne potrzebne claimy
+                new Claim("lastname", "lastname")
             }, "authenticationType");
 
             var usertest = new ClaimsPrincipal(identity);

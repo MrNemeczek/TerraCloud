@@ -44,6 +44,7 @@ namespace TerraCloud.Client.Pages.Device
             else
             {
                 _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Succes", Detail = "Device deleted", Duration = 5000 });
+                _navManager.NavigateTo(_navManager.Uri, true);
             }
         }
         public void GoToDetails(Guid deviceId)

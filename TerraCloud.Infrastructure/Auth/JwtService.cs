@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using TerraCloud.Infrastructure.Interfaces.Auth;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TerraCloud.Infrastructure.Auth
 {
@@ -44,7 +45,10 @@ namespace TerraCloud.Infrastructure.Auth
 
         public TokenValidationParameters GetValidationParameters()
         {
-            string key = _configuration["Jwt:Key"];
+            string key = _configuration["Jwt:Key"] ?? "WygenerowanyDługiBezpiecznyKlucz";
+            string validIssuer = _configuration["Jwt:Issuer"] ?? "Test.com";
+            string validAudience = _configuration["Jwt:Issuer"] ?? "Test.com";// TODO: zmienic na Audience
+
             if (String.IsNullOrEmpty(key))
             {
                 Console.WriteLine("jest null nie wiem czemu");
@@ -56,8 +60,8 @@ namespace TerraCloud.Infrastructure.Auth
                 ValidateAudience = true,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                ValidIssuer = _configuration["Jwt:Issuer"],
-                ValidAudience = _configuration["Jwt:Issuer"], // TODO: zmienic na Audience
+                ValidIssuer = validIssuer,
+                ValidAudience = validAudience,                
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
             };
         }
