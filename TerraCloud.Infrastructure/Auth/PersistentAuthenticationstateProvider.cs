@@ -22,27 +22,24 @@ namespace TerraCloud.Infrastructure.Auth
 
         public async override Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            // TODO: dodac sprawdzanie z local storage
-            //try
-            //{
-                string tokenJWT = await _localStorageService.GetItemAsStringAsync("jwt");
-                if (!String.IsNullOrEmpty(tokenJWT))
+            string tokenJWT = await _localStorageService.GetItemAsStringAsync("jwt");
+            if (!String.IsNullOrEmpty(tokenJWT))
+            {
+                tokenJWT = tokenJWT.Trim('\"');
+
+                var user = GetClaimsPrincipal(tokenJWT);
+                if(user is null)
                 {
-                    tokenJWT = tokenJWT.Trim('\"');
-                    var user = GetClaimsPrincipal(tokenJWT);
-                    AuthenticationState authState = new AuthenticationState(user);
-
-                    NotifyAuthenticationStateChanged(Task.FromResult(authState));
-
-                    return authState;
+                    return await Task.FromResult(new AuthenticationState(anonymous));
                 }
 
-                return await Task.FromResult(new AuthenticationState(anonymous));
-            //}
-            //catch (Exception)
-            //{
-            //    return await Task.FromResult(new AuthenticationState(anonymous));
-            //}
+                AuthenticationState authState = new AuthenticationState(user);
+                NotifyAuthenticationStateChanged(Task.FromResult(authState));
+
+                return authState;
+            }
+
+            return await Task.FromResult(new AuthenticationState(anonymous));
         }
 
         public async Task UpdateAuthenticationState(string? token)
