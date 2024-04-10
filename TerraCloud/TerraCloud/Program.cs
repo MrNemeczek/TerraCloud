@@ -3,14 +3,14 @@ using Radzen;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Blazored.LocalStorage;
+using Microsoft.OpenApi.Models;
 
 using TerraCloud.Persistence.Contexts;
 using TerraCloud.Server.Components;
 using TerraCloud.Infrastructure;
 using TerraCloud.Persistence;
 using TerraCloud.Client;
-using Blazored.LocalStorage;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 IConfiguration config = builder.Configuration;
