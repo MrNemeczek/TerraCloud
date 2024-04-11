@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using TerraCloud.Application.DTOs.Device.Responses;
 using TerraCloud.Application.Interfaces.Device;
-using TerraCloud.Domain.Models.Device;
 using TerraCloud.Persistence.Interfaces.Repository.Device;
 
 namespace TerraCloud.Application.Device.Queries

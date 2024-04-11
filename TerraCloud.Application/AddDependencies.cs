@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using TerraCloud.Application.Animal.Commands;
+using TerraCloud.Application.Animal.Queries;
 using TerraCloud.Application.Device.Commands;
 using TerraCloud.Application.Device.Queries;
+using TerraCloud.Application.Interfaces.Animal;
 using TerraCloud.Application.Interfaces.Auth;
 using TerraCloud.Application.Interfaces.Device;
 using TerraCloud.Infrastructure.Auth;
@@ -21,6 +24,12 @@ namespace TerraCloud.Infrastructure
             services.AddScoped<IGetDevices, GetDevices>();
             services.AddScoped<IAddDevice, AddDevice>();
             services.AddScoped<IDeleteDevice, DeleteDevice>();
+
+            //Animal
+            services.AddScoped<IGetAnimal, GetAnimal>();
+            services.AddScoped<IGetAnimals, GetAnimals>();
+            services.AddScoped<IAddAnimal, AddAnimal>();
+            services.AddScoped<IDeleteAnimal, DeleteAnimal>();
         }
     }
 }

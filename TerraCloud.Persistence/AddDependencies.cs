@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
+using TerraCloud.Persistence.Interfaces.Repository.Animal;
 using TerraCloud.Persistence.Interfaces.Repository.Database;
 using TerraCloud.Persistence.Interfaces.Repository.Device;
 using TerraCloud.Persistence.Interfaces.Repository.User;
+using TerraCloud.Persistence.Repositories.Animal;
 using TerraCloud.Persistence.Repositories.Database;
 using TerraCloud.Persistence.Repositories.Device;
 using TerraCloud.Persistence.Repositories.User;
@@ -21,6 +23,9 @@ namespace TerraCloud.Persistence
 
             //Device
             services.AddScoped<IDeviceRepository, DeviceRepository>();
+
+            //Animal
+            services.AddScoped<IAnimalRepository, AnimalRepository>();
         }
     }
 }

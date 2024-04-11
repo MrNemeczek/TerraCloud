@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 
+using TerraCloud.Application.DTOs.Animal.Requests;
+using TerraCloud.Application.DTOs.Animal.Responses;
 using TerraCloud.Application.DTOs.Auth.Requests;
 using TerraCloud.Application.DTOs.Device.Requests;
 using TerraCloud.Application.DTOs.Device.Responses;
@@ -19,6 +21,10 @@ namespace TerraCloud.Application
             //Device
             CreateMap<Domain.Models.Device.Device, DeviceResponse>();
             CreateMap<AddDeviceRequest, Domain.Models.Device.Device>();
+
+            //Animal
+            CreateMap<Domain.Models.Animal.Animal, GetAnimalResponse>();
+            CreateMap<AddAnimalRequest,  Domain.Models.Animal.Animal>();
         }
     }
 }
