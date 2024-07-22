@@ -30,7 +30,8 @@ namespace TerraCloud.Infrastructure.Auth
             {
                 new Claim("name", jwtUser.Name),
                 new Claim("lastname", jwtUser.Lastname),
-                new Claim("email", jwtUser.Email)
+                new Claim("email", jwtUser.Email),
+                new Claim("guid", jwtUser.Id.ToString())
             };
 
             var token = new JwtSecurityToken(
