@@ -4,7 +4,6 @@ using Radzen;
 using TerraCloud.Application.DTOs.Animal.Responses;
 using TerraCloud.Application.DTOs.Error;
 using TerraCloud.Client.Common;
-using TerraCloud.Client.Pages.Device;
 
 namespace TerraCloud.Client.Pages.Animal
 {
@@ -14,8 +13,6 @@ namespace TerraCloud.Client.Pages.Animal
 
         [Inject]
         private IApiRequest _apiRequest { get; set; } = default!;
-        [Inject]
-        private DialogService _dialogService { get; set; } = default!;
         [Inject]
         private NavigationManager _navManager { get; set; } = default!;
         [Inject]
@@ -30,9 +27,7 @@ namespace TerraCloud.Client.Pages.Animal
 
         public async Task AddAnimal()
         {
-            await _dialogService.OpenAsync<DialogCreate>(
-                title: "Add Device",
-                options: new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+            _navManager.NavigateTo("animal/create");
         }
 
         public async Task Delete(Guid deviceId)

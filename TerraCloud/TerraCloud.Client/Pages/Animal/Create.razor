@@ -1,7 +1,32 @@
-﻿@inherits CreateBase
+﻿@page "/animal/create"
 
-<h3>Create</h3>
+@using TerraCloud.Application.DTOs.Animal.Requests;
 
-@code {
+@inherits CreateBase
 
-}
+@inject Radzen.DialogService dialogService
+
+<RadzenCard>
+    <RadzenTemplateForm Data="@animalRequest" Submit="@((AddAnimalRequest args) => OnAnimalAdd(args))">
+        <RadzenText class="rz-mb-3">Animal species</RadzenText>
+        <RadzenTextBox @bind-Value=@animalRequest.Species class="w-100 rz-mb-3" />
+
+        <RadzenFieldset Text="Day parameters">
+            <RadzenText class="rz-mb-3">Day humidity</RadzenText>
+            <RadzenNumeric @bind-Value=@animalRequest.DayHumidity />
+
+            <RadzenText class="rz-mb-3">Day temperature</RadzenText>
+            <RadzenNumeric @bind-Value=@animalRequest.DayTemperature />
+        </RadzenFieldset>
+
+        <RadzenFieldset Text="Night parameters">
+            <RadzenText class="rz-mb-3">Night humidity</RadzenText>
+            <RadzenNumeric @bind-Value=@animalRequest.NightHumidity />
+
+            <RadzenText class="rz-mb-3">Night temperature</RadzenText>
+            <RadzenNumeric @bind-Value=@animalRequest.NightTemperature />
+        </RadzenFieldset>
+
+        <RadzenButton ButtonType="ButtonType.Submit" Size="ButtonSize.Large" Icon="save" Text="Add" class="rz-mt-5" />
+    </RadzenTemplateForm>
+</RadzenCard>
