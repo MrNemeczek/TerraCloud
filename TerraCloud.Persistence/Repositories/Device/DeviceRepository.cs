@@ -29,6 +29,11 @@ namespace TerraCloud.Persistence.Repositories.Device
             await _context.Devices.Where(d => d.Id == deviceId).ExecuteDeleteAsync();
         }
 
+        public async Task DeleteUserDevice(Guid userId, Guid userDeviceId)
+        {
+            await _context.UserDevices.Where(ud => ud.Id == userDeviceId && ud.UserId == userId).ExecuteDeleteAsync();
+        }
+
         public async Task<Domain.Models.Device.Device> GetDeviceById(Guid deviceId)
         {
             return await _context.Devices.SingleOrDefaultAsync(d => d.Id == deviceId);

@@ -13,5 +13,6 @@ namespace TerraCloud.Persistence.Interfaces.Repository.Device
         Task AddUserDevice(UserDevice device);
         void UpdateUserDevice(UserDevice device);
         Task DeleteDevice(Guid deviceId);
+        Task DeleteUserDevice(Guid userId, Guid userDeviceId);
     }
 }

@@ -19,11 +19,12 @@ namespace TerraCloud.Server.Controllers
         private readonly IAddDevice _addDevice;
         private readonly IAddUserDevice _addUserDevice;
         private readonly IDeleteDevice _deleteDevice;
+        private readonly IDeleteUserDevice _deleteUserDevice;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IGetUserDevices _getUserDevices;
         private readonly IUpdateUserDevice _updateUserDevice;
 
-        public DeviceController(IGetDevice getDevice, IGetDevices getDevices, IAddDevice addDevice, IDeleteDevice deleteDevice, IHttpContextAccessor contextAccessor, IGetUserDevices getUserDevices, IAddUserDevice addUserDevice, IUpdateUserDevice updateUserDevice)
+        public DeviceController(IGetDevice getDevice, IGetDevices getDevices, IAddDevice addDevice, IDeleteDevice deleteDevice, IHttpContextAccessor contextAccessor, IGetUserDevices getUserDevices, IAddUserDevice addUserDevice, IUpdateUserDevice updateUserDevice, IDeleteUserDevice deleteUserDevice)
         {
             _getDevice = getDevice;
             _getDevices = getDevices;
@@ -33,6 +34,7 @@ namespace TerraCloud.Server.Controllers
             _getUserDevices = getUserDevices;
             _addUserDevice = addUserDevice;
             _updateUserDevice = updateUserDevice;
+            _deleteUserDevice = deleteUserDevice;
         }
 
         [HttpGet("Device")]
@@ -82,12 +84,32 @@ namespace TerraCloud.Server.Controllers
 
             return Ok();
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("Device/{id}")]
         public async Task<IActionResult> DeleteDevice([FromRoute] string id)
         {
             try
             {
                 await _deleteDevice.Execute(id);
+            }
+            catch (ApplicationException)
+            {
+                var errorResponse = new ErrorResponse()
+                {
+                    Describe = "Aplication error",
+                    ErrorCode = ErrorCode.ApplicationError
+                };
+                return BadRequest(errorResponse);
+            }
+
+            return NoContent();
+        }
+        [HttpDelete("UserDevice/{id}")]
+        public async Task<IActionResult> DeleteUserDevice([FromRoute] string id)
+        {
+            try
+            {
+                Guid userId = _contextAccessor.GetUserGuid();
+                await _deleteUserDevice.Execute(id, userId);
             }
             catch (ApplicationException)
             {
