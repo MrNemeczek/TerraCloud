@@ -1,0 +1,25 @@
+﻿@page "/userdevice"
+
+@using TerraCloud.Application.DTOs.Device.Responses;
+
+@inherits IndexBase
+
+<RadzenButton Text="Add Device" class="rz-mb-3" Click=@AddDevice />
+
+<RadzenDataGrid AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" Data="@devices" TItem="UserDeviceResponse"
+                ColumnWidth="300px">
+    <Columns>
+        <RadzenDataGridColumn TItem="UserDeviceResponse" Property="Id" Title="ID" />
+        <RadzenDataGridColumn TItem="UserDeviceResponse" Property="Name" Title="Name" />
+        <RadzenDataGridColumn TItem="UserDeviceResponse" Property="Id" Width="60px" Sortable=false>
+            <Template Context="device">
+                <RadzenButton class="mb-1" Click="@(() => GoToDetails(device.Id))" Icon="pageview" ButtonStyle="ButtonStyle.Secondary" />
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="UserDeviceResponse" Property="Id" Width="60px" Sortable=false>
+            <Template Context="device">
+                <RadzenButton class="mb-1" Click="@(() => Delete(device.Id))" Icon="delete_forever" ButtonStyle="ButtonStyle.Danger" />
+            </Template>
+        </RadzenDataGridColumn>
+    </Columns>
+</RadzenDataGrid>

@@ -2,6 +2,6 @@
 {
     public class AddDeviceRequest
     {
-        public string Name { get; set; }
+        public string UniqueCode { get; set; }
     }
 }

@@ -1,11 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TerraCloud.Domain.Models.Device;
 
 namespace TerraCloud.Persistence.Configurations.Device
 {
@@ -17,8 +11,9 @@ namespace TerraCloud.Persistence.Configurations.Device
 
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Name)
-                .HasComment("Nazwa urządzenia");
+            builder.Property(x => x.UniqueCode)
+                .IsRequired()
+                .HasComment("Unikalny kod urządzenia");
         }
     }
 }

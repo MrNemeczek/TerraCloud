@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TerraCloud.Persistence.Contexts;
@@ -11,9 +12,11 @@ using TerraCloud.Persistence.Contexts;
 namespace TerraCloud.Persistence.Migrations
 {
     [DbContext(typeof(TerraCloudContext))]
-    partial class TerraCloudContextModelSnapshot : ModelSnapshot
+    [Migration("20240722185921_DeviceChangeLogic")]
+    partial class DeviceChangeLogic
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,38 +73,6 @@ namespace TerraCloud.Persistence.Migrations
                     b.ToTable("Device", (string)null);
                 });
 
-            modelBuilder.Entity("TerraCloud.Domain.Models.Device.DeviceMonitor", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("DeviceId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int?>("Humidity")
-                        .HasColumnType("integer")
-                        .HasComment("Pomiar wilgotności");
-
-                    b.Property<int?>("Temperature")
-                        .HasColumnType("integer")
-                        .HasComment("Pomiar temperatury");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("timestamp with time zone")
-                        .HasComment("Czas pobrania pomiaru");
-
-                    b.Property<DateTime>("TimeStamp")
-                        .HasColumnType("timestamp with time zone")
-                        .HasComment("TimeStamp");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DeviceId");
-
-                    b.ToTable("DeviceMonitor", (string)null);
-                });
-
             modelBuilder.Entity("TerraCloud.Domain.Models.Device.UserDevice", b =>
                 {
                     b.Property<Guid>("Id")
@@ -110,14 +81,6 @@ namespace TerraCloud.Persistence.Migrations
 
                     b.Property<Guid>("DeviceId")
                         .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("LastMeasurement")
-                        .HasColumnType("timestamp with time zone")
-                        .HasComment("Ostatnia data pomiaru");
-
-                    b.Property<int>("MeasurementTime")
-                        .HasColumnType("integer")
-                        .HasComment("Okres czasu co jaki urządzenie ma zbierać pomiary wyrażony w minutach");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -183,17 +146,6 @@ namespace TerraCloud.Persistence.Migrations
                     b.ToTable("User", (string)null);
                 });
 
-            modelBuilder.Entity("TerraCloud.Domain.Models.Device.DeviceMonitor", b =>
-                {
-                    b.HasOne("TerraCloud.Domain.Models.Device.Device", "Device")
-                        .WithMany("DeviceMonitors")
-                        .HasForeignKey("DeviceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Device");
-                });
-
             modelBuilder.Entity("TerraCloud.Domain.Models.Device.UserDevice", b =>
                 {
                     b.HasOne("TerraCloud.Domain.Models.Device.Device", "Device")
@@ -215,8 +167,6 @@ namespace TerraCloud.Persistence.Migrations
 
             modelBuilder.Entity("TerraCloud.Domain.Models.Device.Device", b =>
                 {
-                    b.Navigation("DeviceMonitors");
-
                     b.Navigation("UserDevices");
                 });
 

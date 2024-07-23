@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Blazored.LocalStorage;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 using TerraCloud.Persistence.Contexts;
 using TerraCloud.Server.Components;
@@ -52,6 +53,7 @@ builder.Services.AddApplication();
 builder.Services.AddPersistance();
 builder.Services.AddInfrastructure();
 builder.Services.AddClient();
+builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 // Radzen
 builder.Services.AddRadzenComponents();

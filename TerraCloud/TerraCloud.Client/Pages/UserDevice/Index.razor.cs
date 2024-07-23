@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Radzen;
-
 using TerraCloud.Application.DTOs.Device.Responses;
 using TerraCloud.Application.DTOs.Error;
 using TerraCloud.Client.Common;
+using TerraCloud.Client.Pages.Device;
 
-namespace TerraCloud.Client.Pages.Device
+namespace TerraCloud.Client.Pages.UserDevice
 {
     public class IndexBase : ComponentBase
     {
-        protected IEnumerable<DeviceResponse> devices;
+        protected IEnumerable<UserDeviceResponse> devices;
 
         [Inject]
         private IApiRequest _apiRequest { get; set; } = default!;
@@ -24,7 +24,7 @@ namespace TerraCloud.Client.Pages.Device
         {
             await base.OnInitializedAsync();
 
-            devices = await _apiRequest.GetAsync<IEnumerable<DeviceResponse>>("Device/Device");
+            devices = await _apiRequest.GetAsync<IEnumerable<UserDeviceResponse>>("Device/UserDevice");
         }
 
         public async Task AddDevice()

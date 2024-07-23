@@ -3,8 +3,9 @@
     public class Device
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
+        public string UniqueCode { get; set; }
 
         public virtual ICollection<UserDevice>? UserDevices { get; }
+        public virtual ICollection<DeviceMonitor>? DeviceMonitors { get; }
     }
 }

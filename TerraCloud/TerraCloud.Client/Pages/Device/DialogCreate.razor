@@ -13,7 +13,7 @@
 <RadzenCard>
     <RadzenTemplateForm Data="@deviceRequest" Submit="@((AddDeviceRequest args) => OnDeviceAdd(args))">
         <RadzenText class="rz-mb-3">Device name</RadzenText>
-        <RadzenTextBox @bind-Value=@deviceRequest.Name class="w-100 rz-mb-3" />
+        <RadzenTextBox @bind-Value=@deviceRequest.UniqueCode class="w-100 rz-mb-3" />
 
         <RadzenButton ButtonType="ButtonType.Submit" Size="ButtonSize.Large" Icon="save" Text="Add" class="rz-mt-5" />
     </RadzenTemplateForm>

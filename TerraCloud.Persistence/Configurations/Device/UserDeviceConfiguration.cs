@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using TerraCloud.Domain.Models.Device;
 
 namespace TerraCloud.Persistence.Configurations.Device
@@ -16,6 +12,15 @@ namespace TerraCloud.Persistence.Configurations.Device
             builder.ToTable("UserDevice");
 
             builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Name)
+                .HasComment("Nazwa urządzenia dla konretnego użytkownika");
+
+            builder.Property(x => x.MeasurementTime)
+                .HasComment("Okres czasu co jaki urządzenie ma zbierać pomiary wyrażony w minutach");
+
+            builder.Property(x => x.LastMeasurement)
+                .HasComment("Ostatnia data pomiaru");
 
             builder.HasOne(x => x.User)
                 .WithMany(x => x.UserDevices)

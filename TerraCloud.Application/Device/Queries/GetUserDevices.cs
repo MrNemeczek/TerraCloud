@@ -2,25 +2,26 @@
 
 using TerraCloud.Application.DTOs.Device.Responses;
 using TerraCloud.Application.Interfaces.Device;
+using TerraCloud.Domain.Models.Device;
 using TerraCloud.Persistence.Interfaces.Repository.Device;
 
 namespace TerraCloud.Application.Device.Queries
 {
-    internal class GetDevice : IGetDevice
+    internal class GetUserDevices : IGetUserDevices
     {
         private readonly IDeviceRepository _deviceRepository;
         private readonly IMapper _mapper;
 
-        public GetDevice(IDeviceRepository deviceRepository, IMapper mapper)
+        public GetUserDevices(IDeviceRepository deviceRepository, IMapper mapper)
         {
             _deviceRepository = deviceRepository;
             _mapper = mapper;
         }
 
-        public async Task<DeviceResponse> Execute(Guid deviceId)
+        public async Task<IEnumerable<UserDeviceResponse>> Execute(Guid userGuid)
         {
-            Domain.Models.Device.Device device = await _deviceRepository.GetDeviceById(deviceId);
-            var response = _mapper.Map<DeviceResponse>(device);
+            IEnumerable<UserDevice> userDevices = await _deviceRepository.GetUserDevices(userGuid);
+            IEnumerable<UserDeviceResponse> response = userDevices.Select(ud => _mapper.Map<UserDeviceResponse>(ud));
 
             return response;
         }
