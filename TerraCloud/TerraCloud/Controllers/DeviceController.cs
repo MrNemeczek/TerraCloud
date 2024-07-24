@@ -23,8 +23,10 @@ namespace TerraCloud.Server.Controllers
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IGetUserDevices _getUserDevices;
         private readonly IUpdateUserDevice _updateUserDevice;
+        private readonly IAddDeviceMeasurement _addDeviceMeasurement;
+        private readonly IGetDeviceMeasurement _getDeviceMeasurement;
 
-        public DeviceController(IGetDevice getDevice, IGetDevices getDevices, IAddDevice addDevice, IDeleteDevice deleteDevice, IHttpContextAccessor contextAccessor, IGetUserDevices getUserDevices, IAddUserDevice addUserDevice, IUpdateUserDevice updateUserDevice, IDeleteUserDevice deleteUserDevice)
+        public DeviceController(IGetDevice getDevice, IGetDevices getDevices, IAddDevice addDevice, IDeleteDevice deleteDevice, IHttpContextAccessor contextAccessor, IGetUserDevices getUserDevices, IAddUserDevice addUserDevice, IUpdateUserDevice updateUserDevice, IDeleteUserDevice deleteUserDevice, IAddDeviceMeasurement addMeasurement, IGetDeviceMeasurement getDeviceMeasurement)
         {
             _getDevice = getDevice;
             _getDevices = getDevices;
@@ -35,6 +37,8 @@ namespace TerraCloud.Server.Controllers
             _addUserDevice = addUserDevice;
             _updateUserDevice = updateUserDevice;
             _deleteUserDevice = deleteUserDevice;
+            _addDeviceMeasurement = addMeasurement;
+            _getDeviceMeasurement = getDeviceMeasurement;
         }
 
         [HttpGet("Device")]
@@ -61,6 +65,14 @@ namespace TerraCloud.Server.Controllers
 
             return Ok(response);
         }
+        [HttpGet("Measurement/{id}")]
+        public async Task<IActionResult> GetDeviceMeasurement([FromRoute] Guid id)
+        {
+            Guid userId = _contextAccessor.GetUserGuid();
+            DeviceMeasurementResponse response = await _getDeviceMeasurement.Execute(id, userId);
+
+            return Ok(response);
+        }
         [HttpPost]
         public async Task<IActionResult> AddDevice([FromBody] AddDeviceRequest request)
         {
@@ -73,6 +85,14 @@ namespace TerraCloud.Server.Controllers
         {
             Guid userId = _contextAccessor.GetUserGuid();
             await _addUserDevice.Execute(request, userId);
+
+            return Created();
+        }
+        [HttpPost("Measurement")]
+        public async Task<IActionResult> AddMeasurement([FromBody] AddDeviceMeasurementRequest request)
+        {
+            Guid userId = _contextAccessor.GetUserGuid();
+            await _addDeviceMeasurement.Execute(request, userId);
 
             return Created();
         }

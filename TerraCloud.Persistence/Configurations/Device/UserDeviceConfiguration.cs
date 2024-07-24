@@ -16,12 +16,6 @@ namespace TerraCloud.Persistence.Configurations.Device
             builder.Property(x => x.Name)
                 .HasComment("Nazwa urządzenia dla konretnego użytkownika");
 
-            builder.Property(x => x.MeasurementTime)
-                .HasComment("Okres czasu co jaki urządzenie ma zbierać pomiary wyrażony w minutach");
-
-            builder.Property(x => x.LastMeasurement)
-                .HasComment("Ostatnia data pomiaru");
-
             builder.HasOne(x => x.User)
                 .WithMany(x => x.UserDevices)
                 .HasForeignKey(x => x.UserId);

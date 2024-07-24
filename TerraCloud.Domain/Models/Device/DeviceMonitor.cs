@@ -3,7 +3,7 @@
     public class DeviceMonitor
     {
         public Guid Id { get; set; }
-        public DateTime TimeStamp { get; private set; } = DateTime.Now;
+        public DateTime TimeStamp { get; private set; } = DateTime.UtcNow;
         public DateTime Time { get; set; }
         public int? Humidity { get; set; }
         public int? Temperature { get; set; }

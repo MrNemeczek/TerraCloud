@@ -11,6 +11,12 @@ namespace TerraCloud.Persistence.Configurations.Device
 
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.MeasurementTime)
+                .HasComment("Okres czasu co jaki urządzenie ma zbierać pomiary wyrażony w minutach");
+
+            builder.Property(x => x.LastMeasurement)
+                .HasComment("Ostatnia data pomiaru");
+
             builder.Property(x => x.UniqueCode)
                 .IsRequired()
                 .HasComment("Unikalny kod urządzenia");

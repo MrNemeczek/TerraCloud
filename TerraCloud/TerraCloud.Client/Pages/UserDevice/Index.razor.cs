@@ -36,7 +36,7 @@ namespace TerraCloud.Client.Pages.UserDevice
 
         public async Task Delete(Guid deviceId)
         {
-            ErrorResponse? result = await _apiRequest.DeleteAsync($"Device/{deviceId}");
+            ErrorResponse? result = await _apiRequest.DeleteAsync($"Device/UserDevice/{deviceId}");
             if (result is not null)
             {
                 _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = result.Describe, Duration = 5000 });

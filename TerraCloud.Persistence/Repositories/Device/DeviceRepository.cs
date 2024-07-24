@@ -19,6 +19,11 @@ namespace TerraCloud.Persistence.Repositories.Device
             await _context.Devices.AddAsync(device);
         }
 
+        public async Task AddDeviceMeasurment(DeviceMonitor deviceMonitor)
+        {
+            await _context.DeviceMonitors.AddAsync(deviceMonitor);
+        }
+
         public async Task AddUserDevice(UserDevice device)
         {
             await _context.UserDevices.AddAsync(device);
@@ -39,9 +44,19 @@ namespace TerraCloud.Persistence.Repositories.Device
             return await _context.Devices.SingleOrDefaultAsync(d => d.Id == deviceId);
         }
 
+        public async Task<Domain.Models.Device.Device> GetDeviceById(Guid deviceId, Guid userId)
+        {
+            return await _context.Devices.SingleOrDefaultAsync(d => d.UserDevices.Any(ud => ud.DeviceId == deviceId && ud.UserId == userId));
+        }
+
         public async Task<Domain.Models.Device.Device> GetDeviceByUniqueCode(string uniqueCode)
         {
             return await _context.Devices.SingleOrDefaultAsync(d => d.UniqueCode == uniqueCode);
+        }
+
+        public async Task<IEnumerable<DeviceMonitor>> GetDeviceMonitors(Guid deviceId)
+        {
+            return await _context.DeviceMonitors.Where(dm => dm.DeviceId == deviceId).ToListAsync();
         }
 
         public async Task<IEnumerable<Domain.Models.Device.Device>> GetDevices()
@@ -57,6 +72,11 @@ namespace TerraCloud.Persistence.Repositories.Device
         public async Task<IEnumerable<UserDevice>> GetUserDevices(Guid userId)
         {
             return await _context.UserDevices.Where(ud => ud.UserId == userId).ToListAsync();
+        }
+
+        public void UpdateDevice(Domain.Models.Device.Device device)
+        {
+            _context.Devices.Update(device);
         }
 
         public void UpdateUserDevice(UserDevice device)

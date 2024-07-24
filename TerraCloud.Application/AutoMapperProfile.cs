@@ -25,6 +25,8 @@ namespace TerraCloud.Application
             CreateMap<AddDeviceRequest, Domain.Models.Device.Device>();
             CreateMap<AddUserDeviceRequest, UserDevice>();
             CreateMap<UpdateUserDeviceRequest, UserDevice>();
+            CreateMap<AddDeviceMeasurementRequest, DeviceMonitor>();
+            CreateMap<DeviceMonitor, DeviceSingleMeasurementResponse>();
 
             //Animal
             CreateMap<Domain.Models.Animal.Animal, GetAnimalResponse>();
