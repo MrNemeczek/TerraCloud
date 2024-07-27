@@ -1,0 +1,57 @@
+﻿@page "/device/details/{Id}"
+
+@inherits DetailsBase
+
+@if (device is null || deviceMeasurement is null)
+{
+    <RadzenText>Loading...</RadzenText>
+}
+else
+{
+    <h3>Device Details</h3>
+
+    <RadzenCard>
+
+        <RadzenText class="rz-mb-3">Device name</RadzenText>
+        <RadzenText class="w-100 rz-mb-3">@deviceMeasurement.DeviceName</RadzenText>
+
+        <RadzenText class="rz-mb-3">Device unique code</RadzenText>
+        <RadzenText class="w-100 rz-mb-3">@device.UniqueCode </RadzenText>
+
+        <RadzenText class="rz-mb-3">Last Measurement</RadzenText>
+        <RadzenText class="w-100 rz-mb-3">@device.LastMeasurement</RadzenText>
+
+        <RadzenText class="rz-mb-3">Measurement time interval</RadzenText>
+        <RadzenText class="w-100 rz-mb-3">@device.MeasurementTime</RadzenText>
+
+        <RadzenChart>
+            <RadzenLineSeries Smooth="true" Data="@deviceMeasurement.deviceMeasurements" CategoryProperty="Time" Title="Temperature" ValueProperty="Temperature">
+                <RadzenMarkers Visible="true" MarkerType="MarkerType.Circle" />
+                <RadzenSeriesDataLabels Visible="false" />
+            </RadzenLineSeries>
+
+            <RadzenCategoryAxis Padding="20" Formatter="@FormatAsDateTime" />
+
+            <RadzenValueAxis Formatter="@FormatAsCelsius">
+                <RadzenGridLines Visible="true" />
+                <RadzenAxisTitle Text="Temperature" />
+            </RadzenValueAxis>
+        </RadzenChart>
+
+        <RadzenChart>
+            <RadzenLineSeries Smooth="true" Data="@deviceMeasurement.deviceMeasurements" CategoryProperty="Time" Title="Humidity" ValueProperty="Humidity">
+                <RadzenMarkers Visible="true" MarkerType="MarkerType.Circle" />
+                <RadzenSeriesDataLabels Visible="false" />
+            </RadzenLineSeries>
+
+            <RadzenCategoryAxis Padding="20" Formatter="@FormatAsDateTime" />
+
+            <RadzenValueAxis Formatter="@FormatAsHumidity">
+                <RadzenGridLines Visible="true" />
+                <RadzenAxisTitle Text="Humidity" />
+            </RadzenValueAxis>
+        </RadzenChart>
+
+    </RadzenCard>
+}
+

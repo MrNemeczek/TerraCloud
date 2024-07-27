@@ -12,13 +12,13 @@
         <RadzenDataGridColumn TItem="UserDeviceResponse" Property="Id" Title="ID" />
         <RadzenDataGridColumn TItem="UserDeviceResponse" Property="Name" Title="Name" />
         <RadzenDataGridColumn TItem="UserDeviceResponse" Property="Id" Width="60px" Sortable=false>
-            <Template Context="device">
-                <RadzenButton class="mb-1" Click="@(() => GoToDetails(device.Id))" Icon="pageview" ButtonStyle="ButtonStyle.Secondary" />
+            <Template Context="userDevice">
+                <RadzenButton class="mb-1" Click="@(() => GoToDetails(userDevice.DeviceId))" Icon="pageview" ButtonStyle="ButtonStyle.Secondary" />
             </Template>
         </RadzenDataGridColumn>
         <RadzenDataGridColumn TItem="UserDeviceResponse" Property="Id" Width="60px" Sortable=false>
-            <Template Context="device">
-                <RadzenButton class="mb-1" Click="@(() => Delete(device.Id))" Icon="delete_forever" ButtonStyle="ButtonStyle.Danger" />
+            <Template Context="userDevice">
+                <RadzenButton class="mb-1" Click="@(() => Delete(userDevice.Id))" Icon="delete_forever" ButtonStyle="ButtonStyle.Danger" />
             </Template>
         </RadzenDataGridColumn>
     </Columns>

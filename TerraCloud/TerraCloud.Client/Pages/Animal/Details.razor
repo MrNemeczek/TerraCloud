@@ -11,24 +11,24 @@ else{
 
     <RadzenCard>
 
-            <RadzenText class="rz-mb-3">Animal species</RadzenText>
-            <RadzenText @bind-Value=@animal.Species class="w-100 rz-mb-3" />
+        <RadzenText class="rz-mb-3">Animal species</RadzenText>
+        <RadzenText class="w-100 rz-mb-3">@animal.Species</RadzenText>
 
-            <RadzenFieldset Text="Day parameters">
-                <RadzenText class="rz-mb-3">Day humidity</RadzenText>
-                <RadzenText>@animal.DayHumidity</RadzenText>
+        <RadzenFieldset Text="Day parameters">
+            <RadzenText class="rz-mb-3">Day humidity</RadzenText>
+            <RadzenText>@animal.DayHumidity</RadzenText>
 
-                <RadzenText class="rz-mb-3">Day temperature</RadzenText>
-                <RadzenText>@animal.DayTemperature</RadzenText>
-            </RadzenFieldset>
+            <RadzenText class="rz-mb-3">Day temperature</RadzenText>
+            <RadzenText>@animal.DayTemperature</RadzenText>
+        </RadzenFieldset>
 
-            <RadzenFieldset Text="Night parameters">
-                <RadzenText class="rz-mb-3">Night humidity</RadzenText>
-                <RadzenText>@animal.NightHumidity</RadzenText>
+        <RadzenFieldset Text="Night parameters">
+            <RadzenText class="rz-mb-3">Night humidity</RadzenText>
+            <RadzenText>@animal.NightHumidity</RadzenText>
 
-                <RadzenText class="rz-mb-3">Night temperature</RadzenText>
-                <RadzenText>@animal.NightTemperature</RadzenText>
-            </RadzenFieldset>
+            <RadzenText class="rz-mb-3">Night temperature</RadzenText>
+            <RadzenText>@animal.NightTemperature</RadzenText>
+        </RadzenFieldset>
 
     </RadzenCard>
 }
