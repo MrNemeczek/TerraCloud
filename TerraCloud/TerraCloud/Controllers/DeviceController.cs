@@ -22,11 +22,12 @@ namespace TerraCloud.Server.Controllers
         private readonly IDeleteUserDevice _deleteUserDevice;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IGetUserDevices _getUserDevices;
+        private readonly IGetUserDevice _getUserDevice;
         private readonly IUpdateUserDevice _updateUserDevice;
         private readonly IAddDeviceMeasurement _addDeviceMeasurement;
         private readonly IGetDeviceMeasurement _getDeviceMeasurement;
 
-        public DeviceController(IGetDevice getDevice, IGetDevices getDevices, IAddDevice addDevice, IDeleteDevice deleteDevice, IHttpContextAccessor contextAccessor, IGetUserDevices getUserDevices, IAddUserDevice addUserDevice, IUpdateUserDevice updateUserDevice, IDeleteUserDevice deleteUserDevice, IAddDeviceMeasurement addMeasurement, IGetDeviceMeasurement getDeviceMeasurement)
+        public DeviceController(IGetDevice getDevice, IGetDevices getDevices, IAddDevice addDevice, IDeleteDevice deleteDevice, IHttpContextAccessor contextAccessor, IGetUserDevices getUserDevices, IAddUserDevice addUserDevice, IUpdateUserDevice updateUserDevice, IDeleteUserDevice deleteUserDevice, IAddDeviceMeasurement addMeasurement, IGetDeviceMeasurement getDeviceMeasurement, IGetUserDevice getUserDevice)
         {
             _getDevice = getDevice;
             _getDevices = getDevices;
@@ -39,6 +40,7 @@ namespace TerraCloud.Server.Controllers
             _deleteUserDevice = deleteUserDevice;
             _addDeviceMeasurement = addMeasurement;
             _getDeviceMeasurement = getDeviceMeasurement;
+            _getUserDevice = getUserDevice;
         }
 
         [HttpGet("Device")]
@@ -62,6 +64,14 @@ namespace TerraCloud.Server.Controllers
         public async Task<IActionResult> GetDevice([FromRoute] Guid id)
         {
             DeviceResponse response = await _getDevice.Execute(id); 
+
+            return Ok(response);
+        }
+        [HttpGet("UserDevice/{id}")]
+        public async Task<IActionResult> GetUserDevice([FromRoute] Guid id)
+        {
+            Guid userId = _contextAccessor.GetUserGuid();
+            UserDeviceResponse response = await _getUserDevice.Execute(id, userId);
 
             return Ok(response);
         }

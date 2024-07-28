@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TerraCloud.Persistence.Contexts;
@@ -11,9 +12,11 @@ using TerraCloud.Persistence.Contexts;
 namespace TerraCloud.Persistence.Migrations
 {
     [DbContext(typeof(TerraCloudContext))]
-    partial class TerraCloudContextModelSnapshot : ModelSnapshot
+    [Migration("20240728120719_AnimalDeviceUser")]
+    partial class AnimalDeviceUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,7 +91,7 @@ namespace TerraCloud.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("AnimalUserId")
+                    b.Property<Guid>("AnimalUserId")
                         .HasColumnType("uuid");
 
                     b.Property<int?>("DayHumidity")
@@ -251,7 +254,9 @@ namespace TerraCloud.Persistence.Migrations
                 {
                     b.HasOne("TerraCloud.Domain.Models.Animal.AnimalUser", "AnimalUser")
                         .WithMany("Devices")
-                        .HasForeignKey("AnimalUserId");
+                        .HasForeignKey("AnimalUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("AnimalUser");
                 });

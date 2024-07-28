@@ -51,5 +51,9 @@ namespace TerraCloud.Client.Pages.UserDevice
         {
             _navManager.NavigateTo($"device/details/{deviceId}");
         }
+        public void GoToEdit(Guid deviceId)
+        {
+            _navManager.NavigateTo($"device/edit/{deviceId}");
+        }
     }
 }

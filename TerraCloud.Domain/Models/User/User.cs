@@ -1,4 +1,5 @@
-﻿using TerraCloud.Domain.Models.Device;
+﻿using TerraCloud.Domain.Models.Animal;
+using TerraCloud.Domain.Models.Device;
 
 namespace TerraCloud.Domain.Models.User
 {
@@ -13,5 +14,6 @@ namespace TerraCloud.Domain.Models.User
         public string Email { get; set; }
 
         public virtual ICollection<UserDevice>? UserDevices { get; }
+        public virtual ICollection<AnimalUser>? AnimalUsers { get; }
     }
 }

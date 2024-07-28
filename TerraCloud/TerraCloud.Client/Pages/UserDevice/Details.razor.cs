@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
 using System.Globalization;
+
 using TerraCloud.Application.DTOs.Device.Responses;
 using TerraCloud.Client.Common;
 

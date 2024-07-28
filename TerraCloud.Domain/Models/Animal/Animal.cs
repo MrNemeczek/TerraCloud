@@ -8,5 +8,11 @@
         public int? DayTemperature { get; set; }
         public int? NightHumidity { get; set; }
         public int? NightTemperature { get; set; }
+        /// <summary>
+        /// Is animal published
+        /// </summary>
+        public bool IsPublic { get; set; } = false;
+
+        public virtual ICollection<AnimalUser>? AnimalUsers { get; }
     }
 }

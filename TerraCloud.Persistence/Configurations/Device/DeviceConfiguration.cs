@@ -20,6 +20,22 @@ namespace TerraCloud.Persistence.Configurations.Device
             builder.Property(x => x.UniqueCode)
                 .IsRequired()
                 .HasComment("Unikalny kod urządzenia");
+
+            builder.Property(x => x.DayTemperature)
+                .HasComment("Temperatura w dzień");
+
+            builder.Property(x => x.DayHumidity)
+                .HasComment("Wilgotność w dzień");
+
+            builder.Property(x => x.NightTemperature)
+                .HasComment("Temperatura w nocy");
+
+            builder.Property(x => x.NightHumidity)
+                .HasComment("Wilgotność w nocy");
+
+            builder.HasOne(x => x.AnimalUser)
+                .WithMany(x => x.Devices)
+                .HasForeignKey(x => x.AnimalUserId);
         }
     }
 }

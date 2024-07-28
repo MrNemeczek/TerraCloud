@@ -31,6 +31,7 @@ namespace TerraCloud.Infrastructure
             services.AddScoped<IDeleteUserDevice, DeleteUserDevice>();
             services.AddScoped<IAddDeviceMeasurement, AddDeviceMeasurement>();
             services.AddScoped<IGetDeviceMeasurement, GetDeviceMeasurement>();
+            services.AddScoped<IGetUserDevice, GetUserDevice>();
 
             //Animal
             services.AddScoped<IGetAnimal, GetAnimal>();

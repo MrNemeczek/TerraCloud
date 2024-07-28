@@ -25,6 +25,9 @@ namespace TerraCloud.Persistence.Configurations.Animal
 
             builder.Property(x => x.NightHumidity)
                 .HasComment("Wilgotność w nocy");
+
+            builder.Property(x => x.IsPublic)
+                .HasComment("Czy gatunek jest dostępny publicznie");
         }
     }
 }

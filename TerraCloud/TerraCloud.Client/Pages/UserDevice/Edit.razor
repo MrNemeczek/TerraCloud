@@ -1,5 +1,42 @@
-﻿<h3>Edit</h3>
+﻿@page "/device/edit/{Id}"
+@using TerraCloud.Application.DTOs.Animal.Responses
 
-@code {
+@inherits EditBase
 
+@if (device is null || userDevice is null)
+{
+    <RadzenText>Loading...</RadzenText>
 }
+else
+{
+    <h3>Edit device</h3>
+
+    <RadzenCard>
+
+        <RadzenText class="rz-mb-3">Device name</RadzenText>
+        <RadzenTextBox class="w-100 rz-mb-3">@userDevice.Name</RadzenTextBox>
+
+        <RadzenText class="rz-mb-3">Device unique code</RadzenText>
+        <RadzenText class="w-100 rz-mb-3">@device.UniqueCode </RadzenText>
+
+        <RadzenText class="rz-mb-3">Measurement time interval</RadzenText>
+        <RadzenTextBox class="w-100 rz-mb-3">@device.MeasurementTime</RadzenTextBox>
+
+        <RadzenText class="rz-mb-3">Day temperature</RadzenText>
+        <RadzenTextBox class="w-100 rz-mb-3">@userDevice.DayTemperature</RadzenTextBox>
+
+        <RadzenText class="rz-mb-3">Day Humidity</RadzenText>
+        <RadzenTextBox class="w-100 rz-mb-3">@userDevice.DayHumidity</RadzenTextBox>
+
+        <RadzenText class="rz-mb-3">Night temperature</RadzenText>
+        <RadzenTextBox class="w-100 rz-mb-3">@userDevice.NightTemperature</RadzenTextBox>
+
+        <RadzenText class="rz-mb-3">Night humidity</RadzenText>
+        <RadzenTextBox class="w-100 rz-mb-3">@userDevice.NightHumidity</RadzenTextBox>
+
+        <RadzenText class="rz-mb-3">Animal</RadzenText>
+        <RadzenDropDown @bind-Value=@animalId TextProperty="@nameof(GetAnimalResponse.Species)" ValueProperty="@nameof(GetAnimalResponse.Id)" Data=@animals Style="width: 100%; max-width: 400px;"/>
+
+    </RadzenCard>
+}
+
