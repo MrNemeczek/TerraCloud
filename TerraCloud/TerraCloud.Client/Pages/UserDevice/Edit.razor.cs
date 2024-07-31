@@ -28,7 +28,7 @@ namespace TerraCloud.Client.Pages.UserDevice
 
         protected UpdateUserDeviceRequest request { get; set; } = new();
 
-        protected Guid animalId;
+        protected Guid animalUserId;
 
         protected override async Task OnInitializedAsync()
         {
@@ -45,7 +45,7 @@ namespace TerraCloud.Client.Pages.UserDevice
         protected async Task SaveClick()
         {
             request = _mapper.Map(userDevice, request);
-            request.AnimalUserId = animalId;
+            request.AnimalUserId = animalUserId;
             request.MeasurementTime = device.MeasurementTime;
 
             var result = await _apiRequest.OnlyPatchAsync("Device/UserDevice", request);

@@ -38,6 +38,7 @@ namespace TerraCloud.Infrastructure
             services.AddScoped<IGetAnimals, GetAnimals>();
             services.AddScoped<IAddAnimal, AddAnimal>();
             services.AddScoped<IDeleteAnimal, DeleteAnimal>();
+            services.AddScoped<IGetUserAnimals, GetUserAnimals>();
         }
     }
 }

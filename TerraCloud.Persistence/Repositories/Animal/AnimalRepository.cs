@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
+using TerraCloud.Domain.Models.Animal;
 using TerraCloud.Persistence.Contexts;
 using TerraCloud.Persistence.Interfaces.Repository.Animal;
 
@@ -27,6 +27,10 @@ namespace TerraCloud.Persistence.Repositories.Animal
         public async Task<Domain.Models.Animal.Animal> GetAnimal(Guid animalId)
         {
             return await _context.Animals.SingleOrDefaultAsync(d => d.Id == animalId);
+        }
+        public async Task<IEnumerable<AnimalUser>> GetUserAnimals(Guid userId)
+        {
+            return await _context.AnimalUsers.Where(au => au.UserId == userId).ToListAsync();
         }
 
         public async Task<IEnumerable<Domain.Models.Animal.Animal>> GetAnimals()

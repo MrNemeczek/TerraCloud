@@ -16,6 +16,7 @@ namespace TerraCloud.Persistence.Contexts
         public virtual DbSet<UserDevice> UserDevices { get; set; }
         public virtual DbSet<Animal> Animals { get; set; }
         public virtual DbSet<DeviceMonitor> DeviceMonitors { get; set; }
+        public virtual DbSet<AnimalUser> AnimalUsers { get; set; }
 
         public TerraCloudContext(DbContextOptions<TerraCloudContext> options)
             : base(options)
@@ -29,6 +30,7 @@ namespace TerraCloud.Persistence.Contexts
             modelBuilder.ApplyConfiguration(new UserDeviceConfiguration());
             modelBuilder.ApplyConfiguration(new AnimalConfiguration());
             modelBuilder.ApplyConfiguration(new DeviceMonitorConfiguration());
+            modelBuilder.ApplyConfiguration(new AnimalUserConfiguration());
         }
     }
 }

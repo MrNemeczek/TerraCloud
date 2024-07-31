@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using TerraCloud.Application.Animal.Queries;
 using TerraCloud.Application.DTOs.Animal.Requests;
 using TerraCloud.Application.DTOs.Animal.Responses;
 using TerraCloud.Application.Interfaces.Animal;
+using TerraCloud.Server.Common;
 
 namespace TerraCloud.Server.Controllers
 {
@@ -16,19 +17,31 @@ namespace TerraCloud.Server.Controllers
         private readonly IGetAnimals _getAnimals;
         private readonly IAddAnimal _addAnimal;
         private readonly IDeleteAnimal _deleteAnimal;
+        private readonly IGetUserAnimals _getUserAnimals;
+        private readonly IHttpContextAccessor _contextAccessor;
 
-        public AnimalController(IGetAnimal getAnimal, IGetAnimals getAnimals, IAddAnimal addAnimal, IDeleteAnimal deleteAnimal)
+        public AnimalController(IGetAnimal getAnimal, IGetAnimals getAnimals, IAddAnimal addAnimal, IDeleteAnimal deleteAnimal, IGetUserAnimals getUserAnimals, IHttpContextAccessor contextAccessor)
         {
             _addAnimal = addAnimal;
             _getAnimal = getAnimal;
             _getAnimals = getAnimals;
             _deleteAnimal = deleteAnimal;
+            _getUserAnimals = getUserAnimals;
+            _contextAccessor = contextAccessor;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAnimals()
         {
             var response = await _getAnimals.Execute();
+
+            return Ok(response);
+        }
+        [HttpGet("UserAnimals")]
+        public async Task<IActionResult> GetUserAnimals()
+        {
+            var userId = _contextAccessor.GetUserGuid();
+            var response = await _getUserAnimals.Execute(userId);
 
             return Ok(response);
         }

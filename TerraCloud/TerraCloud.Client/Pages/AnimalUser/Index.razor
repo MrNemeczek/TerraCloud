@@ -1,0 +1,27 @@
+﻿@page "/useranimals"
+
+@inherits IndexBase
+
+@using TerraCloud.Application.DTOs.Animal.Responses
+
+<RadzenButton Text="Add Animal" class="rz-mb-3" Click=@AddAnimal />
+
+<RadzenDataGrid AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" Data="@userAnimals" TItem="GetAnimalResponse"
+                ColumnWidth="300px">
+    <Columns>
+        <RadzenDataGridColumn TItem="GetAnimalResponse" Property="Id" Title="ID" />
+        <RadzenDataGridColumn TItem="GetAnimalResponse" Property="Species" Title="Species" />
+        <RadzenDataGridColumn TItem="GetAnimalResponse" Property="AvarageHumidity" Title="Średnia wilgotność" />
+        <RadzenDataGridColumn TItem="GetAnimalResponse" Property="AvarageTemperature" Title="Średnia temperatura" />
+        <RadzenDataGridColumn TItem="GetAnimalResponse" Property="Id" Width="60px" Sortable=false>
+            <Template Context="animal">
+                <RadzenButton class="mb-1" Click="@(() => GoToDetails(animal.Id))" Icon="pageview" ButtonStyle="ButtonStyle.Secondary" />
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="GetAnimalResponse" Property="Id" Width="60px" Sortable=false>
+            <Template Context="animal">
+                <RadzenButton class="mb-1" Click="@(() => Delete(animal.Id))" Icon="delete_forever" ButtonStyle="ButtonStyle.Danger" />
+            </Template>
+        </RadzenDataGridColumn>
+    </Columns>
+</RadzenDataGrid>
