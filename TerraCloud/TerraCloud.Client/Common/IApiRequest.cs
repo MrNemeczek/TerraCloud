@@ -24,6 +24,14 @@ namespace TerraCloud.Client.Common
         /// <summary>
         /// 
         /// </summary>
+        /// <typeparam name="TBody"></typeparam>
+        /// <param name="endpoint"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
+        Task<ErrorResponse?> OnlyPatchAsync<TBody>(string endpoint, TBody body);
+        /// <summary>
+        /// 
+        /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <returns></returns>
         Task<TResult> GetAsync<TResult>(string endpoint);

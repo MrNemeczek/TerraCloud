@@ -12,31 +12,47 @@ else
     <h3>Edit device</h3>
 
     <RadzenCard>
+        <RadzenRow Gap="1rem">
+            <RadzenColumn Size="12" SizeSM="6">
+                <RadzenStack>                    
+                    <RadzenFormField Text="Device name">
+                        <RadzenTextBox class="w-100 rz-mb-3" @bind-Value="@userDevice.Name"></RadzenTextBox>
+                    </RadzenFormField>
+                  
+                    <RadzenFormField Text="Device unique code">
+                        <RadzenTextBox Disabled="true" class="w-100 rz-mb-3" @bind-Value="@device.UniqueCode"></RadzenTextBox>
+                    </RadzenFormField>
 
-        <RadzenText class="rz-mb-3">Device name</RadzenText>
-        <RadzenTextBox class="w-100 rz-mb-3">@userDevice.Name</RadzenTextBox>
+                    <RadzenFormField Text="Measurement time interval">
+                        <RadzenNumeric @bind-Value="@device.MeasurementTime"></RadzenNumeric>
+                    </RadzenFormField>
+ 
+                    <RadzenFormField Text="Day temperature">
+                        <RadzenNumeric @bind-Value="@userDevice.DayTemperature"></RadzenNumeric>
+                    </RadzenFormField>
 
-        <RadzenText class="rz-mb-3">Device unique code</RadzenText>
-        <RadzenText class="w-100 rz-mb-3">@device.UniqueCode </RadzenText>
+                    <RadzenFormField Text="Day Humidity">
+                        <RadzenNumeric @bind-Value="@userDevice.DayHumidity"></RadzenNumeric>
+                    </RadzenFormField>
 
-        <RadzenText class="rz-mb-3">Measurement time interval</RadzenText>
-        <RadzenTextBox class="w-100 rz-mb-3">@device.MeasurementTime</RadzenTextBox>
+                    <RadzenFormField Text="Night temperature">
+                        <RadzenNumeric @bind-Value="@userDevice.NightTemperature"></RadzenNumeric>
+                    </RadzenFormField>
 
-        <RadzenText class="rz-mb-3">Day temperature</RadzenText>
-        <RadzenTextBox class="w-100 rz-mb-3">@userDevice.DayTemperature</RadzenTextBox>
+                    <RadzenFormField Text="Night humidity">
+                        <RadzenNumeric @bind-Value="@userDevice.NightHumidity"></RadzenNumeric>
+                    </RadzenFormField>
 
-        <RadzenText class="rz-mb-3">Day Humidity</RadzenText>
-        <RadzenTextBox class="w-100 rz-mb-3">@userDevice.DayHumidity</RadzenTextBox>
+                    <RadzenFormField Text="Animal">
+                        <RadzenDropDown @bind-Value=@animalId TextProperty="@nameof(GetAnimalResponse.Species)" ValueProperty="@nameof(GetAnimalResponse.Id)" Data=@animals Style="width: 100%; max-width: 400px;"/>
+                    </RadzenFormField>
+                </RadzenStack>
 
-        <RadzenText class="rz-mb-3">Night temperature</RadzenText>
-        <RadzenTextBox class="w-100 rz-mb-3">@userDevice.NightTemperature</RadzenTextBox>
+                <RadzenButton Text="Save" Click="@(() => SaveClick())" />
+                <RadzenButton Text="Quit" ButtonStyle="ButtonStyle.Secondary" Click="@(() => QuitClick())" />
 
-        <RadzenText class="rz-mb-3">Night humidity</RadzenText>
-        <RadzenTextBox class="w-100 rz-mb-3">@userDevice.NightHumidity</RadzenTextBox>
-
-        <RadzenText class="rz-mb-3">Animal</RadzenText>
-        <RadzenDropDown @bind-Value=@animalId TextProperty="@nameof(GetAnimalResponse.Species)" ValueProperty="@nameof(GetAnimalResponse.Id)" Data=@animals Style="width: 100%; max-width: 400px;"/>
-
+            </RadzenColumn>
+        </RadzenRow>
     </RadzenCard>
 }
 

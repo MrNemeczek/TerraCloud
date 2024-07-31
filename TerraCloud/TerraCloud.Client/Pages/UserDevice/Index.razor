@@ -13,7 +13,7 @@
         <RadzenDataGridColumn TItem="UserDeviceResponse" Property="Name" Title="Name" />
         <RadzenDataGridColumn TItem="UserDeviceResponse" Property="Id" Width="60px" Sortable=false>
             <Template Context="userDevice">
-                <RadzenButton class="mb-1" Click="@(() => GoToEdit(userDevice.Id))" Icon="build" ButtonStyle="ButtonStyle.Secondary" />
+                <RadzenButton class="mb-1" Click="@(() => GoToEdit(userDevice.Id))" Icon="build" ButtonStyle="ButtonStyle.Success" />
             </Template>
         </RadzenDataGridColumn>
         <RadzenDataGridColumn TItem="UserDeviceResponse" Property="Id" Width="60px" Sortable=false>

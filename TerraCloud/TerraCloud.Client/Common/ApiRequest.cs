@@ -73,6 +73,32 @@ namespace TerraCloud.Client.Common
                 throw;
             }
         }
+        public async Task<ErrorResponse?> OnlyPatchAsync<TBody>(string endpoint, TBody body)
+        {
+            try
+            {
+                await SetAuthorization();
+
+                string requestBody = JsonSerializer.Serialize(body);
+                var httpContent = new StringContent(requestBody, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _http.PatchAsync(endpoint, httpContent);
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorResponse = await DeserializeResponse<ErrorResponse>(response);
+
+                    return errorResponse;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                await Console.Out.WriteLineAsync(ex.ToString());
+
+                throw;
+            }
+        }
         public async Task<TResult> GetAsync<TResult>(string endpoint)
         {
             await SetAuthorization();

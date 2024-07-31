@@ -22,14 +22,19 @@ namespace TerraCloud.Application.Device.Commands
 
         public async Task Execute(UpdateUserDeviceRequest request, Guid userId)
         {
-            var device = await _deviceRepository.GetUserDeviceById(userId, request.Id);
-            if (device is null)
+            var userDevice = await _deviceRepository.GetUserDeviceById(userId, request.Id);
+            if (userDevice is null)
             {
                 throw new DeviceNotFoundException(request.Id);
             }
 
+            var device = await _deviceRepository.GetDeviceById(userDevice.DeviceId);
+
+            userDevice = _mapper.Map(request, userDevice);
             device = _mapper.Map(request, device);
-            _deviceRepository.UpdateUserDevice(device);
+
+            _deviceRepository.UpdateUserDevice(userDevice);
+            _deviceRepository.UpdateDevice(device);
 
             await _databaseRepository.SaveChangesAsync();
         }
