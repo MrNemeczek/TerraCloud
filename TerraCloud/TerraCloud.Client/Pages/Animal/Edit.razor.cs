@@ -32,9 +32,9 @@ namespace TerraCloud.Client.Pages.Animal
             animal = await _apiRequest.GetAsync<GetAnimalResponse>($"Animal/{Id}");
             animalUpdateRequest = _mapper.Map<UpdateAnimalRequest>(animal);
         }
-        protected async Task OnAnimalEdit(UpdateAnimalRequest request)
+        protected async Task SaveClick()
         {
-            var result = await _apiRequest.OnlyPatchAsync("Animal", request);
+            var result = await _apiRequest.OnlyPatchAsync("Animal", animalUpdateRequest);
             if (result is not null)
             {
                 _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = result.Describe, Duration = 5000 });
@@ -44,6 +44,10 @@ namespace TerraCloud.Client.Pages.Animal
                 _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Succes", Detail = "Animal updated", Duration = 5000 });
                 _navManager.NavigateTo("animal");
             }
+        }
+        protected void QuitClick()
+        {
+            _navManager.NavigateTo($"animal");
         }
     }
 }
