@@ -28,23 +28,24 @@ else
                     </RadzenFormField>
  
                     <RadzenFormField Text="Day temperature">
-                        <RadzenNumeric @bind-Value="@request.DayTemperature"></RadzenNumeric>
+                        <RadzenNumeric Disabled="@animalChosen" @bind-Value="@request.DayTemperature"></RadzenNumeric>
                     </RadzenFormField>
 
                     <RadzenFormField Text="Day Humidity">
-                        <RadzenNumeric @bind-Value="@request.DayHumidity"></RadzenNumeric>
+                        <RadzenNumeric Disabled="@animalChosen" @bind-Value="@request.DayHumidity"></RadzenNumeric>
                     </RadzenFormField>
 
                     <RadzenFormField Text="Night temperature">
-                        <RadzenNumeric @bind-Value="@request.NightTemperature"></RadzenNumeric>
+                        <RadzenNumeric Disabled="@animalChosen" @bind-Value="@request.NightTemperature"></RadzenNumeric>
                     </RadzenFormField>
 
                     <RadzenFormField Text="Night humidity">
-                        <RadzenNumeric @bind-Value="@request.NightHumidity"></RadzenNumeric>
+                        <RadzenNumeric Disabled="@animalChosen" @bind-Value="@request.NightHumidity"></RadzenNumeric>
                     </RadzenFormField>
 
                     <RadzenFormField Text="Animal">
-                        <RadzenDropDown @bind-Value=@request.AnimalUserId TextProperty="@nameof(GetUserAnimalResponse.Species)" ValueProperty="@nameof(GetUserAnimalResponse.Id)" Data=@animals Style="width: 100%; max-width: 400px;" />
+                        <RadzenDropDown @bind-Value=@request.AnimalUserId TextProperty="@nameof(GetUserAnimalResponse.Species)" ValueProperty="@nameof(GetUserAnimalResponse.Id)"
+                                        Data=@animals Style="width: 100%; max-width: 400px;" Change="@AnimalChange" AllowClear=true />
                     </RadzenFormField>
                 </RadzenStack>
 

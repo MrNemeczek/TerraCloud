@@ -30,6 +30,7 @@ namespace TerraCloud.Client.Pages.UserDevice
 
         protected Guid? animalUserId;
         protected bool loaded = false;
+        protected bool animalChosen;
 
         protected override async Task OnInitializedAsync()
         {
@@ -42,11 +43,32 @@ namespace TerraCloud.Client.Pages.UserDevice
             request = _mapper.Map(userDevice, request);
             request = _mapper.Map(device, request);
             
+            animalChosen = request.AnimalUserId is null ? false : true;
+
             loaded = true;
         }
-        public void QuitClick()
+        protected void QuitClick()
         {
             _navManager.NavigateTo($"userdevice");
+        }
+        protected void AnimalChange(object args)
+        {
+            if (args is null)
+            {
+                request.DayTemperature = null;
+                request.DayHumidity = null;
+                request.NightTemperature = null;
+                request.NightHumidity = null;
+
+                animalChosen = false;
+                
+                return;
+            }
+
+            var animalSelected = animals.FirstOrDefault(a => a.Id == Guid.Parse(args.ToString()));
+            request = _mapper.Map(animalSelected, request);
+
+            animalChosen = true;
         }
         protected async Task SaveClick()
         {

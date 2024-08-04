@@ -35,6 +35,8 @@ namespace TerraCloud.Application
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
             CreateMap<Domain.Models.Device.Device, UserDeviceResponse>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<GetUserAnimalResponse, UpdateUserDeviceRequest>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
 
             //Animal
             CreateMap<Domain.Models.Animal.Animal, GetAnimalResponse>();
