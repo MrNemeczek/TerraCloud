@@ -4,6 +4,7 @@
     {
         public Guid Id { get; set; }
         public Guid DeviceId { get; set; }
+        public Guid AnimalUserId { get; set; }
         public string Name { get; set; }
         public int? DayTemperature { get; set; }
         public int? DayHumidity { get; set; }

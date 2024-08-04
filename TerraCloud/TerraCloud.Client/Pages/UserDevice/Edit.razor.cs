@@ -24,11 +24,12 @@ namespace TerraCloud.Client.Pages.UserDevice
 
         protected DeviceResponse device = null!;
         protected UserDeviceResponse userDevice = null!;
-        protected IEnumerable<GetAnimalResponse> animals = null!;
+        protected IEnumerable<GetUserAnimalResponse> animals = null!;
 
         protected UpdateUserDeviceRequest request { get; set; } = new();
 
-        protected Guid animalUserId;
+        protected Guid? animalUserId;
+        protected bool loaded = false;
 
         protected override async Task OnInitializedAsync()
         {
@@ -36,7 +37,12 @@ namespace TerraCloud.Client.Pages.UserDevice
 
             userDevice = await _apiRequest.GetAsync<UserDeviceResponse>($"Device/UserDevice/{Id}");
             device = await _apiRequest.GetAsync<DeviceResponse>($"Device/{userDevice.DeviceId}");
-            animals = await _apiRequest.GetAsync<IEnumerable<GetAnimalResponse>>($"Animal");
+            animals = await _apiRequest.GetAsync<IEnumerable<GetUserAnimalResponse>>($"Animal/UserAnimals");
+
+            request = _mapper.Map(userDevice, request);
+            request = _mapper.Map(device, request);
+            
+            loaded = true;
         }
         public void QuitClick()
         {
@@ -44,10 +50,6 @@ namespace TerraCloud.Client.Pages.UserDevice
         }
         protected async Task SaveClick()
         {
-            request = _mapper.Map(userDevice, request);
-            request.AnimalUserId = animalUserId;
-            request.MeasurementTime = device.MeasurementTime;
-
             var result = await _apiRequest.OnlyPatchAsync("Device/UserDevice", request);
             if (result is not null)
             {

@@ -3,48 +3,48 @@
 
 @inherits EditBase
 
-@if (device is null || userDevice is null)
+@if (!loaded)
 {
     <RadzenText>Loading...</RadzenText>
 }
 else
 {
-    <h3>Edit device</h3>
+    <h3>Edit request</h3>
 
     <RadzenCard>
         <RadzenRow Gap="1rem">
             <RadzenColumn Size="12" SizeSM="6">
                 <RadzenStack>                    
-                    <RadzenFormField Text="Device name">
-                        <RadzenTextBox class="w-100 rz-mb-3" @bind-Value="@userDevice.Name"></RadzenTextBox>
+                    <RadzenFormField Text="request name">
+                        <RadzenTextBox class="w-100 rz-mb-3" @bind-Value="@request.Name"></RadzenTextBox>
                     </RadzenFormField>
                   
-                    <RadzenFormField Text="Device unique code">
+                    <RadzenFormField Text="request unique code">
                         <RadzenTextBox Disabled="true" class="w-100 rz-mb-3" @bind-Value="@device.UniqueCode"></RadzenTextBox>
                     </RadzenFormField>
 
                     <RadzenFormField Text="Measurement time interval">
-                        <RadzenNumeric @bind-Value="@device.MeasurementTime"></RadzenNumeric>
+                        <RadzenNumeric @bind-Value="@request.MeasurementTime"></RadzenNumeric>
                     </RadzenFormField>
  
                     <RadzenFormField Text="Day temperature">
-                        <RadzenNumeric @bind-Value="@userDevice.DayTemperature"></RadzenNumeric>
+                        <RadzenNumeric @bind-Value="@request.DayTemperature"></RadzenNumeric>
                     </RadzenFormField>
 
                     <RadzenFormField Text="Day Humidity">
-                        <RadzenNumeric @bind-Value="@userDevice.DayHumidity"></RadzenNumeric>
+                        <RadzenNumeric @bind-Value="@request.DayHumidity"></RadzenNumeric>
                     </RadzenFormField>
 
                     <RadzenFormField Text="Night temperature">
-                        <RadzenNumeric @bind-Value="@userDevice.NightTemperature"></RadzenNumeric>
+                        <RadzenNumeric @bind-Value="@request.NightTemperature"></RadzenNumeric>
                     </RadzenFormField>
 
                     <RadzenFormField Text="Night humidity">
-                        <RadzenNumeric @bind-Value="@userDevice.NightHumidity"></RadzenNumeric>
+                        <RadzenNumeric @bind-Value="@request.NightHumidity"></RadzenNumeric>
                     </RadzenFormField>
 
                     <RadzenFormField Text="Animal">
-                        <RadzenDropDown @bind-Value=@animalUserId TextProperty="@nameof(GetAnimalResponse.Species)" ValueProperty="@nameof(GetAnimalResponse.Id)" Data=@animals Style="width: 100%; max-width: 400px;"/>
+                        <RadzenDropDown @bind-Value=@request.AnimalUserId TextProperty="@nameof(GetUserAnimalResponse.Species)" ValueProperty="@nameof(GetUserAnimalResponse.Id)" Data=@animals Style="width: 100%; max-width: 400px;" />
                     </RadzenFormField>
                 </RadzenStack>
 

@@ -30,7 +30,11 @@ namespace TerraCloud.Application.Device.Queries
                 throw new DeviceNotFoundException(userDeviceId);
             }
 
+            var device = await _deviceRepository.GetDeviceById(userDevice.DeviceId);
+
             UserDeviceResponse response = _mapper.Map<UserDeviceResponse>(userDevice);
+            response = _mapper.Map(device, response);
+
             return response;
         }
     }

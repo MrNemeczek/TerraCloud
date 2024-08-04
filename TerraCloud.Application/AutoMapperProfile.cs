@@ -31,11 +31,14 @@ namespace TerraCloud.Application
             CreateMap<UserDeviceResponse, UpdateUserDeviceRequest>();
             CreateMap<UpdateUserDeviceRequest, Domain.Models.Device.Device>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<DeviceResponse, UpdateUserDeviceRequest>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<Domain.Models.Device.Device, UserDeviceResponse>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
 
             //Animal
             CreateMap<Domain.Models.Animal.Animal, GetAnimalResponse>();
             CreateMap<AnimalUser, GetUserAnimalResponse>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Animal.Id))
                 .ForMember(dest => dest.Species, opt => opt.MapFrom(src => src.Animal.Species))
                 .ForMember(dest => dest.DayHumidity, opt => opt.MapFrom(src => src.Animal.DayHumidity))
                 .ForMember(dest => dest.DayTemperature, opt => opt.MapFrom(src => src.Animal.DayTemperature))
