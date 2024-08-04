@@ -6,24 +6,24 @@
 
 <RadzenButton Text="Add Animal" class="rz-mb-3" Click=@AddAnimal />
 
-<RadzenDataGrid AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" Data="@userAnimals" TItem="GetAnimalResponse"
+<RadzenDataGrid AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" Data="@userAnimals" TItem="GetUserAnimalResponse"
                 ColumnWidth="300px">
     <Columns>
-        <RadzenDataGridColumn TItem="GetAnimalResponse" Property="Id" Title="ID" />
-        <RadzenDataGridColumn TItem="GetAnimalResponse" Property="Species" Title="Species" />
-        <RadzenDataGridColumn TItem="GetAnimalResponse" Property="AvarageHumidity" Title="Średnia wilgotność" />
-        <RadzenDataGridColumn TItem="GetAnimalResponse" Property="AvarageTemperature" Title="Średnia temperatura" />
-        <RadzenDataGridColumn TItem="GetAnimalResponse" Property="Id" Width="60px" Sortable=false>
+        <RadzenDataGridColumn TItem="GetUserAnimalResponse" Property="Id" Title="ID" />
+        <RadzenDataGridColumn TItem="GetUserAnimalResponse" Property="Species" Title="Species" />
+        <RadzenDataGridColumn TItem="GetUserAnimalResponse" Property="AvarageHumidity" Title="Średnia wilgotność" />
+        <RadzenDataGridColumn TItem="GetUserAnimalResponse" Property="AvarageTemperature" Title="Średnia temperatura" />
+        <RadzenDataGridColumn TItem="GetUserAnimalResponse" Property="Id" Width="60px" Sortable=false>
             <Template Context="animal">
-                <RadzenButton class="mb-1" Click="@(() => GoToEdit(animal.Id))" Icon="build" ButtonStyle="ButtonStyle.Success" />
+                <RadzenButton class="mb-1" Click="@(() => GoToEdit(animal.AnimalId))" Icon="build" ButtonStyle="ButtonStyle.Success" />
             </Template>
         </RadzenDataGridColumn>
-        <RadzenDataGridColumn TItem="GetAnimalResponse" Property="Id" Width="60px" Sortable=false>
+        <RadzenDataGridColumn TItem="GetUserAnimalResponse" Property="Id" Width="60px" Sortable=false>
             <Template Context="animal">
-                <RadzenButton class="mb-1" Click="@(() => GoToDetails(animal.Id))" Icon="pageview" ButtonStyle="ButtonStyle.Secondary" />
+                <RadzenButton class="mb-1" Click="@(() => GoToDetails(animal.AnimalId))" Icon="pageview" ButtonStyle="ButtonStyle.Secondary" />
             </Template>
         </RadzenDataGridColumn>
-        <RadzenDataGridColumn TItem="GetAnimalResponse" Property="Id" Width="60px" Sortable=false>
+        <RadzenDataGridColumn TItem="GetUserAnimalResponse" Property="Id" Width="60px" Sortable=false>
             <Template Context="animal">
                 <RadzenButton class="mb-1" Click="@(() => Delete(animal.Id))" Icon="delete_forever" ButtonStyle="ButtonStyle.Danger" />
             </Template>

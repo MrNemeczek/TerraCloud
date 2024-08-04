@@ -9,7 +9,7 @@ namespace TerraCloud.Client.Pages.AnimalUser
 {
     public class IndexBase : ComponentBase
     {
-        protected IEnumerable<GetAnimalResponse> userAnimals;
+        protected IEnumerable<GetUserAnimalResponse> userAnimals;
 
         [Inject]
         private IApiRequest _apiRequest { get; set; } = default!;
@@ -22,7 +22,7 @@ namespace TerraCloud.Client.Pages.AnimalUser
         {
             await base.OnInitializedAsync();
 
-            userAnimals = await _apiRequest.GetAsync<IEnumerable<GetAnimalResponse>>("Animal/UserAnimals");
+            userAnimals = await _apiRequest.GetAsync<IEnumerable<GetUserAnimalResponse>>("Animal/UserAnimals");
         }
 
         public async Task AddAnimal()

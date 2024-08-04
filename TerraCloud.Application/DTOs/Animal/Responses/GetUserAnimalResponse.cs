@@ -3,6 +3,7 @@
     public class GetUserAnimalResponse
     {
         public Guid Id { get; set; }
+        public Guid AnimalId { get; set; }
         public string Species { get; set; } = null!;
         public int? DayHumidity { get; set; }
         public int? DayTemperature { get; set; }
