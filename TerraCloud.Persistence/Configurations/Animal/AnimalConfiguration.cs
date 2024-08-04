@@ -28,6 +28,10 @@ namespace TerraCloud.Persistence.Configurations.Animal
 
             builder.Property(x => x.IsPublic)
                 .HasComment("Czy gatunek jest dostępny publicznie");
+
+            builder.HasOne(x => x.User)
+                .WithMany(x => x.Animals)
+                .HasForeignKey(x => x.UserId);
         }
     }
 }

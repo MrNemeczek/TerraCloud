@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 
 using TerraCloud.Application.DTOs.Animal.Responses;
-using TerraCloud.Application.Interfaces.Animal;
 using TerraCloud.Persistence.Interfaces.Repository.Animal;
 
 namespace TerraCloud.Application.Animal.Queries
 {
+    public interface IGetAnimal
+    {
+        Task<GetAnimalResponse> Execute(Guid animalId);
+    }
     internal class GetAnimal : IGetAnimal
     {
         private readonly IAnimalRepository _animalRepository;

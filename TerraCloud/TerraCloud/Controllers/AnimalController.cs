@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TerraCloud.Application.Animal.Commands;
 using TerraCloud.Application.Animal.Queries;
 using TerraCloud.Application.DTOs.Animal.Requests;
 using TerraCloud.Application.DTOs.Animal.Responses;
 using TerraCloud.Application.Interfaces.Animal;
+using TerraCloud.Domain.Models.Animal;
 using TerraCloud.Server.Common;
 
 namespace TerraCloud.Server.Controllers
@@ -15,19 +17,21 @@ namespace TerraCloud.Server.Controllers
     {
         private readonly IGetAnimal _getAnimal;
         private readonly IGetAnimals _getAnimals;
-        private readonly IAddAnimal _addAnimal;
-        private readonly IDeleteAnimal _deleteAnimal;
+        private readonly IAddAnimalUser _addAnimalUser;
+        private readonly IDeleteUserAnimal _deleteUserAnimal;
         private readonly IGetUserAnimals _getUserAnimals;
+        private readonly IUpdateAnimal _updateAnimal;
         private readonly IHttpContextAccessor _contextAccessor;
 
-        public AnimalController(IGetAnimal getAnimal, IGetAnimals getAnimals, IAddAnimal addAnimal, IDeleteAnimal deleteAnimal, IGetUserAnimals getUserAnimals, IHttpContextAccessor contextAccessor)
+        public AnimalController(IGetAnimal getAnimal, IGetAnimals getAnimals, IAddAnimalUser addAnimalUser, IGetUserAnimals getUserAnimals, IHttpContextAccessor contextAccessor, IDeleteUserAnimal deleteUserAnimal, IUpdateAnimal updateAnimal)
         {
-            _addAnimal = addAnimal;
+            _addAnimalUser = addAnimalUser;
             _getAnimal = getAnimal;
             _getAnimals = getAnimals;
-            _deleteAnimal = deleteAnimal;
             _getUserAnimals = getUserAnimals;
             _contextAccessor = contextAccessor;
+            _deleteUserAnimal = deleteUserAnimal;
+            _updateAnimal = updateAnimal;
         }
 
         [HttpGet]
@@ -52,22 +56,28 @@ namespace TerraCloud.Server.Controllers
 
             return Ok(response);
         }
-        [HttpPost]
-        public async Task<IActionResult> AddAnimal([FromBody] AddAnimalRequest request)
+        [HttpPost("AnimalUser")]
+        public async Task<IActionResult> AddAnimalUser([FromBody] AddAnimalUserRequest request)
         {
-            await _addAnimal.Execute(request);
+            Guid userId = _contextAccessor.GetUserGuid();
+            await _addAnimalUser.Execute(request, userId);
 
             return Ok();
         }
         [HttpPatch]
-        public async Task<IActionResult> UpdateAnimal()
+        public async Task<IActionResult> UpdateAnimal([FromBody] UpdateAnimalRequest request)
         {
+            Guid userId = _contextAccessor.GetUserGuid();
+            await _updateAnimal.Execute(request, userId);
+
             return Ok();
         }
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAnimal([FromRoute] string id)
+
+        [HttpDelete("UserAnimal/{id}")]
+        public async Task<IActionResult> DeleteUserAnimal([FromRoute] string id)
         {
-            await _deleteAnimal.Execute(id);
+            Guid userId = _contextAccessor.GetUserGuid();
+            await _deleteUserAnimal.Execute(Guid.Parse(id), userId);
 
             return NoContent();
         }

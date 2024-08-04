@@ -15,5 +15,9 @@ namespace TerraCloud.Domain.Models.User
 
         public virtual ICollection<UserDevice>? UserDevices { get; }
         public virtual ICollection<AnimalUser>? AnimalUsers { get; }
+        /// <summary>
+        /// Users created animals
+        /// </summary>
+        public virtual ICollection<Animal.Animal> Animals { get; }
     }
 }

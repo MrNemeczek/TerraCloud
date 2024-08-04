@@ -5,6 +5,7 @@ using TerraCloud.Application.DTOs.Animal.Responses;
 using TerraCloud.Application.DTOs.Auth.Requests;
 using TerraCloud.Application.DTOs.Device.Requests;
 using TerraCloud.Application.DTOs.Device.Responses;
+using TerraCloud.Domain.Models.Animal;
 using TerraCloud.Domain.Models.Device;
 using TerraCloud.Domain.Models.User;
 using TerraCloud.Infrastructure.Auth;
@@ -33,7 +34,16 @@ namespace TerraCloud.Application
 
             //Animal
             CreateMap<Domain.Models.Animal.Animal, GetAnimalResponse>();
-            CreateMap<AddAnimalRequest,  Domain.Models.Animal.Animal>();
+            CreateMap<AnimalUser, GetUserAnimalResponse>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Animal.Id))
+                .ForMember(dest => dest.Species, opt => opt.MapFrom(src => src.Animal.Species))
+                .ForMember(dest => dest.DayHumidity, opt => opt.MapFrom(src => src.Animal.DayHumidity))
+                .ForMember(dest => dest.DayTemperature, opt => opt.MapFrom(src => src.Animal.DayTemperature))
+                .ForMember(dest => dest.NightHumidity, opt => opt.MapFrom(src => src.Animal.NightHumidity))
+                .ForMember(dest => dest.NightTemperature, opt => opt.MapFrom(src => src.Animal.NightTemperature));
+            CreateMap<AddAnimalUserRequest,  Domain.Models.Animal.Animal>();
+            CreateMap<UpdateAnimalRequest,  Domain.Models.Animal.Animal>();
+            CreateMap<GetAnimalResponse, UpdateAnimalRequest>();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace TerraCloud.Client.Pages.Animal
 {
     public class CreateBase : ComponentBase
     {
-        protected AddAnimalRequest animalRequest { get; set; } = new AddAnimalRequest();
+        protected AddAnimalUserRequest animalRequest { get; set; } = new AddAnimalUserRequest();
 
         [Inject]
         private IApiRequest _apiRequest { get; set; } = default!;
@@ -17,9 +17,9 @@ namespace TerraCloud.Client.Pages.Animal
         [Inject]
         private NavigationManager _navManager { get; set; } = default!;
 
-        protected async Task OnAnimalAdd(AddAnimalRequest request)
+        protected async Task OnAnimalAdd(AddAnimalUserRequest request)
         {
-            var result = await _apiRequest.OnlyPostAsync("Animal", request);
+            var result = await _apiRequest.OnlyPostAsync("Animal/AnimalUser", request);
             if (result is not null)
             {
                 _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = result.Describe, Duration = 5000 });

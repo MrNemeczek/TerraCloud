@@ -15,6 +15,11 @@
         <RadzenDataGridColumn TItem="GetAnimalResponse" Property="AvarageTemperature" Title="Średnia temperatura" />
         <RadzenDataGridColumn TItem="GetAnimalResponse" Property="Id" Width="60px" Sortable=false>
             <Template Context="animal">
+                <RadzenButton class="mb-1" Click="@(() => GoToEdit(animal.Id))" Icon="build" ButtonStyle="ButtonStyle.Success" />
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="GetAnimalResponse" Property="Id" Width="60px" Sortable=false>
+            <Template Context="animal">
                 <RadzenButton class="mb-1" Click="@(() => GoToDetails(animal.Id))" Icon="pageview" ButtonStyle="ButtonStyle.Secondary" />
             </Template>
         </RadzenDataGridColumn>

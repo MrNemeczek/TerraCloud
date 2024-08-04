@@ -25,24 +25,6 @@ namespace TerraCloud.Client.Pages.Animal
             animals = await _apiRequest.GetAsync<IEnumerable<GetAnimalResponse>>("Animal");
         }
 
-        public async Task AddAnimal()
-        {
-            _navManager.NavigateTo("animal/create");
-        }
-
-        public async Task Delete(Guid deviceId)
-        {
-            ErrorResponse? result = await _apiRequest.DeleteAsync($"Animal/{deviceId}");
-            if (result is not null)
-            {
-                _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = result.Describe, Duration = 5000 });
-            }
-            else
-            {
-                _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Success", Detail = "Animal deleted", Duration = 5000 });
-                _navManager.NavigateTo(_navManager.Uri, true);
-            }
-        }
         public void GoToDetails(Guid animalId)
         {
             _navManager.NavigateTo($"animal/details/{animalId}");

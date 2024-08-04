@@ -30,9 +30,9 @@ namespace TerraCloud.Client.Pages.AnimalUser
             _navManager.NavigateTo("animal/create");
         }
 
-        public async Task Delete(Guid deviceId)
+        public async Task Delete(Guid animalUserId)
         {
-            ErrorResponse? result = await _apiRequest.DeleteAsync($"Animal/{deviceId}");
+            ErrorResponse? result = await _apiRequest.DeleteAsync($"Animal/UserAnimal/{animalUserId}");
             if (result is not null)
             {
                 _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = result.Describe, Duration = 5000 });
@@ -46,6 +46,10 @@ namespace TerraCloud.Client.Pages.AnimalUser
         public void GoToDetails(Guid animalId)
         {
             _navManager.NavigateTo($"animal/details/{animalId}");
+        }
+        public void GoToEdit(Guid animalId)
+        {
+            _navManager.NavigateTo($"animal/edit/{animalId}");
         }
     }
 }

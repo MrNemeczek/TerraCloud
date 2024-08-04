@@ -1,7 +1,43 @@
-﻿@inherits EditBase
+﻿@page "/animal/edit/{Id}"
+@using TerraCloud.Application.DTOs.Animal.Requests
 
-<h3>Edit</h3>
+@inherits EditBase
 
-@code {
+@inject Radzen.DialogService dialogService
 
+@if (animal is null)
+{
+    <RadzenText>Loading...</RadzenText>
+}
+else
+{
+    <RadzenCard>
+        <RadzenTemplateForm Data="@animalUpdateRequest" Submit="@((UpdateAnimalRequest args) => OnAnimalEdit(args))">
+            <RadzenStack>
+                <RadzenText class="rz-mb-3">Animal species</RadzenText>
+                <RadzenTextBox @bind-Value=@animalUpdateRequest.Species class="w-100 rz-mb-3" />
+
+                <RadzenFieldset Text="Day parameters">
+                    <RadzenText class="rz-mb-3">Day humidity</RadzenText>
+                    <RadzenNumeric @bind-Value=@animalUpdateRequest.DayHumidity />
+
+                    <RadzenText class="rz-mb-3">Day temperature</RadzenText>
+                    <RadzenNumeric @bind-Value=@animalUpdateRequest.DayTemperature />
+                </RadzenFieldset>
+
+                <RadzenFieldset Text="Night parameters">
+                    <RadzenText class="rz-mb-3">Night humidity</RadzenText>
+                    <RadzenNumeric @bind-Value=@animalUpdateRequest.NightHumidity />
+
+                    <RadzenText class="rz-mb-3">Night temperature</RadzenText>
+                    <RadzenNumeric @bind-Value=@animalUpdateRequest.NightTemperature />
+                </RadzenFieldset>
+
+                <RadzenCheckBox @bind-Value=@animalUpdateRequest.IsPublic Name="IsPublicCheckBox" />
+                <RadzenLabel Text="Is public" Component="IsPublicCheckBox" class="rz-ms-2" />
+
+                <RadzenButton ButtonType="ButtonType.Submit" Size="ButtonSize.Large" Icon="save" Text="Add" class="rz-mt-5" />
+            </RadzenStack>
+        </RadzenTemplateForm>
+    </RadzenCard>
 }

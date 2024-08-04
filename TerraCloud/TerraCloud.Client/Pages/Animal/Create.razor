@@ -7,26 +7,31 @@
 @inject Radzen.DialogService dialogService
 
 <RadzenCard>
-    <RadzenTemplateForm Data="@animalRequest" Submit="@((AddAnimalRequest args) => OnAnimalAdd(args))">
-        <RadzenText class="rz-mb-3">Animal species</RadzenText>
-        <RadzenTextBox @bind-Value=@animalRequest.Species class="w-100 rz-mb-3" />
+    <RadzenTemplateForm Data="@animalRequest" Submit="@((AddAnimalUserRequest args) => OnAnimalAdd(args))">
+        <RadzenStack>
+            <RadzenText class="rz-mb-3">Animal species</RadzenText>
+            <RadzenTextBox @bind-Value=@animalRequest.Species class="w-100 rz-mb-3" />
 
-        <RadzenFieldset Text="Day parameters">
-            <RadzenText class="rz-mb-3">Day humidity</RadzenText>
-            <RadzenNumeric @bind-Value=@animalRequest.DayHumidity />
+            <RadzenFieldset Text="Day parameters">
+                <RadzenText class="rz-mb-3">Day humidity</RadzenText>
+                <RadzenNumeric @bind-Value=@animalRequest.DayHumidity />
 
-            <RadzenText class="rz-mb-3">Day temperature</RadzenText>
-            <RadzenNumeric @bind-Value=@animalRequest.DayTemperature />
-        </RadzenFieldset>
+                <RadzenText class="rz-mb-3">Day temperature</RadzenText>
+                <RadzenNumeric @bind-Value=@animalRequest.DayTemperature />
+            </RadzenFieldset>
 
-        <RadzenFieldset Text="Night parameters">
-            <RadzenText class="rz-mb-3">Night humidity</RadzenText>
-            <RadzenNumeric @bind-Value=@animalRequest.NightHumidity />
+            <RadzenFieldset Text="Night parameters">
+                <RadzenText class="rz-mb-3">Night humidity</RadzenText>
+                <RadzenNumeric @bind-Value=@animalRequest.NightHumidity />
 
-            <RadzenText class="rz-mb-3">Night temperature</RadzenText>
-            <RadzenNumeric @bind-Value=@animalRequest.NightTemperature />
-        </RadzenFieldset>
+                <RadzenText class="rz-mb-3">Night temperature</RadzenText>
+                <RadzenNumeric @bind-Value=@animalRequest.NightTemperature />
+            </RadzenFieldset>
 
-        <RadzenButton ButtonType="ButtonType.Submit" Size="ButtonSize.Large" Icon="save" Text="Add" class="rz-mt-5" />
+            <RadzenCheckBox @bind-Value=@animalRequest.IsPublic Name="IsPublicCheckBox"/>
+            <RadzenLabel Text="Is public" Component="IsPublicCheckBox" class="rz-ms-2" />
+
+            <RadzenButton ButtonType="ButtonType.Submit" Size="ButtonSize.Large" Icon="save" Text="Add" class="rz-mt-5" />
+        </RadzenStack>
     </RadzenTemplateForm>
 </RadzenCard>
