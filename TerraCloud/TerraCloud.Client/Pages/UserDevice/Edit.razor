@@ -9,7 +9,7 @@
 }
 else
 {
-    <h3>Edit request</h3>
+    <h3>Edit device</h3>
 
     <RadzenCard>
         <RadzenRow Gap="1rem">
@@ -26,31 +26,37 @@ else
                     <RadzenFormField Text="Measurement time interval">
                         <RadzenNumeric @bind-Value="@request.MeasurementTime"></RadzenNumeric>
                     </RadzenFormField>
- 
-                    <RadzenFormField Text="Day temperature">
-                        <RadzenNumeric Disabled="@animalChosen" @bind-Value="@request.DayTemperature"></RadzenNumeric>
-                    </RadzenFormField>
 
-                    <RadzenFormField Text="Day Humidity">
-                        <RadzenNumeric Disabled="@animalChosen" @bind-Value="@request.DayHumidity"></RadzenNumeric>
-                    </RadzenFormField>
+                    <RadzenFieldset Text="Day parameters">
+                        <RadzenFormField Text="Day temperature">
+                            <RadzenNumeric Disabled="@animalChosen" @bind-Value="@request.DayTemperature"></RadzenNumeric>
+                        </RadzenFormField>
 
-                    <RadzenFormField Text="Night temperature">
-                        <RadzenNumeric Disabled="@animalChosen" @bind-Value="@request.NightTemperature"></RadzenNumeric>
-                    </RadzenFormField>
+                        <RadzenFormField Text="Day Humidity">
+                            <RadzenNumeric Disabled="@animalChosen" @bind-Value="@request.DayHumidity"></RadzenNumeric>
+                        </RadzenFormField>
+                    </RadzenFieldset>
 
-                    <RadzenFormField Text="Night humidity">
-                        <RadzenNumeric Disabled="@animalChosen" @bind-Value="@request.NightHumidity"></RadzenNumeric>
-                    </RadzenFormField>
+                    <RadzenFieldset Text="Night parameters">
+                        <RadzenFormField Text="Night temperature">
+                            <RadzenNumeric Disabled="@animalChosen" @bind-Value="@request.NightTemperature"></RadzenNumeric>
+                        </RadzenFormField>
+
+                        <RadzenFormField Text="Night humidity">
+                            <RadzenNumeric Disabled="@animalChosen" @bind-Value="@request.NightHumidity"></RadzenNumeric>
+                        </RadzenFormField>
+                    </RadzenFieldset>
 
                     <RadzenFormField Text="Animal">
                         <RadzenDropDown @bind-Value=@request.AnimalUserId TextProperty="@nameof(GetUserAnimalResponse.Species)" ValueProperty="@nameof(GetUserAnimalResponse.Id)"
-                                        Data=@animals Style="width: 100%; max-width: 400px;" Change="@AnimalChange" AllowClear=true />
+                                        Data=@animals Style="width: 100%;" Change="@AnimalChange" AllowClear=true />
                     </RadzenFormField>
                 </RadzenStack>
 
-                <RadzenButton Text="Save" Click="@(() => SaveClick())" />
-                <RadzenButton Text="Quit" ButtonStyle="ButtonStyle.Secondary" Click="@(() => QuitClick())" />
+                <div class="mt-2">
+                    <RadzenButton Text="Save" Click="@(() => SaveClick())" />
+                    <RadzenButton Text="Quit" ButtonStyle="ButtonStyle.Secondary" Click="@(() => QuitClick())" />
+                </div>
 
             </RadzenColumn>
         </RadzenRow>
