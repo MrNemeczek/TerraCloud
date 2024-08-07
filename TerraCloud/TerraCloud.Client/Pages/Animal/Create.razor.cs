@@ -27,8 +27,12 @@ namespace TerraCloud.Client.Pages.Animal
             else
             {
                 _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Succes", Detail = "Animal created", Duration = 5000 });
-                _navManager.NavigateTo("animal");
+                _navManager.NavigateTo("useranimals");
             }
+        }
+        protected void QuitClick()
+        {
+            _navManager.NavigateTo($"useranimals");
         }
     }
 }
