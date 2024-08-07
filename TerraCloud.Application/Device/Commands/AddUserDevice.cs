@@ -28,6 +28,11 @@ namespace TerraCloud.Application.Device.Commands
             {
                 throw new DeviceNotFoundException(request.UniqueCode);
             }
+
+            if(device.UserDevices.Any(ud => ud.UserId == userId))
+            {
+                throw new DeviceAlreadyAddedException(device.Id, userId);
+            }
             
             var deviceToAdd = _mapper.Map<Domain.Models.Device.UserDevice>(request);
             deviceToAdd.DeviceId = device.Id;
