@@ -22,7 +22,7 @@ namespace TerraCloud.Infrastructure.Auth
 
         public async override Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            string tokenJWT = await _localStorageService.GetItemAsStringAsync("jwt");
+            string? tokenJWT = await _localStorageService.GetItemAsStringAsync("jwt");
             if (!String.IsNullOrEmpty(tokenJWT))
             {
                 tokenJWT = tokenJWT.Trim('\"');
@@ -49,8 +49,13 @@ namespace TerraCloud.Infrastructure.Auth
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
         }
 
-        private ClaimsPrincipal GetClaimsPrincipal(string token)
+        private ClaimsPrincipal GetClaimsPrincipal(string? token)
         {
+            if (String.IsNullOrEmpty(token))
+            {
+                return anonymous;
+            }
+
             var tokenHandler = new JwtSecurityTokenHandler();
             var validationParameters = _jwtService.GetValidationParameters();
 

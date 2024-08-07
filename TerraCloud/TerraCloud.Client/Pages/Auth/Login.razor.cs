@@ -35,7 +35,7 @@ namespace TerraCloud.Client.Pages.Auth
             };
 
             var loginResponse = await _apiRequest.PostAsync<LoginResponse, LoginRequest>("Auth/Login", loginRequest);
-            Console.WriteLine(loginResponse.Token);
+
             await _localStorageService.SetItemAsync("jwt", loginResponse.Token);
 
             var customAuthStateProvider = (PersistentAuthenticationStateProvider)_authStateProvider;
