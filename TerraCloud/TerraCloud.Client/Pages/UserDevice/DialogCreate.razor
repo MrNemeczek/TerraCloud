@@ -2,10 +2,8 @@
 
 @inherits DialogCreateBase
 
-@inject Radzen.DialogService dialogService
-
 <div class="close-button-div">
-    <RadzenButton Text="X" Click="() => dialogService.Close(false)" class="close-button" ButtonStyle="ButtonStyle.Danger" />
+    <RadzenButton Text="X" Click="() => _dialogService.Close(false)" class="close-button" ButtonStyle="ButtonStyle.Danger" />
 </div>
 
 <RadzenCard>

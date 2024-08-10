@@ -23,7 +23,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddControllersWithViews();
 
 // DB context
-builder.Services.AddDbContext<TerraCloudContext>(options => options.UseNpgsql(config.GetConnectionString("LocalDatabase")).UseLazyLoadingProxies());
+builder.Services.AddDbContext<TerraCloudContext>(options => options.UseNpgsql(config.GetConnectionString("AzureDatabase")).UseLazyLoadingProxies());
 
 builder.Services.AddScoped(sp =>
     new HttpClient

@@ -14,6 +14,8 @@ namespace TerraCloud.Client.Pages.UserDevice
         private IApiRequest _apiRequest { get; set; } = default!;
         [Inject]
         NotificationService _notificationService { get; set; } = default!;
+        [Inject]
+        protected DialogService _dialogService { get; set; } = default!;
 
         protected async Task OnDeviceAdd(AddUserDeviceRequest request)
         {
@@ -25,6 +27,7 @@ namespace TerraCloud.Client.Pages.UserDevice
             else
             {
                 _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Succes", Detail = "Device created", Duration = 5000 });
+                _dialogService.Close();
             }
         }
     }
