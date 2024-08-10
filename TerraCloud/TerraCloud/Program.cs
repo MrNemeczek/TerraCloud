@@ -25,11 +25,14 @@ builder.Services.AddControllersWithViews();
 // DB context
 builder.Services.AddDbContext<TerraCloudContext>(options => options.UseNpgsql(config.GetConnectionString("AzureDatabase")).UseLazyLoadingProxies());
 
-builder.Services.AddScoped(sp =>
-    new HttpClient
-    {
-        BaseAddress = new Uri(config["AppConfigurations:ApiUrl"] ?? "https://localhost:7291/api/")
-    });
+builder.Services.AddHttpClient("terracloud", client =>
+{
+    client.BaseAddress = new Uri(config["AppConfigurations:ApiUrl"] ?? "https://localhost:7291/api/");
+})
+.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+{
+    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {

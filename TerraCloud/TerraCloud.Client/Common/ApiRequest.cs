@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Net.Http.Headers;
 
 using TerraCloud.Application.DTOs.Error;
+using System.Net.Http;
 
 namespace TerraCloud.Client.Common
 {
@@ -13,14 +14,14 @@ namespace TerraCloud.Client.Common
         private readonly HttpClient _http;
         private readonly ILocalStorageService _localStorageService;
 
-        public ApiRequest(HttpClient http, ILocalStorageService localStorageService)
+        public ApiRequest(IHttpClientFactory httpClientFactory, ILocalStorageService localStorageService)
         {
             _options = new JsonSerializerOptions()
             {
                 PropertyNameCaseInsensitive = true
             };
 
-            _http = http;
+            _http = httpClientFactory.CreateClient("terracloud");
             _localStorageService = localStorageService;            
         }
 
