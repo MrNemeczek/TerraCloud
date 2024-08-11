@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using AutoMapper.Internal;
 using Microsoft.AspNetCore.Components;
 using Radzen;
+
 using TerraCloud.Application.DTOs.Animal.Responses;
 using TerraCloud.Application.DTOs.Device.Requests;
 using TerraCloud.Application.DTOs.Device.Responses;
@@ -28,7 +28,6 @@ namespace TerraCloud.Client.Pages.UserDevice
 
         protected UpdateUserDeviceRequest request { get; set; } = new();
 
-        protected Guid? animalUserId;
         protected bool loaded = false;
         protected bool animalChosen;
 
@@ -43,7 +42,7 @@ namespace TerraCloud.Client.Pages.UserDevice
             request = _mapper.Map(userDevice, request);
             request = _mapper.Map(device, request);
             
-            animalChosen = request.AnimalUserId is null ? false : true;
+            animalChosen = request.AnimalUserId is null || request.AnimalUserId.Equals(Guid.Empty) ? false : true;
 
             loaded = true;
         }

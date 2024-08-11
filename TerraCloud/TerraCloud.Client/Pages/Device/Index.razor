@@ -13,11 +13,6 @@
         <RadzenDataGridColumn TItem="DeviceResponse" Property="UniqueCode" Title="Unique code" />
         <RadzenDataGridColumn TItem="DeviceResponse" Property="Id" Width="60px" Sortable=false>
             <Template Context="device">
-                <RadzenButton class="mb-1" Click="@(() => GoToDetails(device.Id))" Icon="pageview" ButtonStyle="ButtonStyle.Secondary" />
-            </Template>
-        </RadzenDataGridColumn>
-        <RadzenDataGridColumn TItem="DeviceResponse" Property="Id" Width="60px" Sortable=false>
-            <Template Context="device">
                 <RadzenButton class="mb-1" Click="@(() => Delete(device.Id))" Icon="delete_forever" ButtonStyle="ButtonStyle.Danger"/>
             </Template>
         </RadzenDataGridColumn>

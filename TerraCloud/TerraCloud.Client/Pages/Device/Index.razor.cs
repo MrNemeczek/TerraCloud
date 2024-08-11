@@ -47,9 +47,5 @@ namespace TerraCloud.Client.Pages.Device
                 _navManager.NavigateTo(_navManager.Uri, true);
             }
         }
-        public void GoToDetails(Guid deviceId)
-        {
-            _navManager.NavigateTo($"device/details/{deviceId}");
-        }
     }
 }
