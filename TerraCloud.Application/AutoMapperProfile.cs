@@ -5,6 +5,8 @@ using TerraCloud.Application.DTOs.Animal.Responses;
 using TerraCloud.Application.DTOs.Auth.Requests;
 using TerraCloud.Application.DTOs.Device.Requests;
 using TerraCloud.Application.DTOs.Device.Responses;
+using TerraCloud.Application.DTOs.Error;
+using TerraCloud.Application.Exceptions;
 using TerraCloud.Domain.Models.Animal;
 using TerraCloud.Domain.Models.Device;
 using TerraCloud.Domain.Models.User;
@@ -49,6 +51,9 @@ namespace TerraCloud.Application
             CreateMap<AddAnimalUserRequest,  Domain.Models.Animal.Animal>();
             CreateMap<UpdateAnimalRequest,  Domain.Models.Animal.Animal>();
             CreateMap<GetAnimalResponse, UpdateAnimalRequest>();
+
+            //Exception
+            CreateMap<MyApplicationException, ErrorResponse>();
         }
     }
 }

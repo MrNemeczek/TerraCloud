@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
+
+using TerraCloud.Application.DTOs.Error;
 
 namespace TerraCloud.Application.Exceptions.Auth
 {
-    public sealed class EmailExistsException : Exception
+    public sealed class EmailExistsException : MyApplicationException
     {
-        public EmailExistsException(string email) : base($"Email: {email} exists!")
+        public EmailExistsException(string email) : base($"Email: {email} exists!", ErrorCode.EmailExists, HttpStatusCode.Conflict)
         {           
         }
     }

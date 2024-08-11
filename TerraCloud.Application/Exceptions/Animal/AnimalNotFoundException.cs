@@ -1,8 +1,12 @@
-﻿namespace TerraCloud.Application.Exceptions.Animal
+﻿using System.Net;
+
+using TerraCloud.Application.DTOs.Error;
+
+namespace TerraCloud.Application.Exceptions.Animal
 {
-    public sealed class AnimalNotFoundException : Exception
+    public sealed class AnimalNotFoundException : MyApplicationException
     {
-        public AnimalNotFoundException(Guid id) : base($"Animal with ID: {id} not found!")
+        public AnimalNotFoundException(Guid id) : base($"Animal with ID: {id} not found!", ErrorCode.AnimalNotFound, HttpStatusCode.NotFound)
         {
             
         }
