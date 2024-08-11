@@ -17,19 +17,25 @@
             </RadzenText>
             <RadzenTemplateForm Data="@registerRequest" Submit="@((RegisterRequest args) => OnRegister(args))">
                 <RadzenText class="rz-mb-3">Username</RadzenText>
-                <RadzenTextBox @bind-Value=@registerRequest.Login class="w-100 rz-mb-3" />
+                <RadzenTextBox @bind-Value=@registerRequest.Login class="w-100 rz-mb-3" Name="Login"/>
+                <RadzenRequiredValidator Component="Login" Text="Username is required" Popup=@popup />
 
                 <RadzenText class="rz-mb-3">Password</RadzenText>
-                <RadzenPassword @bind-Value=@registerRequest.Password class="w-100 rz-mb-3" />
+                <RadzenPassword @bind-Value=@registerRequest.Password class="w-100 rz-mb-3" Name="Password"/>
+                <RadzenRequiredValidator Component="Password" Text="Password is required" Popup=@popup />
 
                 <RadzenText class="rz-mb-3">Confirm Password</RadzenText>
-                <RadzenPassword @bind-Value=@registerRequest.ConfirmPassword class="w-100 rz-mb-3" />
+                <RadzenPassword @bind-Value=@registerRequest.ConfirmPassword class="w-100 rz-mb-3" Name="ConfirmPassword"/>
+                <RadzenRequiredValidator Component="ConfirmPassword" Text="Confirm Password is required" Popup=@popup />
+                <RadzenCustomValidator Component="ConfirmPassword" Validator="@ValidateConfirmPassword" Text="Passwords must be the same" Popup=@popup />
 
                 <RadzenText class="rz-mb-3">Name</RadzenText>
-                <RadzenTextBox @bind-Value=@registerRequest.Name class="w-100 rz-mb-3" />
+                <RadzenTextBox @bind-Value=@registerRequest.Name class="w-100 rz-mb-3" Name="Name"/>
+                <RadzenRequiredValidator Component="Name" Text="Name is required" Popup=@popup />
 
                 <RadzenText class="rz-mb-3">Lastname</RadzenText>
-                <RadzenTextBox @bind-Value=@registerRequest.Lastname class="w-100 rz-mb-3" />
+                <RadzenTextBox @bind-Value=@registerRequest.Lastname class="w-100 rz-mb-3" Name="Lastname"/>
+                <RadzenRequiredValidator Component="Lastname" Text="Lastname is required" Popup=@popup />
 
                 <RadzenText class="rz-mb-3">Email</RadzenText>
                 <RadzenTextBox style="display: block" Name="Email" @bind-Value=@registerRequest.Email class="w-100 rz-mb-3" />

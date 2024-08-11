@@ -37,5 +37,10 @@ namespace TerraCloud.Client.Pages.Auth
                 _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Succes", Detail = "Account created", Duration = 5000 });
             }
         }
+
+        protected bool ValidateConfirmPassword()
+        {
+            return registerRequest.Password.Equals(registerRequest.ConfirmPassword);
+        }
     }
 }
