@@ -11,6 +11,8 @@ namespace TerraCloud.Client.Pages.Animal
         public string Id { get; set; } = null!;
         [Inject]
         private IApiRequest _apiRequest { get; set; } = default!;
+        [Inject]
+        private NavigationManager _navManager { get; set; } = default!;
 
         protected GetAnimalResponse animal = null!;
 
@@ -19,6 +21,11 @@ namespace TerraCloud.Client.Pages.Animal
             await base.OnInitializedAsync();
 
             animal = await _apiRequest.GetAsync<GetAnimalResponse>($"Animal/{Id}");
+        }
+
+        protected void QuitClick()
+        {
+            _navManager.NavigateTo("useranimals");
         }
     }
 }

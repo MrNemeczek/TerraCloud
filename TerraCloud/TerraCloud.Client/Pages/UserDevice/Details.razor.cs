@@ -12,6 +12,8 @@ namespace TerraCloud.Client.Pages.UserDevice
         public string Id { get; set; } = null!;
         [Inject]
         private IApiRequest _apiRequest { get; set; } = default!;
+        [Inject]
+        private NavigationManager _navManager { get; set; } = default!;
 
         protected DeviceResponse device = null!;
         protected DeviceMeasurementResponse deviceMeasurement = null!;
@@ -24,7 +26,7 @@ namespace TerraCloud.Client.Pages.UserDevice
             deviceMeasurement = await _apiRequest.GetAsync<DeviceMeasurementResponse>($"Device/Measurement/{Id}");
         }
 
-        public string FormatAsCelsius(object value)
+        protected string FormatAsCelsius(object value)
         {
             bool parseResult = Int32.TryParse(value.ToString(), out int celsiusValue);
             if (!parseResult)
@@ -35,7 +37,7 @@ namespace TerraCloud.Client.Pages.UserDevice
             return celsiusValue.ToString("N0", CultureInfo.InvariantCulture) + " °C";
         }
 
-        public string FormatAsDateTime(object value)
+        protected string FormatAsDateTime(object value)
         {
             bool parseResult = DateTime.TryParse(value.ToString(), out DateTime dateTime);
             if (!parseResult)
@@ -46,7 +48,7 @@ namespace TerraCloud.Client.Pages.UserDevice
             return dateTime.ToString("dd.MM HH:mm", CultureInfo.InvariantCulture);
         }
 
-        public string FormatAsHumidity(object value)
+        protected string FormatAsHumidity(object value)
         {
             bool parseResult = Int32.TryParse(value.ToString(), out int celsiusValue);
             if (!parseResult)
@@ -55,6 +57,11 @@ namespace TerraCloud.Client.Pages.UserDevice
             }
 
             return celsiusValue.ToString("N0", CultureInfo.InvariantCulture) + " %";
+        }
+
+        protected void QuitClick()
+        {
+            _navManager.NavigateTo("userdevice");
         }
     }
 }
