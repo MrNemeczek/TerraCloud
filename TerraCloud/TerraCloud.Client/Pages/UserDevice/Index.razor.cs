@@ -25,6 +25,12 @@ namespace TerraCloud.Client.Pages.UserDevice
             await base.OnInitializedAsync();
 
             devices = await _apiRequest.GetAsync<IEnumerable<UserDeviceResponse>>("Device/UserDevice");
+            _dialogService.OnClose += dialogService_OnClose;
+        }
+
+        private void dialogService_OnClose(dynamic obj)
+        {
+            _navManager.NavigateTo(_navManager.Uri, true);
         }
 
         public async Task AddDevice()
