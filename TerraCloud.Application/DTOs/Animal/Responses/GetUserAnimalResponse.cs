@@ -11,5 +11,9 @@
         public int? NightTemperature { get; set; }
         public int? AvarageHumidity => (DayHumidity + NightHumidity) / 2;
         public int? AvarageTemperature => (DayTemperature + NightTemperature) / 2;
+        /// <summary>
+        /// Is user owner of that animal?
+        /// </summary>
+        public bool IsOwner { get; set; }
     }
 }

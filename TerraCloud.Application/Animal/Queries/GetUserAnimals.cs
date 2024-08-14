@@ -25,7 +25,16 @@ namespace TerraCloud.Application.Animal.Queries
             var userAnimals = await _animalRepository.GetUserAnimals(userId);
             IEnumerable<GetUserAnimalResponse> response = userAnimals.Select(ua => _mapper.Map<GetUserAnimalResponse>(ua));
 
-            return response;
+            var responseList = response.ToList();
+            foreach (var animal in userAnimals)
+            {
+                if (animal.Animal.UserId.Equals(userId))
+                {
+                    responseList.First(r => r.Id == animal.Id).IsOwner = true;
+                }
+            }
+
+            return responseList;
         }
     }
 }
