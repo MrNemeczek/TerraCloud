@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using TerraCloud.Domain.Models.Animal;
 using TerraCloud.Persistence.Contexts;
 using TerraCloud.Persistence.Interfaces.Repository.Animal;
@@ -19,6 +20,17 @@ namespace TerraCloud.Persistence.Repositories.Animal
             await _context.Animals.AddAsync(animal);
             
             animalUser.AnimalId = animal.Id;
+            await _context.AnimalUsers.AddAsync(animalUser);
+        }
+
+        public async Task AddAnimalUser(Guid animalId, Guid userId)
+        {
+            AnimalUser animalUser = new AnimalUser()
+            {
+                AnimalId = animalId,
+                UserId = userId
+            };
+
             await _context.AnimalUsers.AddAsync(animalUser);
         }
 
@@ -59,6 +71,6 @@ namespace TerraCloud.Persistence.Repositories.Animal
         public void UpdateAnimal(Domain.Models.Animal.Animal animal)
         {
             _context.Animals.Update(animal);
-        }        
+        }
     }
 }

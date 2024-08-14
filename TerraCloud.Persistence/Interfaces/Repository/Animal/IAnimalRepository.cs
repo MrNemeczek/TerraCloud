@@ -10,6 +10,7 @@ namespace TerraCloud.Persistence.Interfaces.Repository.Animal
         Task<AnimalUser> GetAnimalUserByAnimalId(Guid animalId, Guid userId);
         Task<IEnumerable<AnimalUser>> GetUserAnimals(Guid userId);
         Task AddAnimal(Domain.Models.Animal.Animal animal, AnimalUser animalUser);
+        Task AddAnimalUser(Guid animalId, Guid userId);
         Task DeleteAnimal(Guid userAnimalId, Guid? animalId = null);
         void UpdateAnimal(Domain.Models.Animal.Animal animal);
     }

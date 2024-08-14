@@ -11,5 +11,13 @@
         public int? AvarageHumidity => (DayHumidity + NightHumidity) / 2;
         public int? AvarageTemperature => (DayTemperature + NightTemperature) / 2;
         public bool IsPublic { get; set; }
+        /// <summary>
+        /// Is user owner of that animal?
+        /// </summary>
+        public bool IsOwner { get; set; }
+        /// <summary>
+        /// Is this animal added to this user?
+        /// </summary>
+        public bool IsAdded { get; set; }
     }
 }
