@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TerraCloud.Application.Exceptions.Animal;
+﻿using TerraCloud.Application.Exceptions.Animal;
 using TerraCloud.Persistence.Interfaces.Repository.Animal;
 
 namespace TerraCloud.Application.Animal.Commands

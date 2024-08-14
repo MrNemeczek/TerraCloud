@@ -25,7 +25,7 @@
         </RadzenDataGridColumn>
         <RadzenDataGridColumn TItem="GetUserAnimalResponse" Property="Id" Width="60px" Sortable=false>
             <Template Context="animal">
-                <RadzenButton class="mb-1" Click="@(() => Delete(animal.Id))" Icon="delete_forever" ButtonStyle="ButtonStyle.Danger" Disabled="@(!animal.IsOwner)" />
+                <RadzenButton class="mb-1" Click="@(() => Delete(animal.Id))" Icon="delete_forever" ButtonStyle="ButtonStyle.Danger" />
             </Template>
         </RadzenDataGridColumn>
     </Columns>
