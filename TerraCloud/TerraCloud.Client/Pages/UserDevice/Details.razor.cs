@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System.Globalization;
 
 using TerraCloud.Application.DTOs.Device.Responses;
 using TerraCloud.Client.Common;
+using TerraCloud.Domain.Models.Device;
 
 namespace TerraCloud.Client.Pages.UserDevice
 {
@@ -14,9 +16,13 @@ namespace TerraCloud.Client.Pages.UserDevice
         private IApiRequest _apiRequest { get; set; } = default!;
         [Inject]
         private NavigationManager _navManager { get; set; } = default!;
+        [Inject]
+        private IJSRuntime JS { get; set; } = default!;
 
         protected DeviceResponse device = null!;
         protected DeviceMeasurementResponse deviceMeasurement = null!;
+
+        private bool isMobile;
 
         protected override async Task OnInitializedAsync()
         {
@@ -24,6 +30,8 @@ namespace TerraCloud.Client.Pages.UserDevice
 
             device = await _apiRequest.GetAsync<DeviceResponse>($"Device/{Id}");
             deviceMeasurement = await _apiRequest.GetAsync<DeviceMeasurementResponse>($"Device/Measurement/{Id}");
+
+            isMobile = await JS.InvokeAsync<bool>("isMobile");
         }
 
         protected string FormatAsCelsius(object value)
@@ -39,6 +47,11 @@ namespace TerraCloud.Client.Pages.UserDevice
 
         protected string FormatAsDateTime(object value)
         {
+            if (isMobile)
+            {
+                return String.Empty;
+            }
+
             bool parseResult = DateTime.TryParse(value.ToString(), out DateTime dateTime);
             if (!parseResult)
             {

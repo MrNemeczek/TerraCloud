@@ -26,27 +26,27 @@ else
         <RadzenText class="rz-mb-3">Measurement time interval</RadzenText>
         <RadzenText class="w-100 rz-mb-3">@device.MeasurementTime</RadzenText>
 
-        <RadzenChart>
+        <RadzenChart >
             <RadzenLineSeries Smooth="true" Data="@deviceMeasurement.deviceMeasurements" CategoryProperty="Time" Title="Temperature" ValueProperty="Temperature">
                 <RadzenMarkers Visible="true" MarkerType="MarkerType.Circle" />
-                <RadzenSeriesDataLabels Visible="false" />
+                <RadzenSeriesDataLabels />
             </RadzenLineSeries>
 
-            <RadzenCategoryAxis Padding="20" Formatter="@FormatAsDateTime" />
+            <RadzenCategoryAxis Padding="20" Formatter="@FormatAsDateTime" TickDistance="1000"/>
 
             <RadzenValueAxis Formatter="@FormatAsCelsius">
-                <RadzenGridLines Visible="true" />
+                <RadzenGridLines />
                 <RadzenAxisTitle Text="Temperature" />
             </RadzenValueAxis>
         </RadzenChart>
 
         <RadzenChart>
-            <RadzenLineSeries Smooth="true" Data="@deviceMeasurement.deviceMeasurements" CategoryProperty="Time" Title="Humidity" ValueProperty="Humidity">
-                <RadzenMarkers Visible="true" MarkerType="MarkerType.Circle" />
+            <RadzenLineSeries Smooth="true" Data="@deviceMeasurement.deviceMeasurements" CategoryProperty="Time" Title="Humidity" ValueProperty="Humidity" Stroke="#FF0000">
+                <RadzenMarkers Visible="true" MarkerType="MarkerType.Square"  />
                 <RadzenSeriesDataLabels Visible="false" />
             </RadzenLineSeries>
 
-            <RadzenCategoryAxis Padding="20" Formatter="@FormatAsDateTime" />
+            <RadzenCategoryAxis Padding="20" Formatter="@FormatAsDateTime" TickDistance="1000"/>
 
             <RadzenValueAxis Formatter="@FormatAsHumidity">
                 <RadzenGridLines Visible="true" />

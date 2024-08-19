@@ -4,17 +4,17 @@
     </div>
 </div>
 
-@* <input type="checkbox" title="Navigation menu" class="navbar-toggler" /> *@
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
 
-
-<RadzenPanelMenu>
-    <RadzenPanelMenuItem Text="Home" Path="" Icon="home"/>
-    <RadzenPanelMenuItem Text="Devices" Path="device" Icon="camera_enhance" />
-    <RadzenPanelMenuItem Text="My Devices" Path="userdevice" Icon="camera_enhance" />
-    <RadzenPanelMenuItem Text="Animals" Path="animal" />
-    <RadzenPanelMenuItem Text="My Animals" Path="useranimals" />
-</RadzenPanelMenu>
-
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <RadzenPanelMenu>
+        <RadzenPanelMenuItem Text="Home" Path="" Icon="home"/>
+        <RadzenPanelMenuItem Text="Devices" Path="device" Icon="camera_enhance" />
+        <RadzenPanelMenuItem Text="My Devices" Path="userdevice" Icon="camera_enhance" />
+        <RadzenPanelMenuItem Text="Animals" Path="animal" />
+        <RadzenPanelMenuItem Text="My Animals" Path="useranimals" />
+    </RadzenPanelMenu>
+</div>
 
 @* <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="flex-column">
