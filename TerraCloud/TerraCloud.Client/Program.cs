@@ -6,6 +6,7 @@ using TerraCloud.Client;
 using TerraCloud.Infrastructure;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
+IConfiguration config = builder.Configuration;
 
 builder.Services.AddScoped(sp =>
     new HttpClient
@@ -17,7 +18,7 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddCascadingAuthenticationState();
 
 builder.Services.AddClient();
-builder.Services.AddInfrastructure();
+builder.Services.AddInfrastructure(config);
 
 // Radzen
 builder.Services.AddRadzenComponents();

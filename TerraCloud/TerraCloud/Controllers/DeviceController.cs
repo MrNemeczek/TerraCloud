@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Text;
 using TerraCloud.Application.DTOs.Device.Requests;
 using TerraCloud.Application.DTOs.Device.Responses;
 using TerraCloud.Application.DTOs.Error;
 using TerraCloud.Application.Interfaces.Device;
+using TerraCloud.Infrastructure.IoTHub;
 using TerraCloud.Server.Common;
 
 namespace TerraCloud.Server.Controllers
@@ -26,8 +27,9 @@ namespace TerraCloud.Server.Controllers
         private readonly IUpdateUserDevice _updateUserDevice;
         private readonly IAddDeviceMeasurement _addDeviceMeasurement;
         private readonly IGetDeviceMeasurement _getDeviceMeasurement;
+        private readonly IIoTHubService _iotHubService;
 
-        public DeviceController(IGetDevice getDevice, IGetDevices getDevices, IAddDevice addDevice, IDeleteDevice deleteDevice, IHttpContextAccessor contextAccessor, IGetUserDevices getUserDevices, IAddUserDevice addUserDevice, IUpdateUserDevice updateUserDevice, IDeleteUserDevice deleteUserDevice, IAddDeviceMeasurement addMeasurement, IGetDeviceMeasurement getDeviceMeasurement, IGetUserDevice getUserDevice)
+        public DeviceController(IGetDevice getDevice, IGetDevices getDevices, IAddDevice addDevice, IDeleteDevice deleteDevice, IHttpContextAccessor contextAccessor, IGetUserDevices getUserDevices, IAddUserDevice addUserDevice, IUpdateUserDevice updateUserDevice, IDeleteUserDevice deleteUserDevice, IAddDeviceMeasurement addMeasurement, IGetDeviceMeasurement getDeviceMeasurement, IGetUserDevice getUserDevice, IIoTHubService iotHubService)
         {
             _getDevice = getDevice;
             _getDevices = getDevices;
@@ -41,6 +43,7 @@ namespace TerraCloud.Server.Controllers
             _addDeviceMeasurement = addMeasurement;
             _getDeviceMeasurement = getDeviceMeasurement;
             _getUserDevice = getUserDevice;
+            _iotHubService = iotHubService;
         }
 
         [HttpGet("Device")]
@@ -117,39 +120,15 @@ namespace TerraCloud.Server.Controllers
         [HttpDelete("Device/{id}")]
         public async Task<IActionResult> DeleteDevice([FromRoute] string id)
         {
-            try
-            {
-                await _deleteDevice.Execute(id);
-            }
-            catch (ApplicationException)
-            {
-                var errorResponse = new ErrorResponse()
-                {
-                    Describe = "Aplication error",
-                    ErrorCode = ErrorCode.ApplicationError
-                };
-                return BadRequest(errorResponse);
-            }
+            await _deleteDevice.Execute(id);
 
             return NoContent();
         }
         [HttpDelete("UserDevice/{id}")]
         public async Task<IActionResult> DeleteUserDevice([FromRoute] string id)
         {
-            try
-            {
-                Guid userId = _contextAccessor.GetUserGuid();
-                await _deleteUserDevice.Execute(id, userId);
-            }
-            catch (ApplicationException)
-            {
-                var errorResponse = new ErrorResponse()
-                {
-                    Describe = "Aplication error",
-                    ErrorCode = ErrorCode.ApplicationError
-                };
-                return BadRequest(errorResponse);
-            }
+            Guid userId = _contextAccessor.GetUserGuid();
+            await _deleteUserDevice.Execute(id, userId);
 
             return NoContent();
         }

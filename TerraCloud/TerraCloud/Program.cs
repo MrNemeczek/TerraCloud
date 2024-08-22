@@ -9,7 +9,7 @@ IConfiguration config = builder.Configuration;
 
 builder.Services.AddApplication();
 builder.Services.AddPersistance();
-builder.Services.AddInfrastructure();
+builder.Services.AddInfrastructure(config);
 builder.Services.AddClient();
 builder.Services.AddServer(config);
 

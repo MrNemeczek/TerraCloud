@@ -11,6 +11,7 @@ using TerraCloud.Domain.Models.Animal;
 using TerraCloud.Domain.Models.Device;
 using TerraCloud.Domain.Models.User;
 using TerraCloud.Infrastructure.Auth;
+using TerraCloud.Infrastructure.Models.IoTHub;
 
 namespace TerraCloud.Application
 {
@@ -39,6 +40,7 @@ namespace TerraCloud.Application
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
             CreateMap<GetUserAnimalResponse, UpdateUserDeviceRequest>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<Domain.Models.Device.Device, UpdateClientDeviceRequest>();
 
             //Animal
             CreateMap<Domain.Models.Animal.Animal, GetAnimalResponse>();
