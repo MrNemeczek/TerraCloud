@@ -33,6 +33,18 @@ namespace TerraCloud.Server.Controllers
             return Ok(loginResponse);
         }
 
+        [HttpPost("LoginDevice")]
+        public async Task<IActionResult> LoginDevice([FromBody] LoginDeviceRequest loginDevice)
+        {
+            LoginResponse loginResponse = await _loginService.LoginDevice(loginDevice);
+            if (loginResponse is null)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(loginResponse);
+        }
+
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest registerRequest)
         {

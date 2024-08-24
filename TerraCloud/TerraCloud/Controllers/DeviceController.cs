@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Text;
+
+using TerraCloud.Application.Device.Commands;
 using TerraCloud.Application.DTOs.Device.Requests;
 using TerraCloud.Application.DTOs.Device.Responses;
-using TerraCloud.Application.DTOs.Error;
 using TerraCloud.Application.Interfaces.Device;
 using TerraCloud.Infrastructure.IoTHub;
 using TerraCloud.Server.Common;
@@ -104,8 +104,7 @@ namespace TerraCloud.Server.Controllers
         [HttpPost("Measurement")]
         public async Task<IActionResult> AddMeasurement([FromBody] AddDeviceMeasurementRequest request)
         {
-            Guid userId = _contextAccessor.GetUserGuid();
-            await _addDeviceMeasurement.Execute(request, userId);
+            await _addDeviceMeasurement.Execute(request);
 
             return Created();
         }

@@ -22,6 +22,7 @@ namespace TerraCloud.Application
             //Auth
             CreateMap<User, JwtUser>();
             CreateMap<RegisterRequest, User>();
+            CreateMap<Domain.Models.Device.Device, JwtDevice>();
 
             //Device
             CreateMap<Domain.Models.Device.Device, DeviceResponse>();

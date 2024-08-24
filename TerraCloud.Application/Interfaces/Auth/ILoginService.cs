@@ -11,5 +11,6 @@ namespace TerraCloud.Application.Interfaces.Auth
         /// <param name="login"></param>
         /// <returns>JWT Token</returns>
         Task<LoginResponse> Login(LoginRequest login);
+        Task<LoginResponse> LoginDevice(LoginDeviceRequest login);
     }
 }

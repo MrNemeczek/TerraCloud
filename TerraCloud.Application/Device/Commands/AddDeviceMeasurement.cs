@@ -13,6 +13,10 @@ using TerraCloud.Persistence.Interfaces.Repository.Device;
 
 namespace TerraCloud.Application.Device.Commands
 {
+    public interface IAddDeviceMeasurement
+    {
+        Task Execute(AddDeviceMeasurementRequest request);
+    }
     internal class AddDeviceMeasurement : IAddDeviceMeasurement
     {
         private readonly IDeviceRepository _deviceRepository;
@@ -26,12 +30,12 @@ namespace TerraCloud.Application.Device.Commands
             _mapper = mapper;
         }
 
-        public async Task Execute(AddDeviceMeasurementRequest request, Guid userId)
+        public async Task Execute(AddDeviceMeasurementRequest request)
         {
-            var device = await _deviceRepository.GetDeviceById(request.DeviceId, userId);
+            var device = await _deviceRepository.GetDeviceByUniqueCode(request.UniqueCode);
             if (device is null)
             {
-                throw new DeviceNotFoundException(request.DeviceId);
+                throw new DeviceNotFoundException(request.UniqueCode);
             }
 
             var deviceMonitor = _mapper.Map<DeviceMonitor>(request);
