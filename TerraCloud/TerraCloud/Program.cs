@@ -14,6 +14,7 @@ builder.Services.AddClient();
 builder.Services.AddServer(config);
 
 var app = builder.Build();
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 app.UseServer();
 

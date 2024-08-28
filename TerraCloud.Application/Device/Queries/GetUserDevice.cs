@@ -1,16 +1,15 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using TerraCloud.Application.DTOs.Device.Responses;
 using TerraCloud.Application.Exceptions.Device;
-using TerraCloud.Application.Interfaces.Device;
 using TerraCloud.Persistence.Interfaces.Repository.Device;
 
 namespace TerraCloud.Application.Device.Queries
 {
+    public interface IGetUserDevice
+    {
+        Task<UserDeviceResponse> Execute(Guid userDeviceId, Guid userId);
+    }
     internal class GetUserDevice : IGetUserDevice
     {
         private readonly IDeviceRepository _deviceRepository;

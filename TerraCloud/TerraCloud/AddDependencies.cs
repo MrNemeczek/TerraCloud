@@ -30,7 +30,7 @@ namespace TerraCloud.Server
 
             // DB context
             #if DEBUG
-            services.AddDbContext<TerraCloudContext>(options => options.UseNpgsql(config.GetConnectionString("LocalDatabase")).UseLazyLoadingProxies());
+            services.AddDbContext<TerraCloudContext>(options => options.UseNpgsql(config.GetConnectionString("LocalDatabase")).UseLazyLoadingProxies());            
             #endif
             #if !DEBUG
             services.AddDbContext<TerraCloudContext>(options => options.UseNpgsql(config.GetConnectionString("AzureDatabase")).UseLazyLoadingProxies());

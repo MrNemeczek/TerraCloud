@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 using TerraCloud.Application.Device.Commands;
+using TerraCloud.Application.Device.Queries;
 using TerraCloud.Application.DTOs.Device.Requests;
 using TerraCloud.Application.DTOs.Device.Responses;
 using TerraCloud.Application.Interfaces.Device;

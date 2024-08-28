@@ -39,6 +39,7 @@ namespace TerraCloud.Application.Device.Commands
             }
 
             var deviceMonitor = _mapper.Map<DeviceMonitor>(request);
+            deviceMonitor.DeviceId = device.Id;
 
             await _deviceRepository.AddDeviceMeasurment(deviceMonitor);
             

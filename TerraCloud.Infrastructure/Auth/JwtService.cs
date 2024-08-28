@@ -47,7 +47,8 @@ namespace TerraCloud.Infrastructure.Auth
 
             var claims = new List<Claim>
             {
-                new Claim("uniquecode", jwtDevice.UniqueCode)
+                new Claim("uniquecode", jwtDevice.UniqueCode),
+                new Claim("deviceguid", jwtDevice.Id.ToString())
             };
 
             var token = new JwtSecurityToken(
