@@ -22,7 +22,7 @@ namespace TerraCloud.Client.Pages.UserDevice
         protected DeviceResponse device = null!;
         protected DeviceMeasurementResponse deviceMeasurement = null!;
 
-        private bool isMobile;
+        protected bool isMobile;
 
         protected override async Task OnInitializedAsync()
         {
@@ -47,11 +47,6 @@ namespace TerraCloud.Client.Pages.UserDevice
 
         protected string FormatAsDateTime(object value)
         {
-            if (isMobile)
-            {
-                return String.Empty;
-            }
-
             bool parseResult = DateTime.TryParse(value.ToString(), out DateTime dateTime);
             if (!parseResult)
             {

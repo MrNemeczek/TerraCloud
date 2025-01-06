@@ -32,7 +32,7 @@ else
                 <RadzenSeriesDataLabels />
             </RadzenLineSeries>
 
-            <RadzenCategoryAxis Padding="20" Formatter="@FormatAsDateTime" TickDistance="1000"/>
+            <RadzenCategoryAxis Padding="20" Formatter="@FormatAsDateTime" TickDistance="1000" Visible="@(!isMobile)" />
 
             <RadzenValueAxis Formatter="@FormatAsCelsius">
                 <RadzenGridLines />
@@ -46,7 +46,7 @@ else
                 <RadzenSeriesDataLabels Visible="false" />
             </RadzenLineSeries>
 
-            <RadzenCategoryAxis Padding="20" Formatter="@FormatAsDateTime" TickDistance="1000"/>
+            <RadzenCategoryAxis Padding="20" Formatter="@FormatAsDateTime" TickDistance="1000" Visible="@(!isMobile)"/>
 
             <RadzenValueAxis Formatter="@FormatAsHumidity">
                 <RadzenGridLines Visible="true" />
