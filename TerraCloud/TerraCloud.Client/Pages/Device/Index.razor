@@ -1,4 +1,4 @@
-﻿@page "/device"
+﻿    @page "/device"
 
 @using TerraCloud.Application.DTOs.Device.Responses;
 
@@ -9,7 +9,7 @@
 <RadzenDataGrid AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" Data="@devices" TItem="DeviceResponse" 
                 ColumnWidth="300px">
     <Columns>
-        <RadzenDataGridColumn TItem="DeviceResponse" Property="Id" Title="ID"/>
+        @* <RadzenDataGridColumn TItem="DeviceResponse" Property="Id" Title="ID"/> *@
         <RadzenDataGridColumn TItem="DeviceResponse" Property="UniqueCode" Title="Unique code" />
         <RadzenDataGridColumn TItem="DeviceResponse" Property="Id" Width="60px" Sortable=false>
             <Template Context="device">
