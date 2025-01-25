@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-
 using TerraCloud.Application.DTOs.Device.Responses;
+using TerraCloud.Application.Exceptions.Device;
 using TerraCloud.Application.Interfaces.Device;
 using TerraCloud.Persistence.Interfaces.Repository.Device;
 
@@ -20,6 +20,10 @@ namespace TerraCloud.Application.Device.Queries
         public async Task<DeviceResponse> Execute(Guid deviceId)
         {
             Domain.Models.Device.Device device = await _deviceRepository.GetDeviceById(deviceId);
+            if(device is null)
+            {
+                throw new DeviceNotFoundException(deviceId);
+            }
             var response = _mapper.Map<DeviceResponse>(device);
 
             return response;
