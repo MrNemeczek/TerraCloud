@@ -7,6 +7,7 @@ using TerraCloud.Application.Device.Queries;
 using TerraCloud.Application.Interfaces.Animal;
 using TerraCloud.Application.Interfaces.Auth;
 using TerraCloud.Application.Interfaces.Device;
+using TerraCloud.Application.Test;
 using TerraCloud.Infrastructure.Auth;
 using TerraCloud.Infrastructure.Auth.Registry;
 
@@ -41,6 +42,10 @@ namespace TerraCloud.Infrastructure
             services.AddScoped<IDeleteUserAnimal, DeleteUserAnimal>();
             services.AddScoped<IUpdateAnimal, UpdateAnimal>();
             services.AddScoped<IAddAnimalToUserList, AddAnimalToUserList>();
+
+            //Test
+            services.AddScoped<ITestMapping, TestMapping>();
+            services.AddScoped<ITestMapper, TestMapper>();
         }
     }
 }
