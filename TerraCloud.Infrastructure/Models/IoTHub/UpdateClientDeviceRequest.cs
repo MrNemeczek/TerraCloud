@@ -10,5 +10,6 @@
         public int? DayHumidity { get; set; }
         public int? NightTemperature { get; set; }
         public int? NightHumidity { get; set; }
+        public string? TimeStampTest { get; set; }
     }
 }

@@ -43,12 +43,14 @@ namespace TerraCloud.Application.Device.Commands
 
             await _databaseRepository.SaveChangesAsync();
 
-            await SendMsgToDevice(device);
+            await SendMsgToDevice(device, request.TimeStampTest);
         }
 
-        private async Task SendMsgToDevice(Domain.Models.Device.Device device)
+        private async Task SendMsgToDevice(Domain.Models.Device.Device device, string? timeStampTest)
         {
             var updateClientDeviceRequest = _mapper.Map<UpdateClientDeviceRequest>(device);
+            updateClientDeviceRequest.TimeStampTest = timeStampTest;
+
             string serializedRequest = JsonSerializer.Serialize(updateClientDeviceRequest);
             byte[] bytes = Encoding.UTF8.GetBytes(serializedRequest);
 

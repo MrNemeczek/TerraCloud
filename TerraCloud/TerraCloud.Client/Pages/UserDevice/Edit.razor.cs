@@ -5,6 +5,7 @@ using Radzen;
 using TerraCloud.Application.DTOs.Animal.Responses;
 using TerraCloud.Application.DTOs.Device.Requests;
 using TerraCloud.Application.DTOs.Device.Responses;
+using TerraCloud.Application.DTOs.Test.Responses;
 using TerraCloud.Client.Common;
 
 namespace TerraCloud.Client.Pages.UserDevice
@@ -71,6 +72,9 @@ namespace TerraCloud.Client.Pages.UserDevice
         }
         protected async Task SaveClick()
         {
+            var timeStamp = await _apiRequest.GetAsync<TimeStampResponse>("Test/TimeStamp");
+            request.TimeStampTest = timeStamp.TimeStamp;
+
             var result = await _apiRequest.OnlyPatchAsync("Device/UserDevice", request);
             if (result is not null)
             {

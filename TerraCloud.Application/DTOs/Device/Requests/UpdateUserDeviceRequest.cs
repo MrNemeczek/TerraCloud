@@ -10,5 +10,6 @@
         public int? NightTemperature { get; set; }
         public int? NightHumidity { get; set; }
         public Guid? AnimalUserId { get; set; }
+        public string? TimeStampTest { get; set; }
     }
 }
