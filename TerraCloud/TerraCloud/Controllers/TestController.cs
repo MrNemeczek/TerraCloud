@@ -12,13 +12,13 @@ namespace TerraCloud.Server.Controllers
         [HttpGet("TimeStamp")]
         public async Task<IActionResult> GetTimeStamp()
         {
-            var timeStamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ");
+            var timeStamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
             var response = new TimeStampResponse
             {
                 TimeStamp = timeStamp
             };
-            
+
             return Ok(response);
-        }       
+        }
     }
 }
