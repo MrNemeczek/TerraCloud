@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
 using System.Text;
 using System.Text.Json;
 using TerraCloud.Application.DTOs.Device.Requests;
@@ -17,12 +18,14 @@ namespace TerraCloud.Application.Device.Commands
         private readonly IDeviceRepository _deviceRepository;
         private readonly IDatabaseRepository _databaseRepository;
         private readonly IIoTHubService _IoTHubService;
-        public UpdateUserDevice(IMapper mapper, IDeviceRepository deviceRepository, IDatabaseRepository databaseRepository, IIoTHubService ioTHubService)
+        private readonly ILogger<UpdateUserDevice> _logger;
+        public UpdateUserDevice(IMapper mapper, IDeviceRepository deviceRepository, IDatabaseRepository databaseRepository, IIoTHubService ioTHubService, ILogger<UpdateUserDevice> logger)
         {
             _mapper = mapper;
             _deviceRepository = deviceRepository;
             _databaseRepository = databaseRepository;
             _IoTHubService = ioTHubService;
+            _logger = logger;
         }
 
         public async Task Execute(UpdateUserDeviceRequest request, Guid userId)
@@ -48,13 +51,22 @@ namespace TerraCloud.Application.Device.Commands
 
         private async Task SendMsgToDevice(Domain.Models.Device.Device device, string? timeStampTest)
         {
-            var updateClientDeviceRequest = _mapper.Map<UpdateClientDeviceRequest>(device);
-            updateClientDeviceRequest.TimeStampTest = timeStampTest;
+            try
+            {
+                var updateClientDeviceRequest = _mapper.Map<UpdateClientDeviceRequest>(device);
+                updateClientDeviceRequest.TimeStampTest = timeStampTest;
 
-            string serializedRequest = JsonSerializer.Serialize(updateClientDeviceRequest);
-            byte[] bytes = Encoding.UTF8.GetBytes(serializedRequest);
+                string serializedRequest = JsonSerializer.Serialize(updateClientDeviceRequest);
+                byte[] bytes = Encoding.UTF8.GetBytes(serializedRequest);
 
-            await _IoTHubService.SendCloudToDeviceMessageAsync(bytes, device.UniqueCode);
+                await _IoTHubService.SendCloudToDeviceMessageAsync(bytes, device.UniqueCode);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error sending message to device {DeviceId}", device.Id);
+
+                throw;
+            }
         }
     }
 }

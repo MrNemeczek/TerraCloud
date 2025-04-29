@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Components;
 using Radzen;
-
+using System.Diagnostics;
 using TerraCloud.Application.DTOs.Animal.Responses;
 using TerraCloud.Application.DTOs.Device.Requests;
 using TerraCloud.Application.DTOs.Device.Responses;
@@ -72,8 +72,16 @@ namespace TerraCloud.Client.Pages.UserDevice
         }
         protected async Task SaveClick()
         {
+            Stopwatch stopwatch = new();
+            stopwatch.Start();
+
             var timeStamp = await _apiRequest.GetAsync<TimeStampResponse>("Test/TimeStamp");
-            request.TimeStampTest = timeStamp.TimeStamp;
+
+            stopwatch.Stop();
+            long elapsedTime = stopwatch.ElapsedMilliseconds;
+            DateTime timeStampWithElapsedTime = DateTime.Parse(timeStamp.TimeStamp).AddMilliseconds(-elapsedTime);
+
+            request.TimeStampTest = timeStampWithElapsedTime.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
 
             var result = await _apiRequest.OnlyPatchAsync("Device/UserDevice", request);
             if (result is not null)
